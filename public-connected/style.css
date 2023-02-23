@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter";
+}
+
+#Mupi{
+    position: relative;
+    width: 859px;
+    height: 1253px;
+    background-color: #DE0000;
+    margin: auto;
+}
+
+#Modal{
+    position: absolute;
+    width: 754px;
+    height: 1146px;
+    left: 52px;
+    top: 54px;
+    opacity: 0.95;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .textScreen{
+        display: flex;
+        justify-content: center;
+    }
+
+        #title{
+            position: absolute;
+            width: 700px;
+            height: 254px;
+            left: 30px;
+            top: 164px;
+            font-family: 'A-OTF Shin Go Pro';
+            font-weight: 600;
+            font-size: 64px;
+            line-height: 80px;
+            text-align: center;
+            color: #DE0000;
+        }
+
+            #CheckIcon{
+                position: absolute;
+                width: 51px;
+                height: 51px;
+                left: 570px;
+                top: 270px;
+            }
+
+        #description{
+            position: absolute;
+            width: 504px;
+            height: 22px;
+            left: 130px;
+            top: 376px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 22px;
+            text-align: center;
+            letter-spacing: -0.02em;
+            font-feature-settings: 'calt' off;
+            color: #667080;
+        }
+
+        #title2{
+            position: absolute;
+            width: 418px;
+            height: 60px;
+            left: 170px;
+            top: 469px;
+            font-family: 'A-OTF Shin Go Pro';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 32px;
+            line-height: 60px;
+            text-align: center;
+            color: #DE0000;
+        }
+
+        #description2{
+            position: absolute;
+            width: 509px;
+            height: 41px;
+            left: 130px;
+            top: 558px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 36px;
+            text-align: center;
+            color: #000000;
+        }
+
+            #InstructionsDiv{
+                display: flex;
+                flex-direction: column;
+            }
+
+            .Instruction{
+                display: flex;
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 36px;
+                text-align: center;
+                color: #000000;
+            }
+
+                #ClockInstruction{
+                    position: absolute;
+                    width: 567px;
+                    height: 36px;
+                    left: 90px;
+                    top: 680px;
+                }
+
+                #ClockIcon{
+                    position: absolute;
+                    width: 69px;
+                    height: 69px;
+                    left: 530px;
+                    top: 663px;
+                }
+
+                #ArrowsInstruction{
+                    position: absolute;
+                    width: 567px;
+                    height: 36px;
+                    left: 100px;
+                    top: 748px;
+                }
+
+                #ArrowsIcon{
+                    position: absolute;
+                    width: 60px;
+                    height: 24px;
+                    left: 600px;
+                    top: 754px;
+                }
+                
+                #JumpInstruction{
+                    position: absolute;
+                    width: 567px;
+                    height: 36px;
+                    left: 100px;
+                    top: 815px;
+                }
+
+                #JumpIcon{
+                    position: absolute;
+                    width: 69px;
+                    height: 69px;
+                    left: 530px;
+                    top: 798px;
+                }
+    
+    button{
+        justify-content: center;
+        align-items: center;
+        padding: 13px 24px;
+        gap: 10px;
+        position: absolute;
+        width: 316px;
+        height: 109px;
+        left: 220px;
+        top: 950px;
+        background: #DE0000;
+        border-radius: 6px;
+        color: #FFFFFF;
+        font-family: 'A-OTF Shin Go Pro';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 22px;
+        border: none;
+        transition-duration: 0.4s;
+    }
+
+    button:hover{
+        transition-duration: 0.1s;
+        opacity: 0.6;
+    }
+
+    button:after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.5s;
+        box-shadow: 0 0 10px 40px #DE0000;
+      }
+      
+    button:active:after {
+        box-shadow: 0 0 0 0 #DE0000;
+        position: absolute;
+        left: 0;
+        top:0;
+        opacity: 1;
+        transition: 0s;
+    }
+
+.Shell{
+    width: 263px;
+}
+
+#Shell1{
+    position: absolute;
+    right: 0;
+}
+
+#Shell2{
+    position: absolute;
+    top: 456px;
+}
+
+#Nubes{
+    position: absolute;
+    width: 859px;
+    top: 418px;
+}

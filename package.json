@@ -1,20 +1,21 @@
 {
-  "name": "smashinc",
+  "name": "lab-apps-eco-websocket-server-boilerplate",
   "version": "1.0.0",
-  "description": "It is a OHH experience of Nintendo",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "Smash .inc",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
-    "ejs": "^3.1.8",
-    "express": "^4.17.2"
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.19"
   }
 }

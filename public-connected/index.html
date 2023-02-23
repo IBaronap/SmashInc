@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+    <div id="Mupi">
+        <div id="Modal">
+            <div class="textScreen">
+                <h1 id="title">Succesfully connected</h1>
+                <img src="./Images/Icon1.png" alt="Check Icon" class="Icon" id="CheckIcon">
+                <p id="description">Use your phone as a controller</p>
+            </div>
+            <div class="textScreen">
+                <h2 id="title2">How to play</h2>
+                <p id="description2">Reach the top and beware the obstacles</p>
+            </div>
+            <div class="textScreen" id="InstructionsDiv">
+                <div class="Instruction">
+                    <p id="ClockInstruction">Play until the time runs out</p>
+                    <img src="./Images/Icon2.png" alt="Clock Icon" class="Icon" id="ClockIcon">
+                </div>
+                <div class="Instruction">
+                    <p id="ArrowsInstruction">Move the character with the arrows</p>
+                    <img src="./Images/Icon3.png" alt="Arrows" class="Icon" id="ArrowsIcon">
+                </div>
+                <div class="Instruction">
+                    <p id="JumpInstruction">Jump with the button</p>
+                    <img src="./Images/Icon4.png" alt="Jump Button" class="Icon" id="JumpIcon">
+                </div>
+            </div>
+            <button>Play Now!</button>
+        </div>
+        <img src="./Images/Shell1.png" alt="Shell" class="Shell" id="Shell1">
+        <img src="./Images/Shell2.png" alt="Shell" class="Shell" id="Shell2">
+        <img src="./Images/Nubes.png" alt="Nubes" id="Nubes">
+
+    </div>
+    <script src="sketch.js" async defer></script>
+</body>
+
+</html>

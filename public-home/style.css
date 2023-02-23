@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Inter";
+}
+
+#Mupi{
+    position: relative;
+    width: 859px;
+    height: 1253px;
+    background-color: #DE0000;
+    margin: auto;
+}
+
+#Nubes{
+    width: 859px;
+    height: 845px;
+    left: 1042px;
+    top: 726px;
+    z-index: -1;
+}
+
+#NintendoLogo{
+    position: absolute;
+    width: 97px;
+    height: 99px;
+    left: 381px;
+    top: 68px;
+}
+
+#title{
+    font-size: 48;
+    font-weight: 700;
+    position: absolute;
+    width: 398px;
+    height: 48px;
+    left: 237px;
+    top: 216px;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+#description{
+    font-weight: 400;
+    font-size: 22px;
+    position: absolute;
+    width: 653px;
+    height: 58px;
+    left: 103px;
+    top: 304px;
+    text-align: center;
+}
+
+#QR{
+    
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    width: 454px;
+    height: 454px;
+    left: 203px;
+    top: 400px;
+    mix-blend-mode: normal;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+#backgroundImage{
+    position: absolute;
+    width: 859px;
+    margin: auto;
+    top: 591px;
+}
