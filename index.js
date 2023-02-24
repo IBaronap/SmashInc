@@ -8,6 +8,7 @@ const PORT = 5050;
 expressApp.use(express.json()) //Middlewares
 expressApp.use('/mupi-home', express.static('public-home')); //Middlewares
 expressApp.use('/mupi-connected', express.static('public-connected')); 
+expressApp.use('/mupi-game', express.static('public-game')); 
 expressApp.use('/mupi-gameover', express.static('public-gameover')); 
 expressApp.use('/mupi-disconnect', express.static('public-disconnect')); 
 //Phone
@@ -25,5 +26,9 @@ const httpServer = expressApp.listen(PORT, () => { //Star the server
 const io = new Server(httpServer, { path: '/real-time' }); //WebSocket Server (instance) initialization
 
 io.on('connection', (socket) => { //Listening for webSocket connections
-    
+    socket.on('Points', (message) => {
+        console.log(message);
+        let Points = message * 50;
+        console.log(Points);
+    });
 });
