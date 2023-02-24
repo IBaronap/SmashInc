@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter";
+}
+
+#Phone{
+    position: relative;
+    width: 390px;
+    height: 844px;
+    background-color: rgba(255, 255, 255);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textScreen{
+    display: flex;
+    justify-content: center;
+}
+
+    #title{
+        position: absolute;
+        width: 359px;
+        height: 161px;
+        left: 16px;
+        top: 124px;
+        font-family: 'A-OTF Shin Go Pro';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 50px;
+        text-align: center;
+        color: #DE0000;
+    }
+
+    #title2{
+        position: absolute;
+        width: 119px;
+        height: 42px;
+        left: 135px;
+        top: 359px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 42px;
+        text-align: center;
+        color: #000000;
+    }
+
+    #Prize{
+        position: absolute;
+        width: 266px;
+        height: 126px;
+        left: 62px;
+        top: 443px;
+
+    }
+
+button{
+    justify-content: center;
+    align-items: center;
+    padding: 13px 24px;
+    gap: 10px;
+    position: absolute;
+    width: 229px;
+    height: 72px;
+    left: 81px;
+    top: 700px;
+    background: #DE0000;
+    border-radius: 6px;
+
+    color: #FFFFFF;
+    font-family: 'A-OTF Shin Go Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 22px;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    transition-duration: 0.1s;
+    opacity: 0.6;
+}
+
+button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 10px 40px #DE0000;
+}
+
+button:active:after {
+    box-shadow: 0 0 0 0 #DE0000;
+    position: absolute;
+    left: 0;
+    top:0;
+    opacity: 1;
+    transition: 0s;
+}

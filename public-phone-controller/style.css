@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter";
+}
+
+#Phone{
+    position: relative;
+    width: 844px;
+    height: 390px;
+    background-color: rgba(255, 255, 255);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#JumpButton{
+    position: absolute;
+    width: 283.03px;
+    height: 283.03px;
+    left: 61px;
+    top: 53px;
+}
+
+#LeftButton{
+    position: absolute;
+    width: 85.94px;
+    height: 147.8px;
+    left: 454px;
+    top: 120.96px;
+}
+
+#RightButton{
+    position: absolute;
+    width: 85.96px;
+    height: 147.82px;
+    left: 658.08px;
+    top: 120.96px;
+}
