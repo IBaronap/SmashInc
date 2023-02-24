@@ -3,8 +3,13 @@
     margin: 0;
     padding: 0;
     font-family: "Inter";
+    background-color: black;
 }
 
+canvas{
+    margin: 0, 122;
+}
+/* 
 #Phone{
     position: relative;
     width: 844px;
@@ -38,4 +43,4 @@
     height: 147.82px;
     left: 658.08px;
     top: 120.96px;
-}
+} */

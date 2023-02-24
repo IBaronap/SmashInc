@@ -16,7 +16,7 @@ function setup() {
 }
 
 function draw() {
-    keyPressed ();
+    // keyPressed ();
     gravity ();
     game ();
     points();
@@ -61,7 +61,7 @@ function preload (){
 var minh = 1070;
 var maxh = 0;
 var minw = 0;
-var maxw = 1253;
+var maxw = 780;
 
 //Player
 
@@ -72,20 +72,45 @@ var PlayerHeight = 150;
 
     //Movement
 
-    function keyPressed (){
-        if (keyIsDown(LEFT_ARROW) && (Playerx > 40)) {
-        Playerx -= 5;
-    };
-    if (keyIsDown(RIGHT_ARROW) && (Playerx < 920)) {
-        Playerx += 5;
-    };
-    if (keyIsDown(UP_ARROW)) {
-        jump = true;
-    }
-    else{
-        jump = false;
-    }
-    }; 
+    // function keyPressed (){
+    //     if (keyIsDown(LEFT_ARROW) && (Playerx > 40)) {
+    //     Playerx -= 5;
+    // };
+    // if (keyIsDown(RIGHT_ARROW) && (Playerx < 920)) {
+    //     Playerx += 5;
+    // };
+    // if (keyIsDown(UP_ARROW)) {
+    //     jump = true;
+    // }
+    // else{
+    //     jump = false;
+    // }
+    // }; 
+
+    socket.on('Move-Player', msn => {
+        console.log(msn);
+        let{} = msn;
+        switch(msn){
+            case 'LEFT':
+                if (Playerx <= maxw) {
+                       Playerx += 5;
+                    };
+                break;
+
+            case 'RIGHT':
+                if (Playerx >= minw) {
+                       Playerx -= 5;
+                    };
+                break;
+
+            case 'UP':
+                jump = true;
+                break;
+            default:
+                jump = false;
+                break;
+        }
+    })
 
     //Variables for jumping and gravity
 
@@ -126,7 +151,7 @@ var PlayerHeight = 150;
     }
     };
 
-//Juego
+//Juego SetUp
 
 function game (){
     image (back, -5, 0, width+5, height);
@@ -179,7 +204,7 @@ function game (){
             const platformWidth = 140;
             const platformHeight = 40;
 
-            if (Playerx >= x && Playerx <= x + platformWidth && Playery + 120 >= y - platformHeight/2 && Playery + 120 < y + platformHeight && jump == false) {
+            if (Playerx >= x - platformWidth/2 + 20 && Playerx <= x + platformWidth/2 + 20 && Playery + 120 >= y - platformHeight/2 && Playery + 120 < y + platformHeight && jump == false) {
                 Playery= Playery;
                 velocity = 0 
                 jumpcounter = 0;

@@ -32,3 +32,10 @@ io.on('connection', (socket) => { //Listening for webSocket connections
         console.log(Points);
     });
 });
+
+io.on('connection', (socket) => { //Listening for webSocket connections
+    socket.on('Instructions', (message) => {
+        console.log(message);
+        socket.broadcast.emit('Move-Player', message)
+    });
+});
