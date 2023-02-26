@@ -39,12 +39,12 @@ function game (){
     image (back, -5, 0, width+5, height);
     image (stuff, 20, minh, 0, 0);
 
+    image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
+
     End.drawEnd();
     Enemy.Spike();
     Enemy.CanonR();
     Enemy.CanonL();
-
-    image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
 
     Plat.paint();
     Plat.collision();
@@ -97,7 +97,7 @@ var maxw = 780;
                 case 'LEFT':
                     if (Playerx >= minw) {
                         Playerx -= 5;
-                        };
+                       };
                     break;
 
                 case 'RIGHT':

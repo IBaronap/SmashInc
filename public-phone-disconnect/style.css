@@ -41,7 +41,7 @@
         width: 119px;
         height: 42px;
         left: 135px;
-        top: 359px;
+        top: 309px;
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 400;
@@ -53,11 +53,25 @@
 
     #Prize{
         position: absolute;
-        width: 266px;
-        height: 126px;
-        left: 62px;
-        top: 443px;
+        width: 180px;
+        left: 110px;
+        top: 370px;
+    }
 
+    #PrizeDesc{
+        position: absolute;
+        width: 180px;
+        left: 105px;
+        top: 580px;
+        font-family: 'Poppins';
+        text-align: center;
+    }
+
+    #Code{
+        font-family: 'Poppins';
+        font-size: 12px;
+        left: 135px;
+        margin-top: 470px;
     }
 
 button{
