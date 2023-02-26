@@ -70,19 +70,23 @@
         }
 
         #Points{
+            display: flex;
+            justify-content: space-between;
             position: absolute;
             width: 392.56px;
             height: 86.12px;
-            left: 195px;
+            left: 200px;
             top: 440px;
-            font-family: 'A-OTF Shin Go Pro';
             font-style: normal;
             font-weight: 600;
-            font-size: 55px;
             line-height: 110px;
             text-align: center;
             color: #FE0000;
         }
+            #NumPoints, #TextPoints{
+                font-size: 55px;
+                font-family: 'A-OTF Shin Go Pro';
+            }
 
             #Instruction{
                 position: absolute;

@@ -1,6 +1,5 @@
 let socket = io("http://localhost:5050", { path: '/real-time' })
 let canvas;
-let controllerX, controllerY = 0;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
@@ -8,14 +7,18 @@ function setup() {
     canvas.style('position', 'fixed');
     canvas.style('top', '0');
     canvas.style('right', '0');
-    background(0);
+    background(0, 0, 0);
 }
 
-function draw() {
-}
+let Points;
+const NumPoints = document.getElementById('NumPoints');
 
-function mouseDragged() {
-}
+    socket.on('Final-Points', msn => {
+        console.log(msn);
+        Points = msn;
+        NumPoints.innerHTML = Points;
+        }
+    )
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);

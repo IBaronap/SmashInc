@@ -30,6 +30,7 @@ io.on('connection', (socket) => { //Listening for webSocket connections
         console.log(message);
         let Points = message * 50;
         console.log(Points);
+        socket.broadcast.emit('Final-Points', Points)
     });
 });
 

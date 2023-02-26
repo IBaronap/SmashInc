@@ -6,14 +6,7 @@
     background-color: black;
 }
 
-body {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: center;
-}
-
 canvas{
-    margin: 0 1100px;
+    margin: 0 21vw;
     position: relative;
 }

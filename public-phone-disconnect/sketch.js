@@ -14,8 +14,13 @@ function setup() {
 function draw() {
 }
 
-function mouseDragged() {
-}
+let Points;
+
+    socket.on('Final-Points', msn => {
+        console.log(msn);
+        Points = msn;
+        }
+    )
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);

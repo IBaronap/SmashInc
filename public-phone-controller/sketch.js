@@ -11,11 +11,8 @@ function setup() {
     canvas.style('position', 'fixed');
     canvas.style('top', '0');
     canvas.style('right', '0');
-    background(0);
-
-    
+    background(255);
     frameRate(16);
-    
     controllerX = windowWidth / 2;
     controllerY = windowHeight / 2;
 }
@@ -32,18 +29,17 @@ function preload(){
 
 function draw() {
     fill(255, 0, 0);
-    ellipse(windowWidth / 2, windowHeight / 3, 50, 50);
-    
-    fill(255, 0, 0);
-    ellipse(windowWidth / 3, windowHeight / 2, 50, 50);
-    
-    fill(255, 0, 0);
-    ellipse(windowWidth / 1.5, windowHeight / 2, 50, 50);   
+    image (UP, windowWidth / 5, windowHeight / 2 - windowWidth/10, windowWidth/5, windowWidth/5);  
 
+    fill(255, 0, 0);
+    image (LEFT, windowWidth / 2, windowHeight / 2 - windowWidth/20, windowWidth/14, windowWidth/10);
+
+    fill(255, 0, 0);
+    image (RIGHT, 3 * windowWidth / 4, windowHeight / 2 - windowWidth/20, windowWidth/14, windowWidth/10);
     
-    movementButton('UP', windowWidth / 2, windowHeight / 3);
-    movementButton('RIGHT', windowWidth / 3, windowHeight / 2);
-    movementButton('LEFT', windowWidth / 1.5, windowHeight / 2);
+    movementButton('UP', windowWidth / 5, windowHeight / 2 - windowWidth/10);
+    movementButton('LEFT', windowWidth / 2, windowHeight / 2 - windowWidth/20);
+    movementButton('RIGHT', 3 * windowWidth / 4, windowHeight / 2 - windowWidth/20);
 }
 
 function movementButton(){
@@ -51,17 +47,17 @@ function movementButton(){
     let msn = "";
 
     switch(true){
-        case (dist(pmouseX, pmouseY, windowWidth / 2, windowHeight / 3) < 25):
+        case (dist(pmouseX, pmouseY, windowWidth / 5 + windowWidth / 10, windowHeight / 2) < 150):
             msn = 'UP';
             console.log("up");
             break;
 
-        case (dist(pmouseX, pmouseY,  windowWidth / 1.5, windowHeight / 2) < 25):
+        case (dist(pmouseX, pmouseY,  windowWidth / 2 + windowWidth/28, windowHeight / 2 - windowWidth/20) < 100):
             msn = 'LEFT';
             console.log("left");
             break;
 
-        case (dist(pmouseX, pmouseY,  windowWidth / 3, windowHeight / 2) < 25):
+        case (dist(pmouseX, pmouseY,  3 * windowWidth / 4 + windowWidth/28, windowHeight / 2) < 100):
             msn = 'RIGHT';
             
             console.log("right");
