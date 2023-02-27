@@ -55,6 +55,7 @@
     left: 40px;
     top: 0;
 }
+
     #NameInput{
         display: flex;
         flex-direction: column;
@@ -202,9 +203,7 @@ button{
     height: 72px;
     left: 81px;
     top: 700px;
-    background: #DE0000;
     border-radius: 6px;
-
     color: #FFFFFF;
     font-family: 'A-OTF Shin Go Pro';
     font-style: normal;
@@ -220,24 +219,55 @@ button:hover{
     opacity: 0.6;
 }
 
-button:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    top:0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: all 0.5s;
-    box-shadow: 0 0 10px 40px #DE0000;
-}
+    button:enabled{
+        background: #DE0000;
+    }
 
-button:active:after {
-    box-shadow: 0 0 0 0 #DE0000;
-    position: absolute;
-    left: 0;
-    top:0;
-    opacity: 1;
-    transition: 0s;
-}
+    button:enabled:after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.5s;
+        box-shadow: 0 0 10px 40px #DE0000;
+        border-radius: 6px;
+    }
+
+    button:enabled:active:after {
+        box-shadow: 0 0 0 0 #DE0000;
+        position: absolute;
+        left: 0;
+        top:0;
+        opacity: 1;
+        transition: 0s;
+        border-radius: 6px;
+    }
+
+        button:disabled{
+            background: #a1a1a1;
+        }
+
+        button:disabled:active{
+            animation: shake 1s;
+            transform: translate3d(0, 0, 0);
+            perspective: 1000px;
+        }
+
+        @keyframes shake {
+            10%, 90% {
+            transform: translate3d(-10px, 0, 0);
+            }
+            20%, 80% {
+            transform: translate3d(10px, 0, 0);
+            }
+            30%, 50%, 70% {
+            transform: translate3d(-10px, 0, 0);
+            }
+            40%, 60% {
+            transform: translate3d(10x, 0, 0);
+            }
+        }

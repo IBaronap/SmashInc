@@ -123,6 +123,7 @@
         opacity: 0;
         transition: all 0.5s;
         box-shadow: 0 0 5px 20px #DE0000;
+        border-radius: 6px;
       }
       
     button:active:after {
@@ -131,7 +132,8 @@
         left: 0;
         top:0;
         opacity: 1;
-        transition: 0s;
+        transition: 0s;  
+        border-radius: 6px;
     }
 
 #Nubes{

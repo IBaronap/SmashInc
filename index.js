@@ -52,3 +52,16 @@ io.on('connection', (socket) => { //Listening for webSocket connections
         socket.broadcast.emit('Move-Player', message)
     });
 });
+
+expressApp.get('/Forms-Array', (request, response) => {
+    response.send(PlayerForm);
+});
+
+let PlayerForm = [];
+
+expressApp.post('/Forms-Array', (request, response) => {  
+    const {name, email, phone, notify} = request.body; 
+    response.json({ received: request.body });
+    PlayerForm.push(request.body)
+    console.log(PlayerForm);
+});
