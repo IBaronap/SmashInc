@@ -1,6 +1,5 @@
 let socket = io("http://localhost:5050", { path: '/real-time' })
 let canvas;
-let controllerX, controllerY = 0;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
@@ -9,12 +8,6 @@ function setup() {
     canvas.style('top', '0');
     canvas.style('right', '0');
     background(0);
-}
-
-function draw() {
-}
-
-function mouseDragged() {
 }
 
 function windowResized() {

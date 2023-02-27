@@ -1,6 +1,5 @@
 let socket = io("http://localhost:5050", { path: '/real-time' })
 let canvas;
-let controllerX, controllerY = 0;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
