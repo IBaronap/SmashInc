@@ -1,4 +1,7 @@
-let socket = io("http://localhost:5050", { path: '/real-time' })
+const NGROK = `${window.location.hostname}`;
+console.log('Server IP: ', NGROK);
+let socket = io(NGROK, { path: '/real-time' });
+///Aqui voy, falta terminar cambios para que coja el Ngrok (esta es la única pantalla que lo tiene)
 let canvas;
 
 function setup() {
