@@ -32,9 +32,7 @@ io.on('connection', (socket) => { //Listening for webSocket connections
         console.log(Points);
         socket.broadcast.emit('Final-Points', Points)
     });
-});
 
-io.on('connection', (socket) => { //Listening for webSocket connections
     socket.on('Instructions', (message) => {
         console.log(message);
         socket.broadcast.emit('Move-Player', message)

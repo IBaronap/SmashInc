@@ -20,13 +20,10 @@ function draw() {
     game ();
     points();
 
+    stroke(255);
     fill(255);
-    rect(407, 32, 80, 60, 50);
-
-    stroke(0, 0, 255);
-    fill(0, 0, 255);
-    textSize(40);
-    text(Points, 425, 75)
+    textSize(50);
+    text(Points, 760, 75)
   }
 
 function windowResized() {
