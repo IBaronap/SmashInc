@@ -164,6 +164,8 @@ var maxw = 780;
     class Platforms {
     constructor(){
 
+        //10 platforms at random positions
+
         for (let i = 0; i < numPlatforms; i++){
 
             let overlap = true;
@@ -172,6 +174,7 @@ var maxw = 780;
                 x = Math.floor(Math.random() * (minw + 70, maxw - 70));
                 y = Math.floor(Math.random() * (1100));
                 
+                //So the platforms dont appear one on top of the other
                 overlap = false;
                 for (let j = 0; j < Plats.length; j++) {
                     const platform = Plats[j];
@@ -193,6 +196,8 @@ var maxw = 780;
             image(stand, x, y, 140, 40)
         };
     };
+
+    //Collision (hitbox of platforms)
 
     collision(){
         for (let i = 0; i < Plats.length; i++) {
@@ -235,6 +240,7 @@ var maxw = 780;
                     imgObj.y += imgObj.speed;
                     image(imgObj.img, imgObj.x, imgObj.y);
 
+                    //Collision
                     let d = dist(imgObj.x + imgObj.width/2, imgObj.y + imgObj.height/2, Playerx, Playery);
                     if (d < imgObj.width/2 + 40) { 
                         GameOver();
@@ -332,7 +338,8 @@ var maxw = 780;
             socket.emit('Points', msn);
             
             window.location.href = '/mupi-gameover';
-
+        
+            //Restart
             time = 0;
             Points = 0;
 

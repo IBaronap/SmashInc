@@ -10,6 +10,7 @@ function setup() {
     background(0);
 }
 
+//Lets the button be abled to use by checking if the "Terms and conditions" is cheked
 let button = document.getElementById('ButtonSend');
 
     let Disable = document.getElementById('Check1');
@@ -22,6 +23,7 @@ let button = document.getElementById('ButtonSend');
         }
       });
 
+//The user data
 
 let data = {
     name: "",
