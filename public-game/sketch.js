@@ -327,6 +327,7 @@ var maxw = 780;
             console.log('Game Over');
             msn = Points;
             change = '/phone-gameover';
+            
             socket.emit('switchPage', change);
             socket.emit('Points', msn);
             

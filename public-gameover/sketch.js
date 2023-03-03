@@ -11,14 +11,17 @@ function setup() {
 }
 
 let Points;
+
 const NumPoints = document.getElementById('NumPoints');
 
     socket.on('Final-Points', msn => {
         console.log(msn);
         Points = msn;
+        
         NumPoints.innerHTML = Points;
         }
     )
+
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
