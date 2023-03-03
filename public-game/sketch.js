@@ -334,7 +334,9 @@ var maxw = 780;
             msn = Points;
             change = '/phone-gameover';
             
+            //If switchPage is emited first, the points are not emited
             socket.emit('switchPage', change);
+            //Even if the points do send, the pages will recharge and erase the message that they received
             socket.emit('Points', msn);
             
             window.location.href = '/mupi-gameover';
