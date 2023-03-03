@@ -95,13 +95,13 @@ var maxw = 780;
             switch(msn){
                 case 'LEFT':
                     if (Playerx >= minw) {
-                        Playerx -= 5;
+                        Playerx -= 10;
                        };
                     break;
 
                 case 'RIGHT':
                     if (Playerx <= maxw) {
-                        Playerx += 5;
+                        Playerx += 10;
                         };
                     break;
 

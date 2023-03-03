@@ -56,3 +56,8 @@ function touch(instruction) {
     }
     
 }
+
+
+socket.on('loadPage', (page) => {
+    window.location.href = page;
+  });

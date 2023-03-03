@@ -13,3 +13,11 @@ function setup() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+document.getElementById('ConnectedBTN').addEventListener('click', () => {
+    socket.emit('switchPage', 'phone-controller');
+  });
+
+socket.on('loadPage', (page) => {
+   window.location.href = page;
+});

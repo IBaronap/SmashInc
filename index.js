@@ -5,6 +5,7 @@ const SERVER_IP = '172.30.95.100';
 const expressApp = express(); //Environment setup
 
 //Mupi
+
 expressApp.use(express.json()) //Middlewares
 expressApp.use('/mupi-home', express.static('public-home')); //Middlewares
 expressApp.use('/mupi-connected', express.static('public-connected')); 
@@ -19,6 +20,7 @@ expressApp.use('/phone-form', express.static('public-phone-form'));
 expressApp.use('/phone-disconnect', express.static('public-phone-disconnect'));
 
 // expressApp.listen(PORT);
+
 const httpServer = expressApp.listen(PORT, () => { //Start the server
     console.log(`Server is running, host http://${SERVER_IP}:${PORT}/`);
     console.table({
