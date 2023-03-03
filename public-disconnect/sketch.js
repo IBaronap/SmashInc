@@ -44,3 +44,7 @@ let Points;
             }
         }
     )
+
+socket.on('switch', (msn) => {
+    window.location.href = msn;
+ });

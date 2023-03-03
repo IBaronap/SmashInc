@@ -44,3 +44,8 @@ let Points;
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+document.getElementById('DisconnectBTN').addEventListener('click', () => {
+    let msn = "/mupi-home"
+    socket.emit('switchPage', msn);
+  });

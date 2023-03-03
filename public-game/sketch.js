@@ -326,12 +326,16 @@ var maxw = 780;
         function GameOver(){
             console.log('Game Over');
             msn = Points;
+            change = '/phone-gameover';
+            socket.emit('switchPage', change);
             socket.emit('Points', msn);
+            
+            window.location.href = '/mupi-gameover';
 
             time = 0;
             Points = 0;
 
-            alert("Game over!");
+            
             Playerx = 412;
             Playery = minh;
             console.clear();

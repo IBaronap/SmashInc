@@ -13,3 +13,8 @@ function setup() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+
+socket.on('switch', (msn) => {
+    window.location.href = msn;
+ });

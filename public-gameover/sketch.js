@@ -23,3 +23,7 @@ const NumPoints = document.getElementById('NumPoints');
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+socket.on('switch', (msn) => {
+    window.location.href = msn;
+ });

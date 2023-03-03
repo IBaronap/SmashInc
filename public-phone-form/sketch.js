@@ -48,3 +48,8 @@ async function send(data) {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+document.getElementById('ButtonSend').addEventListener('click', () => {
+  let msn = "/mupi-disconnect"
+  socket.emit('switchPage', msn);
+});

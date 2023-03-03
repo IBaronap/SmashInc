@@ -58,6 +58,6 @@ function touch(instruction) {
 }
 
 
-socket.on('loadPage', (page) => {
-    window.location.href = page;
-  });
+socket.on('switch', (msn) => {
+    window.location.href = msn;
+ });

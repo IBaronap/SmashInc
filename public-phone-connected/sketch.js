@@ -15,9 +15,7 @@ function windowResized() {
 }
 
 document.getElementById('ConnectedBTN').addEventListener('click', () => {
-    socket.emit('switchPage', 'phone-controller');
+    let msn = "/mupi-game"
+    socket.emit('switchPage', msn);
   });
 
-socket.on('loadPage', (page) => {
-   window.location.href = page;
-});
