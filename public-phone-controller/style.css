@@ -3,12 +3,17 @@
     margin: 0;
     padding: 0;
     font-family: "Inter";
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
 canvas{
     margin: 0, 122;
 }
+
+/* #PhoneP {
+    width: ;
+} */
+
 /* 
 #Phone{
     position: relative;
@@ -20,6 +25,7 @@ canvas{
     align-items: center;
     justify-content: center;
 }
+*/
 
 #JumpButton{
     position: absolute;
@@ -27,6 +33,7 @@ canvas{
     height: 283.03px;
     left: 61px;
     top: 53px;
+    z-index: 20;
 }
 
 #LeftButton{
@@ -35,6 +42,7 @@ canvas{
     height: 147.8px;
     left: 454px;
     top: 120.96px;
+    z-index: 20;
 }
 
 #RightButton{
@@ -43,4 +51,5 @@ canvas{
     height: 147.82px;
     left: 658.08px;
     top: 120.96px;
-} */
+    z-index: 20;
+}
