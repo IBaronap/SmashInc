@@ -50,7 +50,7 @@
                 position: absolute;
                 width: 51px;
                 height: 51px;
-                left: 570px;
+                left: 620px;
                 top: 270px;
             }
 
@@ -128,7 +128,7 @@
                     position: absolute;
                     width: 69px;
                     height: 69px;
-                    left: 530px;
+                    left: 590px;
                     top: 663px;
                 }
 
@@ -144,7 +144,7 @@
                     position: absolute;
                     width: 60px;
                     height: 24px;
-                    left: 600px;
+                    left: 590px;
                     top: 754px;
                 }
                 
@@ -160,7 +160,7 @@
                     position: absolute;
                     width: 69px;
                     height: 69px;
-                    left: 530px;
+                    left: 540px;
                     top: 798px;
                 }
     
@@ -230,5 +230,5 @@
 #Nubes{
     position: absolute;
     width: 859px;
-    top: 418px;
+    bottom: 0px;
 }
