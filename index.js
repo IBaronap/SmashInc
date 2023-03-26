@@ -23,17 +23,9 @@ expressApp.use(cors({
 
 //Mupi
 expressApp.use(express.json()) 
-expressApp.use('/mupi-home', express.static('public-home')); 
-expressApp.use('/mupi-connected', express.static('public-connected')); 
-expressApp.use('/mupi-game', express.static('public-game')); 
-expressApp.use('/mupi-gameover', express.static('public-gameover')); 
-expressApp.use('/mupi-disconnect', express.static('public-disconnect')); 
+expressApp.use('/mupi', express.static('public-home')); 
 //Phone
-expressApp.use('/phone-connected', express.static('public-phone-connected'));
-expressApp.use('/phone-controller', express.static('public-phone-controller'));
-expressApp.use('/phone-gameover', express.static('public-phone-gameover'));
-expressApp.use('/phone-form', express.static('public-phone-form'));
-expressApp.use('/phone-disconnect', express.static('public-phone-disconnect'));
+expressApp.use('/phone', express.static('public-phone-connected'));
 
 //Server
 const httpServer = expressApp.listen(PORT, () => { //Start the server
@@ -47,7 +39,7 @@ io.on('connection', (socket) => {
     socket.on('Points', (message) => {
         console.log(message);
         let Points = message * 50;
-        console.log(Points);
+        console.log('User got ' + Points + ' points');
         socket.broadcast.emit('Final-Points', Points)
     });
 
@@ -57,7 +49,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('switchPage', (message) => {
-        console.log(message);
+        console.log('Switch to screen '+ message);
         socket.broadcast.emit('switch', message)
     });
 });

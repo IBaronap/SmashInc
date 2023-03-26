@@ -16,22 +16,109 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
      
-    <div id="Phone">
-        <div class="textScreen">
-            <h1 id="title">Succesfully connected</h1>
-            <img src="./Images/Icon1.png" alt="Check Icon" class="Icon" id="CheckIcon">
-            <p id="description">Please read the instructions on the screen.<br>
-                Once you're ready to play tilt your phone.</p>
+    <!-- Phone Connected -->
+    <div id="Connected">
+        <div id="Phone">
+            <div class="textScreen">
+                <h1 id="title">¡Conectado!</h1>
+                <img src="./Images/Icon1.png" alt="Check Icon" class="Icon" id="CheckIcon">
+                <p id="description">Por favor lee las instrucciones en la pantalla <br> Cuando estes listo gira tu celular</p>
+            </div>
+    
+            <img src="./Images/TiltPhoneIcon.png" alt="Tilt your phone" class="Icon" id="TiltIcon">
+            
+            <button alt="QR" id="ConnectedBTN" >¡Juega!</button>
+            <img src="./Images/Shell1.png" alt="Shell" class="Shell" id="Shell1">
+            <img src="./Images/Shell2.png" alt="Shell" class="Shell" id="Shell2">
         </div>
-
-        <img src="./Images/TiltPhoneIcon.png" alt="Tilt your phone" class="Icon" id="TiltIcon">
-        
-        <a href="/phone-controller">
-            <button alt="QR" id="ConnectedBTN" >Play Now!</button>
-        </a>
-        <img src="./Images/Shell1.png" alt="Shell" class="Shell" id="Shell1">
-        <img src="./Images/Shell2.png" alt="Shell" class="Shell" id="Shell2">
     </div>
+
+    <!-- Phone Controller -->
+    <div id="Controller">
+        <div id="Phone">
+            <img src="./Images/JumpButton.png" alt="Jump Button" class="Button" id="JumpButton">
+            <img src="./Images/ArrowIzqButton.png" alt="Left Button" class="Button" id="LeftButton">
+            <img src="./Images/ArrowDerButton.png" alt="Right Button" class="Button" id="RightButton">
+        </div>
+    </div>
+    
+    <!-- Phone Gameover -->
+    <div id="Gameover">
+        <div id="Phone">
+            <div class="textScreen">
+                <img src="./Images/Estrellas.png" alt="Stars" id="Stars">
+                <h1 id="titleGameover">¡Game Over!</h1>
+            </div>
+            <div class="textScreen">
+                <h3 id="titleGameover2">Obtuviste</h3>
+                <div id="Points">
+                    <div id="NumPoints"></div>
+                    <h1 id="TextPoints"> Puntos</h1>
+                </div>
+            </div>
+            <div class="textScreen">
+                <h3 id="Instruction">Estás a un paso de conseguir tu premio</h3>
+            </div>
+            
+            <button id="GameoverBTN">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Phone Form -->
+    <div id="Form">
+        <div id="Phone">
+            <div class="textScreen">
+                <h3 id="InstructionForm">Estás a un paso de conseguir tu premio</h3>
+                <p id="descriptionForm">Será enviado por e-mail</p>
+            </div>
+            <div class="textScreen" id="InputsDiv">
+                <div id="NameInput">
+                    <label id="nameLabel" for="nameBox">Nombre</label><br>
+                    <input id="nameBox" type="text">
+                </div>
+                <div id="EmailInput">
+                    <label id="emailLabel" for="emailBox">E-mail</label><br>
+                    <input id="emailBox" type="email">
+                </div>
+                <div id="NumberInput">
+                    <label id="numberLabel" for="numberBox">Número de teléfono</label><br>
+                    <input id="numberBox" type="number">
+                </div>
+                <div>
+                    <p id="LittleWord">* Necesitamos esta información para saber donde podrás usar el código de descuento.</p>
+                </div>
+            </div>
+            <div id="checkbox">
+                <label id="Terms">
+                    <input id="CheckT&C" type="checkbox">
+                    Estoy de acuerdo y acepto los terminos y condiciones y las política de privacidad
+                </label><br><br>
+                <label id="Notifications">
+                    <input id="Check2" type="checkbox">
+                    Quiero ser notificado sobre nuevas ofertas y contenido por e-mail
+                </label>
+            </div>
+            
+            <button id="ButtonSendForm" disabled>Enviar</button>
+        </div>
+    </div>
+
+    <!-- Phone Disconnect -->
+    <div id="Disconnect">
+        <div id="Phone">
+            <div class="textScreen">
+                <h1 id="title">¡Gracias por jugar!</h1>
+            </div>
+            <div class="textScreen">
+                <h3 id="titleDisconnect2">Ganaste</h3>
+                <div id="PrizeDiv"></div>
+                <p id="Code">También recibirás un código de descuento por e-mail</p>
+            </div>
+            
+            <button id="DisconnectBTN">Desconectar</button>
+        </div>
+    </div>
+
     <script src="sketch.js" async defer></script>
 </body>
 </html>
