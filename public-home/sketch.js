@@ -70,10 +70,6 @@ function windowResized() {
           }        
     };
 
-// Home
-
-// Connected
-
  //Game
 
     function setup() {
@@ -89,7 +85,7 @@ function windowResized() {
         End = new Fin ();
         Enemy = new Item();
     }
-
+    
     function draw() {
         if(screen === 3){
             gravity ();
@@ -106,13 +102,14 @@ function windowResized() {
     function windowResized() {
         resizeCanvas(850, 1253);
     }
-
+   
     //Juego SetUp
 
     function game (){
         image (back, -5, 0, width+5, height);
         image (stuff, 20, minh, 0, 0);
 
+        player = playerR;
         image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
 
         End.drawEnd();
@@ -126,9 +123,13 @@ function windowResized() {
         End.end();
     }
 
-    //Image loads
+    //Image and sounds loads
 
     let player;
+    let playerR;
+    let playerL;
+    let playerJ;
+
     let stand;
     let canon;
     let canonL;
@@ -136,16 +137,25 @@ function windowResized() {
     let stuff;
     let floor;
     let back;
-
+    
     function preload (){
-    player = loadImage('./Images/Mario.png');
-    stand = loadImage ('./Images/Platform.png');
-    canon = loadImage ('./Images/Canon.png');
-    canonL = loadImage ('./Images/Canon2.png');
-    spikes = loadImage ('./Images/Spikes.png');
-    stuff = loadImage('./Images/Stuff.png');
-    floor = loadImage('./Images/Floor.png');
-    back = loadImage('./Images/Background.png')
+        playerR = loadImage('./Images/MarioR.png');
+        playerL = loadImage('./Images/MarioL.png');
+        playerJ = loadImage('./Images/MarioJ.png');
+
+        stand = loadImage ('./Images/Platform.png');
+        canon = loadImage ('./Images/Canon.png');
+        canonL = loadImage ('./Images/Canon2.png');
+        spikes = loadImage ('./Images/Spikes.png');
+        stuff = loadImage('./Images/Stuff.png');
+        floor = loadImage('./Images/Floor.png');
+        back = loadImage('./Images/Background.png');
+
+        const JumpAudio = document.getElementById('JumpAudio');
+        JumpAudio.volume = 0.2;
+
+        const WalkAudio = document.getElementById('WalkAudio');
+        WalkAudio.volume = 0.5;
     }
 
     //Max and Min coordinates
@@ -168,20 +178,44 @@ function windowResized() {
                 switch(msn){
                     case 'LEFT':
                         if (Playerx >= minw) {
+                            player = playerL;
+                            image(playerL, Playerx, Playery, PlayerWidth, PlayerHeight);
+
                             Playerx -= 10;
+
+                            WalkAudio.play();
+                            setTimeout(() => {
+                                WalkAudio.pause();
+                                WalkAudio.currentTime = 0;
+                            }, 1000);
+                            
                         };
                         break;
 
                     case 'RIGHT':
                         if (Playerx <= maxw) {
+                            player = playerR;
+                            image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
+
                             Playerx += 10;
+
+                            WalkAudio.play();
+                            setTimeout(() => {
+                                WalkAudio.pause();
+                                WalkAudio.currentTime = 0;
+                            }, 1000);
+
                             };
                         break;
 
                     case 'UP':
                         if (!jump) {
                             jump = true;
-                            setTimeout(() => {jump = false;}, 500);
+                            JumpAudio.play();
+                            setTimeout(() => {
+                                jump = false;
+                                
+                            }, 500);
                         }
                         break;
                 }
