@@ -14,7 +14,7 @@ function windowResized() {
     let screen = 1;
     let switchMSN;
 
-    document.getElementById('QR').addEventListener('click', () => {
+    document.getElementById('QR').addEventListener('click', () => { /*Cambiar id del QR para que cambie de screen */
         screen = 2;
         switchScreen();
     });
@@ -24,51 +24,94 @@ function windowResized() {
         switchScreen();
     });
 
-    function switchScreen() {
-        switch(screen) {
-            case 1:
-                document.getElementById('Home').style.display = 'block';
-                document.getElementById('Connected').style.display = 'none';
-                document.getElementById('Game').style.display = 'none';
-                document.getElementById('Gameover').style.display = 'none';
-                document.getElementById('Disconnect').style.display = 'none';
-                break;
-            case 2:
-                document.getElementById('Home').style.display = 'none';
-                document.getElementById('Connected').style.display = 'block';
-                document.getElementById('Game').style.display = 'none';
-                document.getElementById('Gameover').style.display = 'none';
-                document.getElementById('Disconnect').style.display = 'none';
-                break;
-            case 3:
-                document.getElementById('Home').style.display = 'none';
-                document.getElementById('Connected').style.display = 'none';
-                document.getElementById('Game').style.display = 'block';
-                document.getElementById('Gameover').style.display = 'none';
-                document.getElementById('Disconnect').style.display = 'none';
+    // function switchScreen() {
+    //     switch(screen) {
+    //         case 1:
+    //             document.getElementById('Home').style.display = 'block';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             break;
+    //         case 2:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'block';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             break;
+    //         case 3:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'block';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
 
-                Restart();
-                break;
-            case 4:
-                document.getElementById('Home').style.display = 'none';
-                document.getElementById('Connected').style.display = 'none';
-                document.getElementById('Game').style.display = 'none';
-                document.getElementById('Gameover').style.display = 'block';
-                document.getElementById('Disconnect').style.display = 'none';
-
-                socket.emit('switchPage', 3);
-                break;
-            case 5:
-                document.getElementById('Home').style.display = 'none';
-                document.getElementById('Connected').style.display = 'none';
-                document.getElementById('Game').style.display = 'none';
-                document.getElementById('Gameover').style.display = 'none';
-                document.getElementById('Disconnect').style.display = 'block';
-                break;
-            default:
-                console.log('Screen does not exist');
-          }        
-    };
+    //             break;
+    //         case 4:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'block';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             Restart();
+    //             break;
+    //         case 5:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'block';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             break;
+    //         case 6:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'block';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             break;
+    //         case 7: 
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'block';
+    //             document.getElementById('Disconnect').style.display = 'none';
+    //             break;
+    //         case 8:
+    //             document.getElementById('Home').style.display = 'none';
+    //             document.getElementById('Connected').style.display = 'none';
+    //             document.getElementById('Instructions').style.display = 'none';
+    //             document.getElementById('Game').style.display = 'none';
+    //             document.getElementById('Gameover').style.display = 'none';
+    //             document.getElementById('QRScreen').style.display = 'none';
+    //             document.getElementById('Formulario').style.display = 'none';
+    //             document.getElementById('Disconnect').style.display = 'block';
+    //             break;
+    //         default:
+    //             console.log('Screen does not exist');
+    //       }        
+    // };
 
  //Game
 

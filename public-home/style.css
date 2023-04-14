@@ -1,4 +1,14 @@
 /* General */
+
+@font-face {
+    font-family: 'MARIO_Font_v3_Solid';
+    src: url('./Fonts/MARIO_Font_v3_Solid.otf');
+}
+
+.SuperMario256 {
+    font-family: 'MARIO_Font_v3_Solid', sans-serif;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,22 +21,30 @@
     position: relative;
     width: 859px;
     height: 1253px;
-    background-color: #DE0000;
+    background-color: #C70000;
+    margin: auto;
+}
+
+#MupiOver{
+    position: relative;
+    width: 859px;
+    height: 1253px;
+    background-color: #000000;
     margin: auto;
 }
 
 button{
     justify-content: center;
     align-items: center;
-    padding: 6px 24px;
+    padding: 0;
     gap: 10px;
     position: absolute;
-    width: 316px;
-    height: 109px;
-    left: 220px;
-    top: 950px;
-    background: #DE0000;
-    border-radius: 6px;
+    width: 255.87;
+    height: 96.27;
+    left: 304px;
+    top: 900px;
+    background: #7FE06E;
+    border-radius: 33.78px;
     color: #FFFFFF;
     font-family: 'A-OTF Shin Go Pro';
     font-style: normal;
@@ -52,25 +70,31 @@ button:after {
     height: 100%;
     opacity: 0;
     transition: all 0.5s;
-    box-shadow: 0 0 10px 40px #DE0000;
+    box-shadow: 0 0 10px 40px #7FE06E;
+    border-radius: 33.78px;
 }
 
 button:active:after {
-    box-shadow: 0 0 0 0 #DE0000;
+    box-shadow: 0 0 0 0 #7FE06E;
     position: absolute;
     left: 0;
     top:0;
     opacity: 1;
     transition: 0s;
+    border-radius: 33.78px;
 }
 
 /* Screens */
 
 #Home{
-    display: block;
+    display: none;
 }
 
 #Connected{
+    display: none;
+}
+
+#Instructions{
     display: none;
 }
 
@@ -82,11 +106,26 @@ button:active:after {
     display: none;
 }
 
-#Disconnect{
+#QRScreen{
     display: none;
 }
 
+#Formulario{
+    display: none;
+}
+
+#Disconnect{
+    display: block;
+}
+
 /* Home */
+
+    #SMUpLogo{
+        position: absolute;
+        width: 13vw;
+        left: 4.5vw;
+        top: 4.6vh;
+    }
 
     #NubesFront{
         position: absolute;
@@ -94,7 +133,7 @@ button:active:after {
         height: 231px;
         left: 0px;
         top: 1022px;
-        z-index: 1;
+        z-index: 2;
     }
 
     #NubesBack{
@@ -103,55 +142,35 @@ button:active:after {
         height: 271px;
         right: 0px;
         bottom: 0px;
+        z-index: 1;
     }
 
     #NintendoLogo{
         position: absolute;
-        width: 85px;
-        height: 87px;
-        left: 387px;
-        top: 36px;
+        width: 10.4vw;
+        height: auto;
+        left: 42vw;
+        top: 4.6vh;
     }
 
     #titleHome{
-        font-size: 48px;
+        color: #E1F3FE;
+        font-family: 'MARIO_Font_v3_Solid';
+        font-size: 35px;
         font-weight: 700;
         position: absolute;
         width: 398px;
         height: 48px;
-        left: 230px;
-        top: 143px;
-        letter-spacing: -0.02em;
+        left: 0;
+        top: 115vh;
+        letter-spacing: 0.2rem;
         text-align: center;
+        transform: rotate(-5.43deg);
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        line-height: 4.6vh;
     }
 
-    #descriptionHome{
-        font-weight: 400;
-        font-size: 24px;
-        position: absolute;
-        width: 677px;
-        height: 58px;
-        left: 91px;
-        top: 219px;
-        text-align: center;
-    }
-
-    #QR{
-        
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(6px);
-        position: absolute;
-        width: 380px;
-        height: 380px;
-        left: 239px;
-        top: 317px;
-        mix-blend-mode: normal;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        opacity: 0.8;
-        z-index: 1;
-    }
-
+    
     #backgroundImage{
         position: absolute;
         width: 766px;
@@ -159,181 +178,150 @@ button:active:after {
         left: 48px;
         top: 671px;
     }
-
-/* Mupi connected */
-
-    #Modal{
+    
+    #GoombaFalling{
         position: absolute;
-        width: 754px;
-        height: 1146px;
-        left: 52px;
-        top: 54px;
-        opacity: 0.95;
-        background: rgba(255, 255, 255, 0.95);
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 13vw;
+        height: auto;
+        left: 20vw;
+        top: 958px;
+        z-index: 3;
     }
+    
+    #MarioFlag{
+        position: absolute;
+        width: 38vw;
+        height: auto;
+        right: 1.5vw;
+        bottom: 0;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+    
+    #LineasFondo{
+        width: 859px;
+        height: 1253px;
+    }
+
+/* Mupi connected / Bienvenida */
 
         .textScreen{
             display: flex;
-            justify-content: center;
+            text-align: center;
         }
 
-            #titleConnected{
+            #titleBienvenida{
                 position: absolute;
                 width: 700px;
-                height: 254px;
-                left: 30px;
-                top: 164px;
-                font-family: 'A-OTF Shin Go Pro';
-                font-weight: 600;
-                font-size: 64px;
+                height: 90px;
+                left: 70px;
+                top: 87px;
+                font-family: 'MARIO_Font_v3_Solid';
+                font-weight: 700;
+                font-size: 5.4vw;
                 line-height: 80px;
                 text-align: center;
-                color: #DE0000;
+                background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke: 5.3px black;
+                letter-spacing: -0.18rem;
+                
             }
 
-                #CheckIcon{
+            #viñeta {
+                position: absolute;
+                width: 707px;
+                height: 548.54px;
+                right: 5vw;
+                top: 294px; 
+            }
+
+                #descriptionConnected{
                     position: absolute;
-                    width: 51px;
-                    height: 51px;
-                    left: 620px;
-                    top: 270px;
-                }
-
-            #descriptionConnected{
-                position: absolute;
-                width: 504px;
-                height: 22px;
-                left: 130px;
-                top: 376px;
-                font-style: normal;
-                font-weight: 400;
-                font-size: 24px;
-                line-height: 22px;
-                text-align: center;
-                letter-spacing: -0.02em;
-                font-feature-settings: 'calt' off;
-                color: #667080;
-            }
-
-            #titleConnected2{
-                position: absolute;
-                width: 418px;
-                height: 60px;
-                left: 170px;
-                top: 469px;
-                font-family: 'A-OTF Shin Go Pro';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 32px;
-                line-height: 60px;
-                text-align: center;
-                color: #DE0000;
-            }
-
-            #descriptionConnected2{
-                position: absolute;
-                width: 509px;
-                height: 41px;
-                left: 130px;
-                top: 558px;
-                font-family: 'Poppins';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 24px;
-                line-height: 36px;
-                text-align: center;
-                color: #000000;
-            }
-
-                #InstructionsDiv{
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .Instruction{
-                    display: flex;
-                    font-family: 'Poppins';
+                    width: 504px;
+                    height: 22px;
+                    left: 146px;
+                    top: 47vh;
                     font-style: normal;
-                    font-weight: 400;
-                    font-size: 24px;
-                    line-height: 36px;
-                    text-align: center;
+                    font-weight: 500;
+                    font-size: 35px;
+                    line-height: 39px;
+                    text-align: left;
+                    letter-spacing: -0.02em;
+                    color: #FE5921;
                 }
 
-                    #ClockInstruction{
-                        position: absolute;
-                        width: 567px;
-                        height: 36px;
-                        left: 90px;
-                        top: 680px;
-                        color: #000000;
-                    }
+                #descriptionBienvenida{
+                    color: #18142B;
+                    position: absolute;
+                    width: 547px;
+                    height: 158px;
+                    left: 146px;
+                    top: 464px;
+                    font-weight: 500;
+                    font-size: 27px;
+                    line-height: 40px;
+                    text-align: left;
+                }
 
-                    #ClockIcon{
-                        position: absolute;
-                        width: 69px;
-                        height: 69px;
-                        left: 590px;
-                        top: 663px;
-                    }
+                #control{
+                    position: absolute;
+                    width: 180px;
+                    height: auto;
+                    right: 7vw;
+                    top: 87vh;
+                    filter: drop-shadow(3.12329px 3.12329px 4.68493px rgba(0, 0, 0, 0.3));
+                    transform: rotate(-25deg);
+                }
 
-                    #ArrowsInstruction{
-                        position: absolute;
-                        width: 567px;
-                        height: 36px;
-                        left: 90px;
-                        top: 748px;
-                        color: #000000;
-                    }
+            #lakitu{
+                position: absolute;
+                width: 291.13px;
+                height: 380.03px;
+                right: 2vw;
+                bottom: 4vh;
+                z-index: 2;
+            }
 
-                    #ArrowsIcon{
-                        position: absolute;
-                        width: 60px;
-                        height: 24px;
-                        left: 590px;
-                        top: 754px;
-                    }
-                    
-                    #JumpInstruction{
-                        position: absolute;
-                        width: 567px;
-                        height: 36px;
-                        left: 90px;
-                        top: 815px;
-                        color: #000000;
-                    }
-
-                    #JumpIcon{
-                        position: absolute;
-                        width: 69px;
-                        height: 69px;
-                        left: 540px;
-                        top: 798px;
-                    }
-
-    .Shell{
-        width: 263px;
-    }
-
-    #Shell1{
-        position: absolute;
-        right: 0;
-    }
-
-    #Shell2{
-        position: absolute;
-        top: 456px;
-    }
+            #gameEjm{
+                position: absolute;
+                width: 344.84px;
+                height: 475.28px;
+                left: 146px;
+                top: 690px;
+            }
 
     #Nubes{
         position: absolute;
         width: 859px;
         bottom: 0px;
     }
+
+/* Instructions */
+
+#descriptionInstructions{
+    color: #000000;
+    position: absolute;
+    width: 620px;
+    height: 117px;
+    left: 125px;
+    top: 340px;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
+    z-index: 1;
+}
+
+span { font-weight: 700; color: #FF5C00} 
+
+#InstImg{
+    position: absolute;
+    width: 581px;
+    height: 255px;
+    left: 112px;
+    top: 490px;
+    z-index: 1;
+}
 
 /* Game */
 
@@ -344,41 +332,59 @@ button:active:after {
 
 /* Gameover */
 
+#LineasNegro{
+    width: 859px;
+    height: 1253px;
+}
+
+.MupiGameOver{
+    color: #000000;
+}
+
     #titleGameover{
         position: absolute;
+        text-align: center;
         width: 700px;
         height: 254px;
-        left: 40px;
-        top: 180px;
-        font-family: 'A-OTF Shin Go Pro';
-        font-weight: 600;
-        font-size: 64px;
+        left: 0;
+        top: -35vh;
+        font-family: 'MARIO_Font_v3_Solid';
+        font-weight: 700;
+        font-size: 5.4vw;
         line-height: 80px;
         text-align: center;
-        color: #DE0000;
+        color: #970202;
+        text-shadow: 
+            -7px -7px 0 #fff,
+            7px -7px 0 #fff,
+            -7px 7px 0 #fff,
+            7px 7px 0 #fff;
+        letter-spacing: -0.18rem;
     }
 
-        #Stars{
-            position: absolute;
-            width: 230px;
-            height: 88px;
-            left: 260px;
-            top: 80px;
-        }
+    #ModalOver {
+        position: absolute;
+        width: 707px;
+        height: 617px;
+        left: 78px;
+        top: 328px;
+        background: #F7F9F8;
+        border: 4px solid #FFA800;
+        border-radius: 24px;
+    }
 
     #titleGameover2{
         position: absolute;
-        width: 139px;
-        height: 40px;
-        left: 300px;
-        top: 386px;
-        font-family: 'Poppins';
+        width: 350px;
+        height: fit-content;
+        left: 180px;
+        top: 30px;
         font-style: normal;
-        font-weight: 400;
-        font-size: 35px;
+        font-weight: 700;
+        font-size: 40px;
         line-height: 52px;
         text-align: center;
-        color: #FE0000;
+        color: #000000;
     }
 
     #Points{
@@ -387,9 +393,9 @@ button:active:after {
         position: absolute;
         width: 392.56px;
         height: 86.12px;
-        left: 200px;
-        top: 440px;
-        font-style: normal;
+        left: 140px;
+        top: 100px;
+        font-family: 'MARIO_Font_v3_Solid';
         font-weight: 600;
         line-height: 110px;
         text-align: center;
@@ -397,21 +403,21 @@ button:active:after {
                     
         #NumPoints, #TextPoints{
             font-size: 55px;
-            font-family: 'A-OTF Shin Go Pro';
-            color: #FE0000;
+            font-family: 'MARIO_Font_v3_Solid';
+            color: #FFFFFF;
+            -webkit-text-stroke: 4px black;
+            letter-spacing: -0.18rem;
         }
 
         #Instruction{
             position: absolute;
-            width: 413px;
-            height: 120px;
-            left: 180px;
-            top: 626px;
-            font-family: 'A-OTF Shin Go Pro';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 32px;
-            line-height: 60px;
+            width: 380px;
+            height: fit-content;
+            left: 152px;
+            top: 265px;
+            font-weight: 800;
+            font-size: 26px;
+            line-height: 32px;
             text-align: center;
             color: #000000;
         }
@@ -420,54 +426,117 @@ button:active:after {
             position: absolute;
             width: 599px;
             height: 96px;
-            left: 95px;
-            top: 820px;
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 24px;
-            line-height: 36px;
+            left: 50px;
+            top: 420px;
+            font-weight: 600;
+            font-size: 23px;
+            line-height: 30px;
             text-align: center;
             color: #000000;
         }
 
-    #CharactersNintendo{
+    #MarioHappy{
         position: absolute;
-        width: 859px;
+        width: 218px;
         bottom: 0;
+        left: 319px;
     }
+
+/*QRScreen*/
+
+#QR{
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    left: 239px;
+    top: 317px;
+    mix-blend-mode: normal;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    z-index: 1;
+}
+
+#JoinExperience{
+    position: absolute;
+    width: 580px;
+    height: 150px;
+    left: 139px;
+    top: 105vh;
+}
+
+/* Formulario */
+#AlmostDone{
+    position: absolute;
+    width: 800px;
+    height: auto;
+    left: 35px;
+    top: 65px;
+    align-items: center;
+}
+
+#FillData{
+    position: absolute;
+    width: 450px;
+    height: auto;
+    left: 200px;
+    top: 1090px;
+    z-index: 1;
+}
+
+#SM{
+    position: absolute;
+    width: 484px;
+    height: 667px;
+    left: 209px;
+    top: 323px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
 
 /* Disconnect */
 
     #titleDisconnect{
+            position: absolute;
+            width: 700px;
+            height: 90px;
+            left: 0px;
+            top: -220px;
+            font-family: 'MARIO_Font_v3_Solid';
+            font-weight: 700;
+            font-size: 5.4vw;
+            line-height: 80px;
+            text-align: center;
+            background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 5.3px black;
+            letter-spacing: -0.18rem;
+    }
+
+    #ModalDisconnect {
         position: absolute;
-        width: 700px;
-        height: 254px;
-        left: 30px;
-        top: 151px;
-        font-family: 'A-OTF Shin Go Pro';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 80px;
-        line-height: 80px;
-        text-align: center;
-        color: #DE0000;
+        width: 707px;
+        height: 617px;
+        left: 78px;
+        top: 328px;
+        background: #F7F9F8;
+        border: 4px solid #FFA800;
+        border-radius: 24px;
     }
 
     #titleDisconnect2{
         position: absolute;
-        width: 246px;
-        height: 67px;
-        left: 250px;
-        top: 487px;
-        font-family: 'Poppins';
+        width: 350px;
+        height: fit-content;
+        left: 180px;
+        top: 30px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 700;
         font-size: 40px;
-        line-height: 60px;
+        line-height: 52px;
         text-align: center;
-
-        color: #DE0000;
+        color: #000000;
     }
 
         #Prize{
@@ -480,15 +549,35 @@ button:active:after {
 
     #InstructionDisconnect{
         position: absolute;
-        width: 589px;
-        height: 49px;
-        left: 85px;
-        top: 880px;
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 36px;
+        width: 380px;
+        height: fit-content;
+        left: 152px;
+        top: 375px;
+        font-weight: 800;
+        font-size: 26px;
+        line-height: 32px;
         text-align: center;
         color: #000000;
     }
+
+    #InstructionDisconnect2{
+        position: absolute;
+        width: 550px;
+        height: 96px;
+        left: 75px;
+        top: 465px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        color: #000000;
+    }
+
+    #MarioStar{
+        position: absolute;
+        width: 300px;
+        height: auto;
+        left: 300px;
+        bottom: 0;
+    }
+

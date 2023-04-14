@@ -3,7 +3,7 @@ import express from 'express';
 import { Server } from 'socket.io';
 import cors from 'cors';
 const PORT = 5050;
-const SERVER_IP = '192.168.1.11'; //Change IP
+const SERVER_IP = '192.168.1.6'; //Change IP
 const expressApp = express();
 expressApp.use(cors());
 

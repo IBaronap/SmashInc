@@ -21,56 +21,53 @@
     <!-- Mupi Home -->
     <div id="Home">
         <div id="Mupi">
+            <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
+            <img src="./Images/SMUpLogo.png" alt="Super Mario Up Logo" id="SMUpLogo">
             <img src="./Images/NubesBack.png" alt="Nubes" id="NubesBack">
             <img src="./Images/NubesFront.png" alt="Nubes" id="NubesFront">
-            <img src="./Images/NintendoLogo1.png" alt="Logo Nintendo" id="NintendoLogo">
+            <img src="./Images/Nintendo Logo.png" alt="Logo Nintendo" id="NintendoLogo">
             <div id="textScreen1">
-                <h1 id="titleHome">A fun break to fly!</h1>
-                <h2 id="descriptionHome">Únete a nuestra experiencia interactiva mientras esperas tu vuelo ¡Gana premios y descuentos de Nintendo Switch!</h2>
-            </div>
-    
-            <div id="QRDiv">
-                <img src="./Images/QR.png" alt="QR" id="QR" onclik="">
-            </div>
-            
-            <img src="./Images/CharactersNintendo.png" alt="Nintendo Characters" id="CharactersNintendo">
+                <h1 id="titleHome">Espera un momento...</h1>
+            </div>            
+            <img src="./Images/Mario flag.png" alt="Mario" id="MarioFlag">
+            <img src="./Images/Goomba falling.png" alt="Goomba" id="GoombaFalling">
         </div>
     </div>
 
-    <!-- Mupi-Connected -->
+    <!-- Mupi-Connected / Bienvenida-->
     <div id="Connected">
         <div id="Mupi">
-            <div id="Modal">
+            <div id="welcomeScreen">
+                <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
                 <div class="textScreen">
-                    <h1 id="titleConnected">Conectado exitosamente</h1>
-                    <img src="./Images/Icon1.png" alt="Check Icon" class="Icon" id="CheckIcon">
-                    <p id="descriptionConnected">Usa tu smartphone como un control</p>
+                    <h1 id="titleBienvenida">¡Bienvenido!</h1>
                 </div>
-                <div class="textScreen">
-                    <h2 id="titleConnected2">Cómo jugar</h2>
-                    <p id="descriptionConnected2">¡Alcanza la cima y ten cuidado con los obstáculos!</p>
-                </div>
-                <div class="textScreen" id="InstructionsDiv">
-                    <div class="Instruction">
-                        <p id="ClockInstruction">Juega hasta que se acabe el tiempo</p>
-                        <img src="./Images/Icon2.png" alt="Clock Icon" class="Icon" id="ClockIcon">
-                    </div>
-                    <div class="Instruction">
-                        <p id="ArrowsInstruction">Muévete presionando las flechas</p>
-                        <img src="./Images/Icon3.png" alt="Arrows" class="Icon" id="ArrowsIcon">
-                    </div>
-                    <div class="Instruction">
-                        <p id="JumpInstruction">Salta para llegar a la cima </p>
-                        <img src="./Images/Icon4.png" alt="Jump Button" class="Icon" id="JumpIcon">
-                    </div>
-                </div>
-        
-                <button>¡Jugar!</button>
                 
+                <div class="textScreen" id="InstructionsDiv">
+                    <img src="./Images/Viñeta.png" alt="viñeta" id="viñeta">
+                    <h2 id="descriptionConnected">¡Te damos la bienvenida a Super Mario Up!</h2>
+                    <h2 id="descriptionBienvenida">Tu objetivo es llegar a la cima esquivando los obstáculos utilizando el control de Mario, hasta que el tiempo se acabe.</h2>
+                    <img src="./Images/control.png" alt="control" id="control">
+                </div>
+                <img src="./Images/lakitu.png" alt="lakitu" id="lakitu">
+                <img src="./Images/gameEjm.png" alt="game screen" id="gameEjm">
+        
+                <!-- <button>¡Jugar!</button> -->
             </div>
-            <img src="./Images/Shell1.png" alt="Shell" class="Shell" id="Shell1">
-            <img src="./Images/Shell2.png" alt="Shell" class="Shell" id="Shell2">
-            <img src="./Images/Nubes.png" alt="Nubes" id="Nubes">
+        </div>
+    </div>
+
+    <!-- Mupi Instrucciones -->
+
+    <div id="Instructions">
+        <div id="Mupi">
+            <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
+            <div id="Viñeta">
+                <p id="descriptionInstructions">Usa el control <span>joystick</span> de izquierda a derecha para guiar a Mario y presiona <span>"A"</span> para saltar las plataformas.</p>
+                <img src="./Images/Instrucciones.png" alt="Instrucciones" id="InstImg">
+                <img src="./Images/Viñeta.png" alt="viñeta" id="viñeta">
+            </div>
+            <img src="./Images/lakitu.png" alt="lakitu" id="lakitu">
         </div>
     </div>
 
@@ -84,49 +81,80 @@
     <!-- Mupi Gameover -->
 
     <div id="Gameover">
-        <div id="Mupi">
-            <div id="Modal">
+        <div id="MupiOver" class="MupiGameOver">
+            <div id="ModalOver">
                 <div class="textScreen">
-                    <img src="./Images/Estrellas.png" alt="Stars" id="Stars">
-                    <h1 id="titleGameover">¡Game Over!</h1>
+                    <h1 id="titleGameover">Juego terminado</h1>
                 </div>
                 <div class="textScreen">
-                    <h3 id="titleGameover2">Obtuviste</h3>
+                    <h3 id="titleGameover2">Haz conseguido</h3>
                     <div id="Points">
                         <div id="NumPoints"></div>
                         <h1 id="TextPoints"> Puntos</h1>
                     </div>
                 </div>
                 <div class="textScreen">
-                    <h3 id="Instruction">¡Estás a un paso de recibir tu obsequio!</h3>
-                    <p id="Instruction2">Pero primero, necesitamos cierta información para que que puedas reclamar tu regalo</p>
-    
-                    <button>Revisa tu celular</button>
+                    <h3 id="Instruction">¡Estás a un paso de conseguir tu regalo!</h3>
+                    <p id="Instruction2">Antes de reclamar tu recompensa necesitamos algunos datos para que puedas reclamar tu premio.</p>
                 </div>
             </div>
-            <img src="./Images/CharactersNintendo.png" alt="CharactersNintendo" id="CharactersNintendo">
-    
+            <button type="button"><img src="./Images/Continue BTN.png" height ="96" width="256px" alt="Continue button" /></button>
+            <img src="./Images/Mario happy.png" alt="mario" id="MarioHappy">
+            <img src="./Images/FondoNegro.png" alt="fondo" id="LineasFondo">
+        </div>
+    </div>
+
+    <!-- Mupi QR -->
+    <div id="QRScreen">
+        <div id="Mupi">
+            <img src="./Images/SMUpLogo.png" alt="Super Mario Up Logo" id="SMUpLogo">
+            <img src="./Images/Nintendo Logo.png" alt="Logo Nintendo" id="NintendoLogo">
+            <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
+            <div id="contenidoQR">
+                <img src="./Images/ImgQR.png" alt="QR" id="QR" onclik="">
+                <img src="./Images/ExperienceQR.png" alt="unete a nuestra experiencia" id="JoinExperience">
+            </div>
+            <img src="./Images/Nubes.png" alt="Nubes" id="Nubes">
+        </div>
+    </div>
+
+    <!-- Mupi Formulario -->
+    <div id="Formulario">
+        <div id="Mupi">
+            <div>
+                <img src="./Images/ya casi lo consigues.png" alt="almost" id="AlmostDone">
+                <img src="./Images/llena tus datos.png" alt="llenar datos" id="FillData">
+                <img src="./Images/Super Mario.png" alt="Super Mario" id="SM">
+            </div>
+            <img src="./Images/Nubes.png" alt="Nubes" id="Nubes">
+            <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
         </div>
     </div>
 
     <!-- Mupi Disconnect -->
     <div id="Disconnect">
         <div id="Mupi">
-            <div id="Modal">
+            <img src="./Images/LineasFondo.png" alt="fondo" id="LineasFondo">
+            <div id="ModalDisconnect">
                 <div class="textScreen">
-                    <h1 id="titleDisconnect">Gracias por jugar!</h1>
+                    <h1 id="titleDisconnect">¡Ganaste!</h1>
                 </div>
                 <div class="textScreen">
-                    <h3 id="titleDisconnect2">Ganaste</h3>
+                    <h3 id="titleDisconnect2">Haz conseguido</h3>
+                    <div id="Points">
+                        <div id="NumPoints"></div>
+                        <h1 id="TextPoints"> Puntos</h1>
+                    </div>
                     <div id="PrizeDiv"></div>
                 </div>
+
                 <div class="textScreen">
-                    <p id="InstructionDisconnect">Recibirás tu código de descuento por e-mail</p>
-    
-                    <button>Desconecta tu celular</button>
+                    <h3 id="InstructionDisconnect">¡Estás a un paso de conseguir tu regalo!</h3>
+                    <p id="InstructionDisconnect2">Reclama tu premio en nuestro stand. El código de descuento te llegará a tu correo.</p>
                 </div>
             </div>
-            <img src="./Images/CharactersNintendo.png" alt="CharactersNintendo" id="CharactersNintendo">
+            <button type="button"><img src="./Images/Continue BTN.png" height ="96" width="256px" alt="Continue button" /></button>
+            <img src="./Images/Mario star.png" alt="mario" id="MarioStar">
         </div>
     </div>
 
