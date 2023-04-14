@@ -9,6 +9,46 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
+//Arduino msn
+
+socket.on('arduinoMessage', (arduinoMessage) => {
+    console.log(arduinoMessage);
+    let { actionA, actionB, signal } = arduinoMessage;
+    ArduinoBTNClicked(actionB);
+    BTNSounds(actionA);
+    moveJump([actionA, signal]);
+    moveX([actionB, signal]);
+})
+
+function ArduinoBTNClicked(actionB){
+    if (actionB == 'A') {
+        if(screen == 1){ //From Home to Instructions 1
+            screen = 2;
+            switchScreen();
+        }
+        else if(screen == 2){ //From Instructions 1 to Instructions 2
+            screen = 3;
+            switchScreen();
+        }
+        
+        else if(screen == 3){ //From Instructions 2 to Game
+            screen = 4;
+            switchScreen();
+        }
+    
+        //From Game to Gameover is when the player finishes the game
+        
+        else if(screen == 5){//From Gameover to QR
+            screen = 6;
+            switchScreen();
+        }
+    
+        //From QR to Waiting is when the QR is read on the phone
+        //From Waiting to End is when the form is sent on the phone
+        //From End to Home is when the phone is disconnected
+    }
+}
+
 //Switch Screens
 
     let screen = 1;
@@ -24,94 +64,95 @@ function windowResized() {
         switchScreen();
     });
 
-    // function switchScreen() {
-    //     switch(screen) {
-    //         case 1:
-    //             document.getElementById('Home').style.display = 'block';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             break;
-    //         case 2:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'block';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             break;
-    //         case 3:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'block';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-
-    //             break;
-    //         case 4:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'block';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             Restart();
-    //             break;
-    //         case 5:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'block';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             break;
-    //         case 6:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'block';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             break;
-    //         case 7: 
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'block';
-    //             document.getElementById('Disconnect').style.display = 'none';
-    //             break;
-    //         case 8:
-    //             document.getElementById('Home').style.display = 'none';
-    //             document.getElementById('Connected').style.display = 'none';
-    //             document.getElementById('Instructions').style.display = 'none';
-    //             document.getElementById('Game').style.display = 'none';
-    //             document.getElementById('Gameover').style.display = 'none';
-    //             document.getElementById('QRScreen').style.display = 'none';
-    //             document.getElementById('Formulario').style.display = 'none';
-    //             document.getElementById('Disconnect').style.display = 'block';
-    //             break;
-    //         default:
-    //             console.log('Screen does not exist');
-    //       }        
-    // };
+    function switchScreen() {
+            switch(screen) {
+                case 1: //Home
+                    document.getElementById('Home').style.display = 'block';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    break;
+                case 2: //Instructions 1 
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'block';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    break;
+                case 3: //Instructions 2
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'block';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    break;
+                case 4: //Game
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'block';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    Restart();
+                    socket.emit('orderForArduino','G');
+                    break;
+                case 5: //Gameover
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'block';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    socket.emit('orderForArduino','O');
+                    break;
+                case 6: //QR
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'block';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    break;
+                case 7: //Waiting for formulario
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'block';
+                    document.getElementById('Disconnect').style.display = 'none';
+                    break;
+                case 8: //End
+                    document.getElementById('Home').style.display = 'none';
+                    document.getElementById('Connected').style.display = 'none';
+                    document.getElementById('Instructions').style.display = 'none';
+                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Gameover').style.display = 'none';
+                    document.getElementById('QRScreen').style.display = 'none';
+                    document.getElementById('Formulario').style.display = 'none';
+                    document.getElementById('Disconnect').style.display = 'block';
+                    break;
+                default:
+                    console.log('Screen does not exist');
+              }        
+        };
 
  //Game
 
@@ -130,7 +171,7 @@ function windowResized() {
     }
     
     function draw() {
-        if(screen === 3){
+        if(screen === 4){
             gravity ();
             game ();
             points();
@@ -152,7 +193,7 @@ function windowResized() {
         image (back, -5, 0, width+5, height);
         image (stuff, 20, minh, 0, 0);
 
-        player = playerR;
+        var player = playerR;
         image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
 
         End.drawEnd();
@@ -166,9 +207,8 @@ function windowResized() {
         End.end();
     }
 
-    //Image and sounds loads
+    //Image loads
 
-    let player;
     let playerR;
     let playerL;
     let playerJ;
@@ -193,12 +233,19 @@ function windowResized() {
         stuff = loadImage('./Images/Stuff.png');
         floor = loadImage('./Images/Floor.png');
         back = loadImage('./Images/Background.png');
+    }
 
-        const JumpAudio = document.getElementById('JumpAudio');
-        JumpAudio.volume = 0.2;
+    //BTN Sounds
 
-        const WalkAudio = document.getElementById('WalkAudio');
-        WalkAudio.volume = 0.5;
+    function BTNSounds(actionA){
+        if (actionA == 'B') {
+            if (screen == 4){
+                socket.emit('orderForArduino','J');
+            }
+            else if (screen == 1 || screen == 2 || screen == 3 || screen == 5){
+                socket.emit('orderForArduino','A');
+            }
+        }
     }
 
     //Max and Min coordinates
@@ -215,54 +262,66 @@ function windowResized() {
 
             //Movement
 
-            socket.on('Move-Player', msn => {
-                console.log(msn);
-                let{} = msn;
-                switch(msn){
-                    case 'LEFT':
-                        if (Playerx >= minw) {
+            function moveX([direction, signal]) {
+                if(direction[0] == 'X'){
+                    let mapXValue = (signal * 770) / 1023;
+                    Playerx = mapXValue;
+
+                    let XPosition = signal;
+                    let PreviousXPosition = XPosition;
+                    const threshold = 10;
+
+                    if (XPosition > PreviousXPosition + threshold) {
+                        player = playerR;
+                        image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
+                        PreviousXPosition = XPosition;
+                      } else if (XPosition < PreviousXPosition - threshold) {
                             player = playerL;
-                            image(playerL, Playerx, Playery, PlayerWidth, PlayerHeight);
-
-                            Playerx -= 10;
-
-                            WalkAudio.play();
-                            setTimeout(() => {
-                                WalkAudio.pause();
-                                WalkAudio.currentTime = 0;
-                            }, 1000);
-                            
-                        };
-                        break;
-
-                    case 'RIGHT':
-                        if (Playerx <= maxw) {
-                            player = playerR;
                             image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-
-                            Playerx += 10;
-
-                            WalkAudio.play();
-                            setTimeout(() => {
-                                WalkAudio.pause();
-                                WalkAudio.currentTime = 0;
-                            }, 1000);
-
-                            };
-                        break;
-
-                    case 'UP':
-                        if (!jump) {
-                            jump = true;
-                            JumpAudio.play();
-                            setTimeout(() => {
-                                jump = false;
-                                
-                            }, 500);
+                            PreviousXPosition = XPosition;
                         }
-                        break;
                 }
-            })
+            }
+
+            function moveJump(direction, signal) {
+                if (direction[0] == 'B') {
+                    if (!jump) {
+                        jump = true;
+                        setTimeout(() => {jump = false}, 500);
+                    }
+                }
+            }
+
+            // socket.on('Move-Player', msn => {
+            //     console.log(msn);
+            //     let{} = msn;
+            //     switch(msn){
+            //         case 'LEFT':
+            //             if (Playerx >= minw) {
+
+            //                 Playerx -= 10;
+            //             };
+            //             break;
+
+            //         case 'RIGHT':
+            //             if (Playerx <= maxw) {
+            //                 player = playerR;
+            //                 image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
+
+            //                 Playerx += 10;
+            //                 };
+            //             break;
+
+            //         case 'UP':
+            //             if (!jump) {
+            //                 jump = true;
+            //                 setTimeout(() => {
+            //                     jump = false;
+            //                 }, 500);
+            //             }
+            //             break;
+            //     }
+            // })
 
         //Variables for jumping and gravity
 
@@ -486,12 +545,23 @@ function windowResized() {
         const NumPoints = document.getElementById('NumPoints');
         TotalPoints = Points * 50;
         NumPoints.innerHTML = TotalPoints;
+
+        let data ={TotalPoints};
+        sendPoints(data);
+
         PrizeIMG();
 
-        screen = 4;
+        screen = 5;
         switchScreen();
         // Restart();
     }
+
+            //Send points to array
+                    
+            async function sendPoints(data) {
+                const dataP = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)}
+                await fetch(`/Points-Array`, dataP)
+            }
 
     function Restart(){
         time = 0;

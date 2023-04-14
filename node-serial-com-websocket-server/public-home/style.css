@@ -87,7 +87,7 @@ button:active:after {
 /* Screens */
 
 #Home{
-    display: none;
+    display: block;
 }
 
 #Connected{
@@ -115,7 +115,7 @@ button:active:after {
 }
 
 #Disconnect{
-    display: block;
+    display: none;
 }
 
 /* Home */
@@ -542,9 +542,9 @@ span { font-weight: 700; color: #FF5C00}
         #Prize{
             box-sizing: border-box;
             position: absolute;
-            width: 250px;
-            left: 275px;
-            top: 567px;
+            width: 15vw;
+            left: 15vw;
+            top: 15vh;
         }
 
     #InstructionDisconnect{

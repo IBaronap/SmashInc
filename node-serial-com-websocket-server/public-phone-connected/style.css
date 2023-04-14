@@ -98,27 +98,18 @@ button:hover{
 
 /* Screens */
 
-#Connected{
-    display: block;
-}
-
-#Controller{
-    display: none;
-}
-
 #Gameover{
     display: none;
 }
-
 #Form{
-    display: none;
+    display: block;
 }
 
 #Disconnect{
     display: none;
 }
 
-/* Connected */
+/* General */
     .textScreen{
         display: flex;
         justify-content: center;
@@ -138,160 +129,6 @@ button:hover{
             text-align: center;
             color: #DE0000;
         }
-            #CheckIcon{
-                position: absolute;
-                width: 32px;
-                height: 32px;
-                left: 312px;
-                top: 137px;
-            }
-
-        #description{
-            position: absolute;
-            width: 312px;
-            height: 60px;
-            left: 38px;
-            top: 225px;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 26px;
-            text-align: center;
-            letter-spacing: -0.02em;
-            color: #667080;
-        }
-
-            #TiltIcon{
-                position: absolute;
-                width: 177px;
-                height: 166px;
-                left: 104px;
-                top: 429px;
-            }
-    
-    #Shell1{
-        position: absolute;
-        width: 130px;
-        right: 0px;
-        top: -36px;
-        right: 0;
-    }
-
-    #Shell2{
-        position: absolute;
-        width: 72px;
-        left: 0px;
-        top: 22px;
-        transform:matrix(-1)
-    }
-
-/* Controller */
-
-    canvas{
-        margin: 0, 122;
-    }
-
-    #JumpButton{
-        position: absolute;
-        width: 283.03px;
-        height: 283.03px;
-        left: 61px;
-        top: 53px;
-        z-index: 20;
-    }
-
-    #LeftButton{
-        position: absolute;
-        width: 85.94px;
-        height: 147.8px;
-        left: 454px;
-        top: 120.96px;
-        z-index: 20;
-    }
-
-    #RightButton{
-        position: absolute;
-        width: 85.96px;
-        height: 147.82px;
-        left: 658.08px;
-        top: 120.96px;
-        z-index: 20;
-    }
-
-/* Gameover */
-
-    #titleGameover{
-        position: absolute;
-        width: 359px;
-        height: 63px;
-        left: 16px;
-        top: 93px;
-        font-family: 'A-OTF Shin Go Pro';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 40px;
-        line-height: 50px;
-        text-align: center;
-        color: #DE0000;
-    }
-
-        #Stars{
-            position: absolute;
-            width: 138.52px;
-            height: 53px;
-            left: 126px;
-            top: 210px;
-        }
-    
-    #titleGameover2{
-        position: absolute;
-        width: 92px;
-        height: 36px;
-        left: 149px;
-        top: 290px;
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 36px;
-        text-align: center;
-        color: #DE0000;
-    }
-
-    #Points{
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        width: 280px;
-        height: 77px;
-        left: 60px;
-        top: 316px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 96px;
-        text-align: center;
-        color: #DE0000;
-    }
-
-        #NumPoints, #TextPoints{
-            font-size: 40px;
-            font-family: 'A-OTF Shin Go Pro';
-        }
-
-    #Instruction{
-        position: absolute;
-        width: 294px;
-        height: 80px;
-        left: 48px;
-        top: 528px;
-        font-family: 'A-OTF Shin Go Pro';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 40px;
-        text-align: center;
-        color: #000000;
-    }
 
 /* Form */
 
