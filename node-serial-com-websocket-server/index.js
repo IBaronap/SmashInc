@@ -2,7 +2,7 @@
 import { express, Server, cors, SerialPort, ReadlineParser } from './dependencies.js'
 
 const PORT = 5050;
-const SERVER_IP = '192.168.1.11'; //Change IP
+const SERVER_IP = ' 172.30.177.64'; //Change IP
 const expressApp = express();
 expressApp.use(cors());
 
@@ -86,34 +86,71 @@ io.on('connection', (socket) => {
 
 //User info from form
 
-    //Endpoint
-    expressApp.get('/Forms-Array', (request, response) => {
-        response.send(PlayerForm);
-    });
+// ...
 
-    let PlayerForm = [];
+// Endpoint para el formulario de jugadores
+expressApp.get('/Forms-Array', (request, response) => {
+    response.send(PlayerForm);
+});
 
-    //Receive info
-    expressApp.post('/Forms-Array', (request, response) => {  
-        const {name, email, phone, notify} = request.body; 
-        response.json({ received: request.body });
-        PlayerForm.push(request.body)
-        console.log(PlayerForm);
-    });
+let PlayerForm = [];
 
-//User points
+// Recibir información del formulario de jugadores
+expressApp.post('/Forms-Array', (request, response) => {
+    console.log("Form data received:" + request.body);
+    const { name, email, phone, notify } = request.body;
+    PlayerForm.push({ name, email, phone, notify });
+    console.log("PlayerForm:", PlayerForm);
+    response.json({ received: request.body });
+});
 
-    //Endpoint
-    expressApp.get('/Points-Array', (request, response) => {
-        response.send(Points_Array);
-    });
+// Puntos de usuario
 
-    let Points_Array = [0];
+// Endpoint para los puntos
+expressApp.get('/Points-Array', (request, response) => {
+    response.send(Points_Array);
+});
 
-    //Receive info
-    expressApp.post('/Points-Array', (request, response) => { 
-        const {Points} = request.body; 
-        response.json({ received: request.body });
-        Points_Array.push(request.body);
-        console.log(Points_Array);
-    });
+let Points_Array = [];
+
+// Recibir información de los puntos
+expressApp.post('/Points-Array', (request, response) => {
+    const { TotalPoints } = request.body;
+    Points_Array.push({ TotalPoints });
+    console.log("Points data received:", request.body);
+    console.log("Points_Array:", Points_Array);
+    response.json({ received: request.body });
+});
+
+
+//     //Endpoint
+//     expressApp.get('/Forms-Array', (request, response) => {
+//         response.send(PlayerForm);
+//     });
+
+//     let PlayerForm = [];
+
+//     //Receive info
+//     expressApp.post('/Forms-Array', (request, response) => {  
+//         const {name, email, phone, notify} = request.body; 
+//         response.json({ received: request.body });
+//         PlayerForm.push({name, email, phone, notify});
+//         console.log(PlayerForm);
+//     });
+
+// //User points
+
+//     //Endpoint
+//     expressApp.get('/Points-Array', (request, response) => {
+//         response.send(Points_Array);
+//     });
+
+//     let Points_Array = [0];
+
+//     //Receive info
+//     expressApp.post('/Points-Array', (request, response) => { 
+//         const {Points} = request.body; 
+//         response.json({ received: request.body });
+//         Points_Array.push(request.body);
+//         console.log(Points_Array);
+//     });

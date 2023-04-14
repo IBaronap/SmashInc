@@ -264,22 +264,42 @@ function ArduinoBTNClicked(actionB){
 
             function moveX([direction, signal]) {
                 if(direction[0] == 'X'){
-                    let mapXValue = (signal * 770) / 1023;
-                    Playerx = mapXValue;
 
-                    let XPosition = signal;
-                    let PreviousXPosition = XPosition;
-                    const threshold = 10;
+                    switch(signal){
+                        case 0:
+                            if (Playerx >= minw) {
+                                Playerx -= 20;
+                                socket.emit('orderForArduino','W');
+                                };
+                            break;
+            
+                        case 2:
+                            if (Playerx <= maxw) {
+                                Playerx += 20;
+                                socket.emit('orderForArduino','W');
+                                };
+                            break;
+            
+                        case 1:
+                            Playerx = Playerx;
+                            break;
+                    }
+                    // let mapXValue = (signal * 770) / 1023;
+                    // Playerx = mapXValue;
 
-                    if (XPosition > PreviousXPosition + threshold) {
-                        player = playerR;
-                        image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-                        PreviousXPosition = XPosition;
-                      } else if (XPosition < PreviousXPosition - threshold) {
-                            player = playerL;
-                            image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-                            PreviousXPosition = XPosition;
-                        }
+                    // let XPosition = signal;
+                    // let PreviousXPosition = XPosition;
+                    // const threshold = 10;
+
+                    // if (XPosition > PreviousXPosition + threshold) {
+                    //     player = playerR;
+                    //     image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
+                    //     PreviousXPosition = XPosition;
+                    //   } else if (XPosition < PreviousXPosition - threshold) {
+                    //         player = playerL;
+                    //         image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
+                    //         PreviousXPosition = XPosition;
+                    //     }
                 }
             }
 
@@ -287,7 +307,7 @@ function ArduinoBTNClicked(actionB){
                 if (direction[0] == 'B') {
                     if (!jump) {
                         jump = true;
-                        setTimeout(() => {jump = false}, 500);
+                        setTimeout(() => {jump = false}, 100);
                     }
                 }
             }
@@ -546,8 +566,8 @@ function ArduinoBTNClicked(actionB){
         TotalPoints = Points * 50;
         NumPoints.innerHTML = TotalPoints;
 
-        let data ={TotalPoints};
-        sendPoints(data);
+        let dataPoint ={TotalPoints};
+        sendPoints(dataPoint);
 
         PrizeIMG();
 
@@ -558,8 +578,8 @@ function ArduinoBTNClicked(actionB){
 
             //Send points to array
                     
-            async function sendPoints(data) {
-                const dataP = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)}
+            async function sendPoints(dataPoint) {
+                const dataP = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(dataPoint)}
                 await fetch(`/Points-Array`, dataP)
             }
 
