@@ -74,15 +74,26 @@ void receivingData() {
 
   switch (inByte) {
     case 'A': //Continue
-      tone(BuzzPin, NOTE_C4, 50);
-      delay(60);
-      tone(BuzzPin, NOTE_G4, 50);
-      delay(60);
-      noTone(BuzzPin); 
-      delay(500); 
+      // Parlante 8 ohmios
+
+      // tone(BuzzPin, NOTE_C4, 50);
+      // delay(60);
+      // tone(BuzzPin, NOTE_G4, 50);
+      // delay(60);
+      // noTone(BuzzPin); 
+      // delay(500);
+      
+      //Piezo buzzer (resistencia 220)
+      tone(BuzzPin, NOTE_A4, 100);
+      delay(150);
+      tone(BuzzPin, NOTE_E5, 100);
+      delay(150);
+      noTone(BuzzPin);
+      delay(500);
     break;
 
     case 'G': //Start game
+    //En ambos suena bien (Piezo buzzer con resistencia 220)
       tone(BuzzPin,660,100);
       delay(150);
       tone(BuzzPin,660,100);
@@ -100,35 +111,64 @@ void receivingData() {
     break;
 
     case 'J': //Jump sound
+      //En ambos suena bien (Piezo buzzer con resistencia 220)
+      
       tone(BuzzPin, NOTE_E5, 100);
       delay(200);
       tone(BuzzPin, NOTE_E6, 100);
       delay(200);
       noTone(BuzzPin);
-      delay(2000);
+      delay(500);
     break;
 
     case 'W'://Walk sound
-      tone(BuzzPin, NOTE_C4, 40);
-      delay(15); 
-      noTone(BuzzPin); 
-      delay(15); 
-      tone(BuzzPin, NOTE_A3, 40);
-      delay(75); 
-      noTone(BuzzPin); 
-      delay(15); 
+      // Parlante 8 ohmios
+
+      // tone(BuzzPin, NOTE_C4, 40);
+      // delay(15); 
+      // noTone(BuzzPin); 
+      // delay(15); 
+      // tone(BuzzPin, NOTE_A3, 40);
+      // delay(75); 
+      // noTone(BuzzPin); 
+      // delay(15); 
+
+      //Piezo Buzzer (resistencia 220)
+
+      tone(BuzzPin, NOTE_G5, 20);
+      delay(10);
+      noTone(BuzzPin);
+      delay(5);
+      tone(BuzzPin, NOTE_E5, 20);
+      delay(50);
+      noTone(BuzzPin);
+      delay(5);
     break;
 
     case 'O': //Game over
-      int notaGame[] = { NOTE_E4, NOTE_E4, NOTE_E4, NOTE_C4, NOTE_E4, NOTE_G4, NOTE_G3, NOTE_C4 };
-      int duracionGame[] = { 100, 100, 200, 200, 200, 200, 400, 800 };
+    //Parlante 8 ohmios
+
+      // int notaGame[] = { NOTE_E4, NOTE_E4, NOTE_E4, NOTE_C4, NOTE_E4, NOTE_G4, NOTE_G3, NOTE_C4 };
+      // int duracionGame[] = { 100, 100, 200, 200, 200, 200, 400, 800 };
             
+      // for (int i = 0; i < 8; i++) { // Reproduce cada nota en la secuencia
+      //     tone(BuzzPin, notaGame[i], duracionGame[i]);
+      //     delay(duracionGame[i] * 1.2); // Ajusta el tiempo de espera
+      //   }
+      //   noTone(BuzzPin);
+      //   delay(500);
+
+    //Piezo Buzzer (resistencia 220)
+
+      int notaGame[] = { NOTE_E5, NOTE_E5, NOTE_E5, NOTE_C5, NOTE_E5, NOTE_G5, NOTE_G4, NOTE_C5 };
+      int duracionGame[] = { 100, 100, 200, 200, 200, 200, 400, 800 };
+
       for (int i = 0; i < 8; i++) { // Reproduce cada nota en la secuencia
-          tone(BuzzPin, notaGame[i], duracionGame[i]);
-          delay(duracionGame[i] * 1.2); // Ajusta el tiempo de espera
-        }
-        noTone(BuzzPin);
-        delay(500);
+        tone(BuzzPin, notaGame[i], duracionGame[i]);
+        delay(duracionGame[i] * 0.8); // Ajusta el tiempo de espera
+      }
+      noTone(BuzzPin);
+      delay(500);
     break;
   }
   Serial.flush();

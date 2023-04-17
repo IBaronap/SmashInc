@@ -121,36 +121,3 @@ expressApp.post('/Points-Array', (request, response) => {
     console.log("Points_Array:", Points_Array);
     response.json({ received: request.body });
 });
-
-
-//     //Endpoint
-//     expressApp.get('/Forms-Array', (request, response) => {
-//         response.send(PlayerForm);
-//     });
-
-//     let PlayerForm = [];
-
-//     //Receive info
-//     expressApp.post('/Forms-Array', (request, response) => {  
-//         const {name, email, phone, notify} = request.body; 
-//         response.json({ received: request.body });
-//         PlayerForm.push({name, email, phone, notify});
-//         console.log(PlayerForm);
-//     });
-
-// //User points
-
-//     //Endpoint
-//     expressApp.get('/Points-Array', (request, response) => {
-//         response.send(Points_Array);
-//     });
-
-//     let Points_Array = [0];
-
-//     //Receive info
-//     expressApp.post('/Points-Array', (request, response) => { 
-//         const {Points} = request.body; 
-//         response.json({ received: request.body });
-//         Points_Array.push(request.body);
-//         console.log(Points_Array);
-//     });

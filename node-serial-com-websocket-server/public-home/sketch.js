@@ -177,9 +177,38 @@ function ArduinoBTNClicked(actionB){
             points();
     
             stroke(255);
+            strokeWeight(8);
+            fill(42, 75, 153, 90);
+            circle(width/2, 100, 100, 100);
+
+            stroke(0);
+            strokeWeight(8);
             fill(255);
-            textSize(50);
-            text(Points, 760, 75);
+            textSize(40);
+            textFont( 'MARIO_Font_v3_Solid')
+            if (Points < 10) {
+                text("0" + Points, width/2 - 30, 113);
+            } else {
+                text(Points, width/2 - 30, 113);
+            }
+
+            fill(255);
+            textSize(25);
+            textFont( 'MARIO_Font_v3_Solid')
+            text("Mario", 50, 83);
+
+            fill(255);
+            textSize(25);
+            textFont( 'MARIO_Font_v3_Solid')
+            if (Points < 1) {
+                text("000" + Points*50, 50, 113);
+            }else if (Points < 2) {
+                text("00" + Points*50, 50, 113);
+            }else if (Points < 20) {
+                text("0" + Points*50, 50, 113);
+            } else {
+                text(Points*50, 50, 113);
+            }
         }
     }
 
@@ -191,9 +220,24 @@ function ArduinoBTNClicked(actionB){
 
     function game (){
         image (back, -5, 0, width+5, height);
+        image (stuff2, 0, minh - 100, 0, 0);
         image (stuff, 20, minh, 0, 0);
 
-        var player = playerR;
+        let player;
+
+        if (Newdirection == 'right' && !jump) {
+            player = playerR;
+        } else if (Newdirection == 'left' && !jump) {
+            player = playerL;
+        }     
+            else if (Newdirection == 'right' && jump) {
+                player = playerJumpR;
+            } else if (Newdirection == 'left' && jump) {
+                player = playerJumpL;
+            }
+            
+        Playerx += dx;
+
         image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
 
         End.drawEnd();
@@ -211,26 +255,30 @@ function ArduinoBTNClicked(actionB){
 
     let playerR;
     let playerL;
-    let playerJ;
+    let playerJumpR;
+    let playerJumpL;
 
     let stand;
     let canon;
     let canonL;
     let spikes;
     let stuff;
+    let stuff2;
     let floor;
     let back;
     
     function preload (){
         playerR = loadImage('./Images/MarioR.png');
         playerL = loadImage('./Images/MarioL.png');
-        playerJ = loadImage('./Images/MarioJ.png');
+        playerJumpR = loadImage('./Images/MarioJ.png');
+        playerJumpL = loadImage('./Images/MarioJL.png');
 
         stand = loadImage ('./Images/Platform.png');
         canon = loadImage ('./Images/Canon.png');
         canonL = loadImage ('./Images/Canon2.png');
         spikes = loadImage ('./Images/Spikes.png');
         stuff = loadImage('./Images/Stuff.png');
+        stuff2 = loadImage('./Images/Stuff2.png');
         floor = loadImage('./Images/Floor.png');
         back = loadImage('./Images/Background.png');
     }
@@ -260,6 +308,9 @@ function ArduinoBTNClicked(actionB){
         var PlayerWidth = 100;
         var PlayerHeight = 150;
 
+        let Newdirection = 'right';
+        let dx = 0;
+
             //Movement
 
             function moveX([direction, signal]) {
@@ -268,22 +319,28 @@ function ArduinoBTNClicked(actionB){
                     switch(signal){
                         case 0:
                             if (Playerx >= minw) {
-                                Playerx -= 20;
+                                // Playerx -= 20;
+                                dx = -2;
+                                Newdirection = 'left';
                                 socket.emit('orderForArduino','W');
                                 };
                             break;
             
                         case 2:
                             if (Playerx <= maxw) {
-                                Playerx += 20;
+                                // Playerx += 20;
+                                dx = 2;
+                                Newdirection = 'right';
                                 socket.emit('orderForArduino','W');
                                 };
                             break;
             
                         case 1:
-                            Playerx = Playerx;
+                            dx = 0;
+                            // Playerx = Playerx;
                             break;
                     }
+
                     // let mapXValue = (signal * 770) / 1023;
                     // Playerx = mapXValue;
 
@@ -307,6 +364,7 @@ function ArduinoBTNClicked(actionB){
                 if (direction[0] == 'B') {
                     if (!jump) {
                         jump = true;
+                        direction = signal === 0 ? 'left' : 'right';
                         setTimeout(() => {jump = false}, 100);
                     }
                 }
