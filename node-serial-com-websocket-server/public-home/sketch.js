@@ -2,8 +2,7 @@
 const NGROK = `${window.location.hostname}`;
 console.log('Server IP: ', NGROK);
 
-let socket = io(//"http://localhost:5050"
-NGROK, { path: '/real-time' })
+let socket = io(NGROK, { path: '/real-time' })
 let canvas;
 
 function windowResized() {
@@ -12,13 +11,14 @@ function windowResized() {
 
 //Arduino msn
 
-socket.on('arduinoMessage', (arduinoMessage) => {
+socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
     console.log(arduinoMessage);
     let { actionA, actionB, signal } = arduinoMessage;
-    ArduinoBTNClicked(actionB);
-    BTNSounds(actionA);
-    moveJump([actionA, signal]);
-    moveX([actionB, signal]);
+
+    ArduinoBTNClicked(actionB); //Para cambio de pantallas
+    BTNSounds(actionA); //Cambia el sonido del boton si esta en instrucciones o en el juego
+    moveJump([actionA, signal]); //Mov. salto
+    moveX([actionB, signal]); //Mov. Joystick
 })
 
 function ArduinoBTNClicked(actionB){
@@ -55,12 +55,13 @@ function ArduinoBTNClicked(actionB){
     let screen = 1;
     let switchMSN;
 
+    //Para cambiar pantalla haciendo click al qR (ahora cambie es con el celular)
     document.getElementById('QR').addEventListener('click', () => { /*Cambiar id del QR para que cambie de screen */
         screen = 2;
         switchScreen();
     });
 
-    socket.on('switch', (msn) => {
+    socket.on('switch', (msn) => { //Recibe mensaje de cambiar pantalla desde el celular
         screen = msn;
         switchScreen();
     });
@@ -107,7 +108,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
                     Restart();
-                    socket.emit('orderForArduino','G');
+                    socket.emit('orderForArduino','G'); //Para musica de inicio del juego
                     break;
                 case 5: //Gameover
                     document.getElementById('Home').style.display = 'none';
@@ -118,7 +119,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
-                    socket.emit('orderForArduino','O');
+                    socket.emit('orderForArduino','O'); //Para musica de final del juego
                     break;
                 case 6: //QR
                     document.getElementById('Home').style.display = 'none';
@@ -288,10 +289,10 @@ function ArduinoBTNClicked(actionB){
 
     function BTNSounds(actionA){
         if (actionA == 'B') {
-            if (screen == 4){
+            if (screen == 4){ //Sonido de salto si está en el juego
                 socket.emit('orderForArduino','J');
             }
-            else if (screen == 1 || screen == 2 || screen == 3 || screen == 5){
+            else if (screen == 1 || screen == 2 || screen == 3 || screen == 5){ //Sonido de continuar 
                 socket.emit('orderForArduino','A');
             }
         }
@@ -323,7 +324,7 @@ function ArduinoBTNClicked(actionB){
                                 // Playerx -= 20;
                                 dx = -2;
                                 Newdirection = 'left';
-                                socket.emit('orderForArduino','W');
+                                socket.emit('orderForArduino','W'); //Sonido de caminar
                                 };
                             break;
             
@@ -332,7 +333,7 @@ function ArduinoBTNClicked(actionB){
                                 // Playerx += 20;
                                 dx = 2;
                                 Newdirection = 'right';
-                                socket.emit('orderForArduino','W');
+                                socket.emit('orderForArduino','W'); //Sonido de caminar
                                 };
                             break;
             
@@ -619,7 +620,7 @@ function ArduinoBTNClicked(actionB){
     function GameOver(){
         console.log('Game Over');
         msn = Points;
-        socket.emit('Points', msn);
+        socket.emit('Points', msn);//Ahora se envian con HTTP
 
         const NumPoints = document.getElementById('NumPoints');
         TotalPoints = Points * 50;
@@ -637,7 +638,7 @@ function ArduinoBTNClicked(actionB){
 
             //Send points to array
                     
-            async function sendPoints(dataPoint) {
+            async function sendPoints(dataPoint) {//Envia puntos por HTTP
                 const dataP = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(dataPoint)}
                 await fetch(`/Points-Array`, dataP)
             }

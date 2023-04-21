@@ -11,7 +11,7 @@ expressApp.use(cors());
         console.log(`Server is running, host http://${SERVER_IP}:${PORT}/`);
     })
 
-    const io = new Server(httpServer, { path: '/real-time', cors:{origin: '*', methods: ['GET', 'POST']} }); //WebSocket Server (instance) initialization
+    const io = new Server(httpServer, { path: '/real-time', cors:{origin: '*', methods: ['GET', 'POST']} }); //WebSocket Server initialization
 
 //To let communication between localhost and ngrok
 expressApp.use((req, res, next) => {
@@ -37,8 +37,8 @@ const protocolConfiguration = { // Defining Serial configurations
     path: 'COM8', //COM#
     baudRate: 9600
 };
-const port = new SerialPort(protocolConfiguration);
-const parser = port.pipe(new ReadlineParser);
+const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
+const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
 
 parser.on('data', (arduinoData) => {
     let dataArray = arduinoData.split(' ');
@@ -57,7 +57,7 @@ parser.on('data', (arduinoData) => {
 //Socket messages
 
 io.on('connection', (socket) => {
-    //Points
+    //Points (Se usaba para enviar los puntos, pero ahora esta con HTTP)
     socket.on('Points', (message) => {
         console.log(message);
         let Points = message * 50;
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('Final-Points', Points)
     });
 
-    //Move instructions
+    //Move instructions (Se usaba para mvoer el personaje cuando el celular era el control)
     socket.on('Instructions', (message) => {
         console.log(message);
         socket.broadcast.emit('Move-Player', message)
@@ -86,9 +86,7 @@ io.on('connection', (socket) => {
 
 //User info from form
 
-// ...
-
-// Endpoint para el formulario de jugadores
+// Endpoint 
 expressApp.get('/Forms-Array', (request, response) => {
     response.send(PlayerForm);
 });

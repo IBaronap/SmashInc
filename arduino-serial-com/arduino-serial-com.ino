@@ -10,8 +10,6 @@ int XPosition = 0;
 int PreviousXPosition = XPosition;
 int mapXValue;
 
-int threshold = 1;
-
 //Button
 bool BTNState = false;
 bool PreviousBTNState = false;
@@ -26,9 +24,9 @@ void setup() {
 
 void loop() {
   if (Serial.available() > 0) {
-    receivingData();
+    receivingData(); //Recibe datos
   } else {
-    sendingData();
+    sendingData(); //Manda datos
   }
   delay(10);
 }
@@ -68,7 +66,7 @@ void sendingData() {
   delay(100);
 }
 
-void receivingData() {
+void receivingData() { //Recibe mensajes para reproducir la música
 
   char inByte = Serial.read();
 
@@ -174,7 +172,7 @@ void receivingData() {
   Serial.flush();
 }
 
-void sendSerialMessage(char keyA, char keyB, int Value) {
+void sendSerialMessage(char keyA, char keyB, int Value) { //Estructura del mensaje enviado a server
   Serial.print(keyA);
   Serial.print(' ');
   Serial.print(keyB);

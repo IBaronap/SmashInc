@@ -1,10 +1,7 @@
 // General
 const NGROK = `${window.location.hostname}`;
 console.log('Server IP: ', NGROK);
-let socket = io(//"http://localhost:5050"
-NGROK, {
-    path: '/real-time'
-})
+let socket = io(NGROK, {path: '/real-time'})
 let canvas;
 
 function windowResized() {
@@ -83,6 +80,7 @@ let user = {
     notify: "",
 };
 
+//Al undir el boton se registran los datos
 button.addEventListener("click", function () {
     user.name = document.getElementById("nameBox").value;
     user.email = document.getElementById("emailBox").value;
@@ -93,7 +91,7 @@ button.addEventListener("click", function () {
     sendData(user);
 });
 
-async function sendData(data) {
+async function sendData(data) {//se envia a index
     const dataF = {
         method: "POST",
         headers: {
@@ -117,11 +115,11 @@ const PrizeRender = document.getElementById('PrizeDiv');
 //Fetch points from array
 
 async function getData() {
-    const response = await fetch('/Points-Array');
+    const response = await fetch('/Points-Array'); //Fetch al array que guarda los puntos
     data = await response.json();
-    const lastElement = data[data.length - 1];
+    const lastElement = data[data.length - 1]; 
 
-    if (typeof lastElement === 'object' && 'TotalPoints' in lastElement) {
+    if (typeof lastElement === 'object' && 'TotalPoints' in lastElement) {//Busca el ultimo elemento del array
         const lastValue = lastElement.TotalPoints;
         console.log("El último valor del array es:", lastValue);
         PrizeIMG(lastValue);
