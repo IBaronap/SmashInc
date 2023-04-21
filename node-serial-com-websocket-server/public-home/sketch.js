@@ -2,7 +2,8 @@
 const NGROK = `${window.location.hostname}`;
 console.log('Server IP: ', NGROK);
 
-let socket = io("http://localhost:5050", { path: '/real-time' })
+let socket = io(//"http://localhost:5050"
+NGROK, { path: '/real-time' })
 let canvas;
 
 function windowResized() {
@@ -406,8 +407,8 @@ function ArduinoBTNClicked(actionB){
         var jump = false;
         var direction = 1;
         var velocity = 3;
-        var jumppower = 15;
-        var falling = 5;
+        var jumppower = 25;
+        var falling = 10;
         var jumpcounter = 0;
 
             //Gravity and Jump
