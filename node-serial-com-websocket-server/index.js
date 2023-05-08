@@ -2,7 +2,7 @@
 import { express, Server, cors, SerialPort, ReadlineParser } from './dependencies.js'
 
 const PORT = 5050;
-const SERVER_IP = ' 172.30.177.64'; //Change IP
+const SERVER_IP = ' 172.30.179.100'; //Change IP
 const expressApp = express();
 expressApp.use(cors());
 
@@ -50,7 +50,6 @@ parser.on('data', (arduinoData) => {
         signal: parseInt(dataArray[2])
     }
     io.emit('arduinoMessage', arduinoMessage);
-    // io.broadcast.emit('arduinoMessage', arduinoMessage); //broadcast
     console.log(arduinoMessage);
 });
 

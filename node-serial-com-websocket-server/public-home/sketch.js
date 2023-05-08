@@ -52,7 +52,7 @@ function ArduinoBTNClicked(actionB){
 
 //Switch Screens
 
-    let screen = 1;
+    let screen = 4;
     let switchMSN;
 
     //Para cambiar pantalla haciendo click al qR (ahora cambie es con el celular)
@@ -174,10 +174,13 @@ function ArduinoBTNClicked(actionB){
     
     function draw() {
         if(screen === 4){
+
+            //Game
             gravity ();
             game ();
             points();
     
+            //Counter
             stroke(255);
             strokeWeight(8);
             fill(42, 75, 153, 90);
@@ -194,22 +197,44 @@ function ArduinoBTNClicked(actionB){
                 text(Points, width/2 - 30, 113);
             }
 
+            //Points
             fill(255);
-            textSize(25);
+            textSize(30);
             textFont( 'MARIO_Font_v3_Solid')
             text("Mario", 50, 83);
 
             fill(255);
-            textSize(25);
+            textSize(30);
             textFont( 'MARIO_Font_v3_Solid')
             if (Points < 1) {
-                text("000" + Points*50, 50, 113);
+                text("000" + Points*50, 50, 123);
             }else if (Points < 2) {
-                text("00" + Points*50, 50, 113);
+                text("00" + Points*50, 50, 123);
             }else if (Points < 20) {
-                text("0" + Points*50, 50, 113);
+                text("0" + Points*50, 50, 123);
             } else {
-                text(Points*50, 50, 113);
+                text(Points*50, 50, 123);
+            }
+            
+            //Lives
+            fill(255);
+            textSize(30);
+            textFont( 'MARIO_Font_v3_Solid')
+            text("x " + lives, 750, 83);
+
+            //Gain/Loses points
+            if(immunityCooldown){
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                text("- 500", Playerx, Playery - 25);
+            }
+
+            if(PlatformCollision){
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                text("+ 250", Playerx, Playery - 25);
             }
         }
     }
@@ -224,6 +249,7 @@ function ArduinoBTNClicked(actionB){
         image (back, -5, 0, width+5, height);
         image (stuff2, 0, minh - 100, 0, 0);
         image (stuff, 20, minh, 0, 0);
+        image (liveMushroom, 690, 50, 45, 45);
 
         let player;
 
@@ -268,6 +294,7 @@ function ArduinoBTNClicked(actionB){
     let stuff2;
     let floor;
     let back;
+    let liveMushroom;
     
     function preload (){
         playerR = loadImage('./Images/MarioR.png');
@@ -283,6 +310,7 @@ function ArduinoBTNClicked(actionB){
         stuff2 = loadImage('./Images/Stuff2.png');
         floor = loadImage('./Images/Floor.png');
         back = loadImage('./Images/Background.png');
+        liveMushroom = loadImage('./Images/Live.png')
     }
 
     //BTN Sounds
@@ -445,20 +473,23 @@ function ArduinoBTNClicked(actionB){
         //Class Platforms & collision cases
 
         var Px1 = 500;  var Py1 = 1100;
-        var Px2 = 325;  var Py2 = 950;
-        var Px3 = 475;  var Py3 = 825;
-        var Px4 = 300;  var Py4 = 675;
-        var Px5 = 150;  var Py5 = 550;
-        var Px6 = 400;  var Py6 = 475;
-        var Px7 = 200;  var Py7 = 350;
-        var Px8 = 600;  var Py8 = 300;
-        var Px9 = 300;  var Py9 = 200;
-        var Px10 = 600; var Py10 = 100;
-        var Px11 = 100; var Py11 = 100;
+        var Px2 = 325;  var Py2 = 1000;
+        var Px3 = 475;  var Py3 = 875;
+        var Px4 = 300;  var Py4 = 775;
+        var Px5 = 150;  var Py5 = 650;
+        var Px6 = 400;  var Py6 = 575;
+        var Px7 = 200;  var Py7 = 450;
+        var Px8 = 500;  var Py8 = 400;
+        var Px9 = 300;  var Py9 = 300;
+        var Px10 = 550; var Py10 = 200;
+        var Px11 = 100; var Py11 = 200;
+        var Px12 = 125; var Py12 = 900;
+
+        let PlatformCollision;
 
         class Platforms {
         constructor(){
-            this.width = 140;
+            this.width = 200;
             this.height = 40;
         }
             paint(){
@@ -474,6 +505,7 @@ function ArduinoBTNClicked(actionB){
                 image(stand, Px9, Py9, this.width, this.height);
                 image(stand, Px10, Py10, this.width, this.height);
                 image(stand, Px11, Py11, this.width, this.height);
+                image(stand, Px12, Py12, this.width, this.height);
               };
 
               collision(){
@@ -488,16 +520,27 @@ function ArduinoBTNClicked(actionB){
                     || (Playerx >= Px9 - this.width/2 + 20 && Playerx <= Px9 + this.width/2 + 20 && Playery + 120 >= Py9 - this.height/2 && Playery + 120 < Py9 + this.height && jump == false)
                     || (Playerx >= Px10 - this.width/2 + 20 && Playerx <= Px10 + this.width/2 + 20 && Playery + 120 >= Py10 - this.height/2 && Playery + 120 < Py10 + this.height && jump == false)
                     || (Playerx >= Px11 - this.width/2 + 20 && Playerx <= Px11 + this.width/2 + 20 && Playery + 120 >= Py11 - this.height/2 && Playery + 120 < Py11 + this.height && jump == false)
-                   ){
+                    || (Playerx >= Px12 - this.width/2 + 20 && Playerx <= Px12 + this.width/2 + 20 && Playery + 120 >= Py12 - this.height/2 && Playery + 120 < Py12 + this.height && jump == false)
+                    ){
                         Playery= Playery;
                         velocity = 0 
                         jumpcounter = 0;
+                        Points += 2;
+                        PlatformCollision = true;
+                        setTimeout(() => {
+                            PlatformCollision = false;
+                        }, 1000);
                     }
                 }
         };
     
         //Enemies
-        
+
+        let lives = 3;
+        let immunityCooldown = false;
+        let redScreenOpacity = 0;
+        let redScreenInterval;
+
         let fallingSpikes = [];
         let CanonsRight = [];
         let CanonsLeft = [];
@@ -525,9 +568,36 @@ function ArduinoBTNClicked(actionB){
 
                         //Collision
                         let d = dist(imgObj.x + imgObj.width/2, imgObj.y + imgObj.height/2, Playerx, Playery);
-                        if (d < imgObj.width/2 + 40) { 
-                            GameOver();
-                        }}      
+                        if (d < imgObj.width/2 + 35 && !immunityCooldown) { 
+
+                            lives -= 1; 
+                            Points -= 10;
+
+                            immunityCooldown = true;
+
+                            redScreenOpacity = 100;
+                            redScreenInterval = setInterval(() => {
+                            redScreenOpacity = redScreenOpacity == 0 ? random(10, 20) : 0;
+                            }, 200);
+                            
+                            setTimeout(() => {
+
+                                immunityCooldown = false;
+
+                                clearInterval(redScreenInterval);
+                                redScreenOpacity = 0;
+
+                            }, 1000);             
+
+                            if (lives == 0){
+                                GameOver();
+                            }
+                        }
+                    }      
+                    
+                    fill(255, 0, 0, redScreenOpacity);
+                    rect(0, 0, width, height);
+                
                 };
                 CanonR() {
                     setTimeout(() => {
@@ -549,10 +619,36 @@ function ArduinoBTNClicked(actionB){
                         image(imgObj.img, imgObj.x, imgObj.y);
 
                         let d = dist(imgObj.x + imgObj.width/2, imgObj.y + imgObj.height/2, Playerx, Playery);
-                        if (d < imgObj.width/2 + 25) { 
-                            GameOver();
+                        if (d < imgObj.width/2 + 25 && !immunityCooldown) { 
+
+                            lives -= 1;     
+                            Points -= 10;
+
+                            immunityCooldown = true;
+                            
+                            redScreenOpacity = 100;
+                            redScreenInterval = setInterval(() => {
+                            redScreenOpacity = redScreenOpacity == 0 ? random(10, 20) : 0;
+                            }, 200);
+                            
+                            setTimeout(() => {
+
+                                immunityCooldown = false;
+
+                                clearInterval(redScreenInterval);
+                                redScreenOpacity = 0;
+
+                            }, 1000);
+
+                            if (lives == 0){
+                                GameOver();
+                            }
                         }
                     }
+                    
+                    fill(255, 0, 0, redScreenOpacity);
+                    rect(0, 0, width, height);
+                
                 };
                 CanonL() {
                     setTimeout(() => {
@@ -574,10 +670,35 @@ function ArduinoBTNClicked(actionB){
                         image(imgObj.img, imgObj.x, imgObj.y);
 
                         let d = dist(imgObj.x + imgObj.width/2, imgObj.y + imgObj.height/2, Playerx, Playery);
-                        if (d < imgObj.width/2 + 25) { 
-                            GameOver();
+                        if (d < imgObj.width/2 + 25 && !immunityCooldown) { 
+
+                            lives -= 1;          
+                            Points -= 10;
+
+                            immunityCooldown = true;
+                            
+                            redScreenOpacity = 100;
+                            redScreenInterval = setInterval(() => {
+                            redScreenOpacity = redScreenOpacity == 0 ? random(10, 20) : 0;
+                            }, 200);
+                            
+                            setTimeout(() => {
+
+                                immunityCooldown = false;
+
+                                clearInterval(redScreenInterval);
+                                redScreenOpacity = 0;
+
+                            }, 1000);
+
+                            if (lives == 0){
+                                GameOver();
+                            }
                         }
                     }
+                    
+                    fill(255, 0, 0, redScreenOpacity);
+                    rect(0, 0, width, height);
                 };
             };
 
@@ -600,16 +721,24 @@ function ArduinoBTNClicked(actionB){
 
         class Fin {
             constructor() {
-            this.position = [0, 0];
+            this.position = [600, 50];
             };
             drawEnd() {
                 noStroke();
-                fill(0, 215, 255);
-                rect(this.position[0], this.position[1], width, 10);
+                fill(160);
+                rect(this.position[0], this.position[1], 15, 150);
+
+                noStroke();
+                fill(250, 238, 12);
+                circle(this.position[0] + 8, this.position[1], 25, 25);
+
+                noStroke();
+                fill(255, 0, 0);
+                triangle(600, 65, 600, 100, 550, 82.5);
             };
             end() {
             if (Playery == this.position[1]) {
-                Points = 60;
+                Points = 100;
                 GameOver();
             };
             };
@@ -651,6 +780,7 @@ function ArduinoBTNClicked(actionB){
         fallingSpikes.length = 0;
         CanonsRight.length = 0;
         CanonsLeft.length = 0;
+        lives = 2;
     }
 
     //Disconnect
