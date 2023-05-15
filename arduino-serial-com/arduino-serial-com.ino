@@ -3,7 +3,7 @@
 //Pins
 int XPin = A0;
 int BTNPin = 2;
-int BuzzPin = 4;
+int BuzzPin = 5;
 
 //Joystick
 int XPosition = 0;

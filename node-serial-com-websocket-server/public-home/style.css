@@ -87,7 +87,7 @@ button:active:after {
 /* Screens */
 
 #Home{
-    display: none;
+    display: block;
 }
 
 #Connected{
@@ -99,7 +99,7 @@ button:active:after {
 }
 
 #Game{
-    display: block;
+    display: none;
 }
 
 #Gameover{

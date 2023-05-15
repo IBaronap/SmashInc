@@ -52,7 +52,7 @@ function ArduinoBTNClicked(actionB){
 
 //Switch Screens
 
-    let screen = 4;
+    let screen = 1;
     let switchMSN;
 
     //Para cambiar pantalla haciendo click al qR (ahora cambie es con el celular)
@@ -179,6 +179,7 @@ function ArduinoBTNClicked(actionB){
             gravity ();
             game ();
             points();
+            PointsChange();
     
             //Counter
             stroke(255);
@@ -230,11 +231,18 @@ function ArduinoBTNClicked(actionB){
                 text("- 500", Playerx, Playery - 25);
             }
 
-            if(PlatformCollision){
+            if(IncreasePoints){
                 fill(255);
                 textSize(30);
                 textFont( 'MARIO_Font_v3_Solid')
-                text("+ 250", Playerx, Playery - 25);
+                text("+ 200", Playerx, Playery - 25);
+            }
+
+            if(DecreasePoints){
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                text("- 200", Playerx, Playery - 25);
             }
         }
     }
@@ -394,7 +402,7 @@ function ArduinoBTNClicked(actionB){
                 if (direction[0] == 'B') {
                     if (!jump) {
                         jump = true;
-                        direction = signal === 0 ? 'left' : 'right';
+                        Newdirection = direction === 'left' ? 'left' : 'right';
                         setTimeout(() => {jump = false}, 100);
                     }
                 }
@@ -485,8 +493,6 @@ function ArduinoBTNClicked(actionB){
         var Px11 = 100; var Py11 = 200;
         var Px12 = 125; var Py12 = 900;
 
-        let PlatformCollision;
-
         class Platforms {
         constructor(){
             this.width = 200;
@@ -509,30 +515,50 @@ function ArduinoBTNClicked(actionB){
               };
 
               collision(){
-                if (   (Playerx >= Px1 - this.width/2 + 20 && Playerx <= Px1 + this.width/2 + 20 && Playery + 120 >= Py1 - this.height/2 && Playery + 120 < Py1 + this.height && jump == false)
-                    || (Playerx >= Px2 - this.width/2 + 20 && Playerx <= Px2 + this.width/2 + 20 && Playery + 120 >= Py2 - this.height/2 && Playery + 120 < Py2 + this.height && jump == false)
-                    || (Playerx >= Px3 - this.width/2 + 20 && Playerx <= Px3 + this.width/2 + 20 && Playery + 120 >= Py3 - this.height/2 && Playery + 120 < Py3 + this.height && jump == false)
-                    || (Playerx >= Px4 - this.width/2 + 20 && Playerx <= Px4 + this.width/2 + 20 && Playery + 120 >= Py4 - this.height/2 && Playery + 120 < Py4 + this.height && jump == false)
-                    || (Playerx >= Px5 - this.width/2 + 20 && Playerx <= Px5 + this.width/2 + 20 && Playery + 120 >= Py5 - this.height/2 && Playery + 120 < Py5 + this.height && jump == false)
-                    || (Playerx >= Px6 - this.width/2 + 20 && Playerx <= Px6 + this.width/2 + 20 && Playery + 120 >= Py6 - this.height/2 && Playery + 120 < Py6 + this.height && jump == false)
-                    || (Playerx >= Px7 - this.width/2 + 20 && Playerx <= Px7 + this.width/2 + 20 && Playery + 120 >= Py7 - this.height/2 && Playery + 120 < Py7 + this.height && jump == false)
-                    || (Playerx >= Px8 - this.width/2 + 20 && Playerx <= Px8 + this.width/2 + 20 && Playery + 120 >= Py8 - this.height/2 && Playery + 120 < Py8 + this.height && jump == false)
-                    || (Playerx >= Px9 - this.width/2 + 20 && Playerx <= Px9 + this.width/2 + 20 && Playery + 120 >= Py9 - this.height/2 && Playery + 120 < Py9 + this.height && jump == false)
-                    || (Playerx >= Px10 - this.width/2 + 20 && Playerx <= Px10 + this.width/2 + 20 && Playery + 120 >= Py10 - this.height/2 && Playery + 120 < Py10 + this.height && jump == false)
-                    || (Playerx >= Px11 - this.width/2 + 20 && Playerx <= Px11 + this.width/2 + 20 && Playery + 120 >= Py11 - this.height/2 && Playery + 120 < Py11 + this.height && jump == false)
-                    || (Playerx >= Px12 - this.width/2 + 20 && Playerx <= Px12 + this.width/2 + 20 && Playery + 120 >= Py12 - this.height/2 && Playery + 120 < Py12 + this.height && jump == false)
+                if (   (Playerx >= Px1 - this.width/2 + 30 && Playerx <= Px1 + this.width/2 + 30 && Playery + 120 >= Py1 - this.height/2 && Playery + 120 < Py1 + this.height && jump == false)
+                    || (Playerx >= Px2 - this.width/2 + 30 && Playerx <= Px2 + this.width/2 + 30 && Playery + 120 >= Py2 - this.height/2 && Playery + 120 < Py2 + this.height && jump == false)
+                    || (Playerx >= Px3 - this.width/2 + 30 && Playerx <= Px3 + this.width/2 + 30 && Playery + 120 >= Py3 - this.height/2 && Playery + 120 < Py3 + this.height && jump == false)
+                    || (Playerx >= Px4 - this.width/2 + 30 && Playerx <= Px4 + this.width/2 + 30 && Playery + 120 >= Py4 - this.height/2 && Playery + 120 < Py4 + this.height && jump == false)
+                    || (Playerx >= Px5 - this.width/2 + 30 && Playerx <= Px5 + this.width/2 + 30 && Playery + 120 >= Py5 - this.height/2 && Playery + 120 < Py5 + this.height && jump == false)
+                    || (Playerx >= Px6 - this.width/2 + 30 && Playerx <= Px6 + this.width/2 + 30 && Playery + 120 >= Py6 - this.height/2 && Playery + 120 < Py6 + this.height && jump == false)
+                    || (Playerx >= Px7 - this.width/2 + 30 && Playerx <= Px7 + this.width/2 + 30 && Playery + 120 >= Py7 - this.height/2 && Playery + 120 < Py7 + this.height && jump == false)
+                    || (Playerx >= Px8 - this.width/2 + 30 && Playerx <= Px8 + this.width/2 + 30 && Playery + 120 >= Py8 - this.height/2 && Playery + 120 < Py8 + this.height && jump == false)
+                    || (Playerx >= Px9 - this.width/2 + 30 && Playerx <= Px9 + this.width/2 + 30 && Playery + 120 >= Py9 - this.height/2 && Playery + 120 < Py9 + this.height && jump == false)
+                    || (Playerx >= Px10 - this.width/2 + 30 && Playerx <= Px10 + this.width/2 + 30 && Playery + 120 >= Py10 - this.height/2 && Playery + 120 < Py10 + this.height && jump == false)
+                    || (Playerx >= Px11 - this.width/2 + 30 && Playerx <= Px11 + this.width/2 + 30 && Playery + 120 >= Py11 - this.height/2 && Playery + 120 < Py11 + this.height && jump == false)
+                    || (Playerx >= Px12 - this.width/2 + 30 && Playerx <= Px12 + this.width/2 + 30 && Playery + 120 >= Py12 - this.height/2 && Playery + 120 < Py12 + this.height && jump == false)
                     ){
                         Playery= Playery;
                         velocity = 0 
                         jumpcounter = 0;
-                        Points += 2;
-                        PlatformCollision = true;
-                        setTimeout(() => {
-                            PlatformCollision = false;
-                        }, 1000);
                     }
                 }
         };
+
+        //Points based on height
+
+        let IncreasePoints;
+        let DecreasePoints;
+        let previousY = 1070;
+
+        function PointsChange(){
+            previousY = Points;
+            if (previousY - Playery >= 100){
+                Points += 2;
+                IncreasePoints = true;
+                setTimeout(() => {
+                    IncreasePoints = false;
+                }, 1000);
+            }
+            if (Playery - previousY <= -100){
+                Points -= 2;
+                DecreasePoints = true;
+                setTimeout(() => {
+                    DecreasePoints = false;
+                }, 1000);
+            }
+            previousY = Playery;
+        }
     
         //Enemies
 
@@ -794,19 +820,19 @@ function ArduinoBTNClicked(actionB){
     function PrizeIMG(){
         const PrizeRender = document.getElementById('PrizeDiv');
 
-        if(TotalPoints <= 600){        
+        if(TotalPoints <= 1000){        
             PrizeRender.innerHTML = `<img src=${Sticker} id="Prize" alt="Sticker">`
         }
-        else if(TotalPoints >= 600 && TotalPoints <= 1200){
+        else if(TotalPoints >= 1000 && TotalPoints <= 2000){
             PrizeRender.innerHTML = `<img src=${Pin} id="Prize" alt="Pin">`
         }
-        else if(TotalPoints >= 1200 && TotalPoints <= 1800){
+        else if(TotalPoints >= 2000 && TotalPoints <= 3000){
             PrizeRender.innerHTML = `<img src=${KeyChain} id="Prize" alt="Keychain">`
         }
-        else if(TotalPoints >= 1800 && TotalPoints <= 2400){
+        else if(TotalPoints >= 3000 && TotalPoints <= 4000){
             PrizeRender.innerHTML = `<img src=${KeyChainPlush} id="Prize" alt="Keychain Plush">`
         }
-        else if(TotalPoints >= 2400 && TotalPoints <= 3000){
+        else if(TotalPoints >= 4000 && TotalPoints <= 5000){
             PrizeRender.innerHTML = `<img src=${Figurine} id="Prize" alt="Figurine">`
         }
     }

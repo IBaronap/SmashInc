@@ -136,15 +136,15 @@ getData();
 function PrizeIMG(RenderPoints) {
     const PrizeRender = document.getElementById('PrizeDiv');
 
-    if (RenderPoints <= 600) {
+    if (RenderPoints <= 1000) {
         PrizeRender.innerHTML = `<img src=${Sticker} id="Prize" alt="Sticker">`
-    } else if (RenderPoints >= 600 && RenderPoints <= 1200) {
+    } else if (RenderPoints >= 1000 && RenderPoints <= 2000) {
         PrizeRender.innerHTML = `<img src=${Pin} id="Prize" alt="Pin">`
-    } else if (RenderPoints >= 1200 && RenderPoints <= 1800) {
+    } else if (RenderPoints >= 2000 && RenderPoints <= 3000) {
         PrizeRender.innerHTML = `<img src=${KeyChain} id="Prize" alt="Keychain">`
-    } else if (RenderPoints >= 1800 && RenderPoints <= 2400) {
+    } else if (RenderPoints >= 3000 && RenderPoints <= 4000) {
         PrizeRender.innerHTML = `<img src=${KeyChainPlush} id="Prize" alt="Keychain Plush">`
-    } else if (RenderPoints >= 2400 && RenderPoints <= 3000) {
+    } else if (RenderPoints >= 4000 && RenderPoints <= 5000) {
         PrizeRender.innerHTML = `<img src=${Figurine} id="Prize" alt="Figurine">`
     }
 }
