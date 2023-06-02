@@ -32,7 +32,7 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
     function startTimer() {
         intervalId = setInterval(() => {
         timecounter++;
-            if (timecounter >= 60) {
+            if (timecounter >= 180) {
                 clearInterval(intervalId);
                 timecounter = 0;
                 interactionData()
@@ -95,7 +95,7 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
         intervalId2 = setInterval(() => {
         interactionTime++;
         console.log(interactionTime);
-            if (screen == 3) {
+            if (screen == 7) {
                 sendTime(interactionTime).then(() => {
                     console.log("Interaction time sent");
                   })
