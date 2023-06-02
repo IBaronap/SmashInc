@@ -1,0 +1,100 @@
+{
+  "interactions": [
+    {
+      "id": 1,
+      "timeStamp": "09:01",
+      "date": "mar May 16 2022"
+    },
+    {
+      "id": 2,
+      "timeStamp": "09:10",
+      "date": "mar May 16 2022"
+    },
+    {
+      "id": 3,
+      "timeStamp": "10:16",
+      "date": "mar May 16 2022"
+    },
+    {
+      "id": 4,
+      "timeStamp": "11:18",
+      "date": "mie May 17 2022"
+    },
+    {
+      "id": 5,
+      "timeStamp": "21:19",
+      "date": "mar May 17 2022"
+    },
+    {
+      "id": 6,
+      "timeStamp": "09:17",
+      "date": "jue May 18 2022"
+    },
+    {
+      "id": 7,
+      "timeStamp": "10:14",
+      "date": "jue May 18 2022"
+    },
+    {
+      "id": 8,
+      "timeStamp": "11:11",
+      "date": "vie May 19 2022"
+    },
+    {
+      "id": 9,
+      "timeStamp": "09:19",
+      "date": "vie May 19 2022"
+    },
+    {
+      "id": 10,
+      "timeStamp": "10:10",
+      "date": "vie May 19 2022"
+    },
+    {
+      "id": 11,
+      "timeStamp": "12:17",
+      "date": "vie May 19 2022"
+    },
+    {
+      "id": 12,
+      "privacyAgreement": false,
+      "date": "sab May 20 2023",
+      "timeStamp": "16:30"
+    },
+    {
+      "id": 13,
+      "date": "dom May 14 2023",
+      "timeStamp": "16:30"
+    },
+    {
+      "id": 14,
+      "date": "lun 29 may 2023",
+      "timeStamp": "09:13"
+    },
+    {
+      "id": 15,
+      "date": "lun 29 may 2023",
+      "timeStamp": "09:20"
+    },
+    {
+      "id": 16,
+      "date": "lun 29 may 2023",
+      "timeStamp": "09:21"
+    },
+    {
+      "id": 17,
+      "date": "jue 1 jun 2023",
+      "timeStamp": "10:11"
+    },
+    {
+      "id": 18,
+      "date": "vie 2 jun 2023",
+      "timeStamp": "10:21"
+    },
+    {
+      "id": 19,
+      "date": "vie 2 jun 2023",
+      "timeStamp": "10:25"
+    }
+  ]
+}

@@ -77,15 +77,41 @@ let user = {
     name: "",
     email: "",
     phone: "",
+    privacyAgreement: "",
+    nintendoUser: "",
+    interactionTime: "",
     notify: "",
+    lead: true,
+
+    date: "",
+    timeStamp: ""
 };
 
 //Al undir el boton se registran los datos
 button.addEventListener("click", function () {
-    user.name = document.getElementById("nameBox").value;
-    user.email = document.getElementById("emailBox").value;
-    user.phone = document.getElementById("numberBox").value;
-    user.notify = document.getElementById("Check2").checked;
+
+    //User
+        user.name = document.getElementById("nameBox").value;
+        user.email = document.getElementById("emailBox").value;
+        user.phone = document.getElementById("numberBox").value;
+        user.privacyAgreement = Disable.checked;
+        user.nintendoUser = document.getElementById("Check3").checked;
+        user.notify = document.getElementById("Check2").checked;
+
+    //Interaction
+
+        let now = new Date();
+    
+        //Get day
+        let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+        let dateWithoutCommas = now.toLocaleDateString('es-ES', options).replace(/,/g, '');
+        user.date = dateWithoutCommas;
+
+        //Get time
+
+        let hours = now.getHours().toString().padStart(2, '0');
+        let minutes = now.getMinutes().toString().padStart(2, '0');
+        user.timeStamp = `${hours}:${minutes}`;
 
     console.log(user);
     sendData(user);
@@ -99,7 +125,7 @@ async function sendData(data) {//se envia a index
         },
         body: JSON.stringify(data),
     };
-    await fetch(`/Forms-Array`, dataF);
+    await fetch(`/user`, dataF);
 }
 
 //Disconnect

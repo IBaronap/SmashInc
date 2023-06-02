@@ -1,7 +1,10 @@
 //Server
-import { express, Server, cors, SerialPort, ReadlineParser } from './dependencies.js'
+import { express, SocketIOServer, cors, SerialPort, ReadlineParser, dotenv, fs } from './dependencies.js';
+import userRoutes from './routes/userRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
 
-const PORT = 5050;
+dotenv.config();
+const PORT = process.env.PORT;
 const SERVER_IP = ' 172.30.179.100'; //Change IP
 const expressApp = express();
 expressApp.use(cors());
@@ -11,7 +14,7 @@ expressApp.use(cors());
         console.log(`Server is running, host http://${SERVER_IP}:${PORT}/`);
     })
 
-    const io = new Server(httpServer, { path: '/real-time', cors:{origin: '*', methods: ['GET', 'POST']} }); //WebSocket Server initialization
+    const io = new SocketIOServer(httpServer, { path: '/real-time', cors:{origin: '*', methods: ['GET', 'POST']} }); //WebSocket Server initialization
 
 //To let communication between localhost and ngrok
 expressApp.use((req, res, next) => {
@@ -30,28 +33,33 @@ expressApp.use(cors({origin: '*'}));
     expressApp.use('/mupi', express.static('public-home')); 
     //Phone
     expressApp.use('/phone', express.static('public-phone-connected'));
+    //Dashboard
+    const STATIC_DASHBOARD = express.static('./static/dashboard-app');
+    expressApp.use('/dashboard-app', STATIC_DASHBOARD);
+    expressApp.use('/user', userRoutes);
+    expressApp.use('/dashboard', dashboardRoutes);
 
 //Arduino communication
 
-const protocolConfiguration = { // Defining Serial configurations
-    path: 'COM8', //COM#
-    baudRate: 9600
-};
-const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
-const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
+// const protocolConfiguration = { // Defining Serial configurations
+//     path: 'COM8', //COM#
+//     baudRate: 9600
+// };
+// const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
+// const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
 
-parser.on('data', (arduinoData) => {
-    let dataArray = arduinoData.split(' ');
-    console.log(dataArray);
+// parser.on('data', (arduinoData) => {
+//     let dataArray = arduinoData.split(' ');
+//     console.log(dataArray);
 
-    let arduinoMessage = {
-        actionA: dataArray[0],
-        actionB: dataArray[1],
-        signal: parseInt(dataArray[2])
-    }
-    io.emit('arduinoMessage', arduinoMessage);
-    console.log(arduinoMessage);
-});
+//     let arduinoMessage = {
+//         actionA: dataArray[0],
+//         actionB: dataArray[1],
+//         signal: parseInt(dataArray[2])
+//     }
+//     io.emit('arduinoMessage', arduinoMessage);
+//     console.log(arduinoMessage);
+// });
 
 //Socket messages
 
@@ -77,10 +85,10 @@ io.on('connection', (socket) => {
     });
 
     //Order for arduino (music)
-    socket.on('orderForArduino', (orderForArduino) => {
-        port.write(orderForArduino);
-        console.log('orderForArduino: ' + orderForArduino);
-    });
+    // socket.on('orderForArduino', (orderForArduino) => {
+    //     port.write(orderForArduino);
+    //     console.log('orderForArduino: ' + orderForArduino);
+    // });
 });
 
 //User info from form
@@ -118,3 +126,6 @@ expressApp.post('/Points-Array', (request, response) => {
     console.log("Points_Array:", Points_Array);
     response.json({ received: request.body });
 });
+
+
+export { io };

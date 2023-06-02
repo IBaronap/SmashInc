@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="SideNav">
+        <img id="NavLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/2560px-Nintendo.svg.png">
+        <div id="NavOptions">
+            <a id="NavResumen" onclick="GoToResumen()" class="Selected"> <img class="SideIcon" src="./Images/ResumenIcon.png" alt="Resumen"> Resumen</a>
+            <a id="NavLeads" onclick="GoToLeads()" class="Unselected"> <img class="SideIcon" src="./Images/LadsIcon.png" alt="Leads"> Leads</a>
+            <a class="Unselected"> <img class="SideIcon" src="./Images/AnalyticsIcon.png" alt="Análisis"> Análisis mensual</a>
+        </div>
+        <div id="NavConfig">
+            <a class="Unselected"> <img class="SideIcon" src="./Images/HelpIcon.png" alt="Ayuda"> Ayuda</a>
+            <a class="Unselected"> <img class="SideIcon" src="./Images/ConfigIcon.png" alt="Configuración"> Configuraciones</a>
+        </div>
+    </div>
+    <div id="NavBar">
+        <img class="NavIcon" src="./Images/Online.png">
+        <img class="NavIcon" src="./Images/NotificationIcon.png">
+        <img class="NavIcon" src="./Images/UserIcon.png">
+    </div>
+    <main>
+        <div id="ResumenPage">
+            <div id="Header">
+                <h2>¡Buenos días, Andrés!</h2>
+                <p>Aquí está el resumen de las analíticas de hoy y esta semana</p>
+            </div>
+            <div id="FastFactsSection">
+                <section class="FastFactsSection">
+                    <h5 class="SectionTitle" >Duración promedio de la experiencia</h5>
+                    <div class="Min-Average" id="Min-Average"></div>
+                </section>
+
+                <section class="FastFactsSection">
+                    <h5 class="SectionTitle">Interacciones de hoy</h5>
+                    <div class="Interactions_Today" id="Interactions_Today"></div>
+                </section>
+                
+                <section class="FastFactsSection">
+                    <h5 class="SectionTitle" >Leads de hoy</h5>
+                    <div class="Leads_Today" id="Leads_Today"></div>
+                </section>
+            </div>
+            <section id="Charts1">
+                <div class="chart-container">
+                    <canvas id="myLineChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="myBarChart"></canvas>
+                </div>
+            </section>
+            <section id="Charts2">
+                <div class="chart-container">
+                    <canvas id="myStackedChart"></canvas>
+                </div>
+                <div class="chart-container" id="doughnut-container">
+                    <canvas id="myDoughnutChart"></canvas>
+                </div>
+            </section>
+        </div>
+        <div id="LeadsPage">
+            <div id="Header">
+                <h2>¡Buenos días, Andrés!</h2>
+                <p>Aquí están los últimos leads</p>
+            </div>
+        
+                <table>
+                    <tr>
+                        <td class="NameTH" scope="col">Nombre</td>
+                        <td class="EmailTH" scope="col">Email</td>
+                        <td class="PhoneTH" scope="col">Teléfono</td>
+                        <td class="DateTH" scope="col">Fecha</td>
+                        <td class="HourTH" scope="col">Hora</td>
+                        <td class="DurationTH" scope="col">Duración</td>
+                        <td class="NewTH" scope="col">Usuario Nintendo</td>
+                    </tr>
+                </table>
+            
+            <section class="Leads">
+                <div class="leads-table" id="leads-table"></div>
+                
+            </section>
+        </div>
+    </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+
+    <script defer src="view.js"></script>
+    <script defer src="controller.js"></script>
+
+</body>
+
+</html>

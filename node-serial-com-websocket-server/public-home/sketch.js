@@ -57,7 +57,7 @@ function ArduinoBTNClicked(actionB){
 
     //Para cambiar pantalla haciendo click al qR (ahora cambie es con el celular)
     document.getElementById('QR').addEventListener('click', () => { /*Cambiar id del QR para que cambie de screen */
-        screen = 2;
+        screen = 7;
         switchScreen();
     });
 
@@ -155,6 +155,7 @@ function ArduinoBTNClicked(actionB){
                     console.log('Screen does not exist');
               }        
         };
+
 
  //Game
 

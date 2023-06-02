@@ -1,0 +1,267 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins';
+}
+
+
+body {
+  background-color:white;
+  margin: 0;
+}
+
+/* Baras navegación */
+  /* Lateral */
+  #SideNav{
+    background-color: #E10005;
+    color: white;
+    height: 100vh; 
+    width: 160px;
+    position: fixed; 
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: none;
+    padding-top: 20px;
+    font-size: 12px;
+  }
+
+    a{
+      display: flex;
+      margin-bottom: 20px;
+      cursor: pointer;
+      align-items: center;
+    }
+
+    #NavLogo{
+      margin-top: -30vh;
+      width: 150px;
+      margin: auto;
+    }
+
+    #NavOptions{
+      display: flex;
+      flex-direction: column;
+      margin: 15px;
+    }
+
+      .Selected{
+        padding: 10px;
+        background: #C00004;
+        border-radius: 6px;
+        box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
+      }
+
+      .Unselected{
+        padding: 10px;
+      }
+
+      .SideIcon{
+        width: 20px;
+        margin-right: 5px;
+      }
+
+    #NavConfig{
+      display: flex;
+      flex-direction: column;
+      margin: 15px;
+      margin-top: 330px;
+    }
+
+  /* Superior */
+  #NavBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+  
+  .NavIcon{
+    height: 35px;
+    margin-top: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+/* Cuerpo */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+}
+
+  /* Página charts */
+  #ResumenPage{
+    display: block;
+    margin-left: 180px;
+    margin-right: 20px;
+  }
+
+    #FastFactsSection{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+      .FastFactsSection{
+        display: flex;
+        flex-direction: column;
+        width: 26vw;
+        height: 15vh;
+        background: #F2F2F2;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        text-align: center;
+      }
+
+        .SectionTitle{
+          margin: 2vh;
+          margin-bottom: 0;
+        }
+
+        .SectionSection{
+          display: flex;
+          justify-content: center;
+          margin: 1vh;
+        }
+
+          .SectionValue{
+            margin-top: 1vh;
+            margin-left: 5vh;
+            font-size: xx-large;
+          }
+
+          .SectionSide{
+            margin: 0;
+            margin-top: 1vh;
+          }
+
+            .SideValue{
+              color: #0E6AE3;
+              margin: 3px;
+              margin-left: 9vh;
+              text-align: left;
+            }
+
+      #Charts1, #Charts2{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 3vh;
+      }
+        
+        .chart-container {
+          width: 40.5vw;
+          height: 47vh;
+          background: #F2F2F2;
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+          border-radius: 5px;
+          padding: 3vh;
+          align-items: center;
+        }
+        
+        canvas {
+          width: 100%;
+          height: auto;
+        }
+
+          #myLineChart, #myBarChart, #myStackedChart, #myDoughnutChart{
+            margin: auto;
+          }
+                
+  /* Página Lista Leads */
+  #LeadsPage{
+    display: none;
+    margin-left: 180px;
+    /* margin-right: 20px; */
+  }
+
+    .Leads{
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .leads-table {
+      width: 100%;
+      height: 500px;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    section.Leads {
+        width: 1291px;
+        overflow-x: auto;
+    }
+
+    section.Leads tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    section.Leads tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    section.Leads tr:hover {
+        background-color: #ddd;
+    }
+
+    section.Leads tr td {
+        padding: 15px;
+        
+        text-align: left;
+    }
+    
+    /* Table info (TH for headers, TD for info) */
+
+      .NameTH, .EmailTH, .PhoneTH, .DateTH, .HourTH, .DurationTH, .NewTH{
+        font-weight: bold;
+      }
+
+      .NameTH{
+        width: 200px;
+      }
+        
+        .NameTD{
+            width: 200px;
+        }
+
+      .EmailTH{
+        padding-left: 5px;
+      }
+
+        .EmailTD {
+            width: 280px;
+        }
+
+      .PhoneTH {
+        padding-left: 230px;
+      }
+
+        .PhoneTD{
+            width: 160px;
+        }
+
+      .DateTH{
+        padding-left: 85px;
+      }
+      
+        .DateTD{
+          width: 210px;
+        }
+        
+      .HourTH{
+        padding-left: 145px;
+      }
+      
+      .DurationTH{
+        padding-left: 110px;
+      }
+        
+      .NewTH{
+        width: 200px;
+        padding-left: 50px;
+      }
+      
+        .HourTD, .DurationTD, .NewTD {
+            width: 154px;
+        }
