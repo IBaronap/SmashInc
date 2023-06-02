@@ -41,25 +41,25 @@ expressApp.use(cors({origin: '*'}));
 
 //Arduino communication
 
-// const protocolConfiguration = { // Defining Serial configurations
-//     path: 'COM8', //COM#
-//     baudRate: 9600
-// };
-// const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
-// const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
+const protocolConfiguration = { // Defining Serial configurations
+    path: 'COM8', //COM#
+    baudRate: 9600
+};
+const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
+const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
 
-// parser.on('data', (arduinoData) => {
-//     let dataArray = arduinoData.split(' ');
-//     console.log(dataArray);
+parser.on('data', (arduinoData) => {
+    let dataArray = arduinoData.split(' ');
+    console.log(dataArray);
 
-//     let arduinoMessage = {
-//         actionA: dataArray[0],
-//         actionB: dataArray[1],
-//         signal: parseInt(dataArray[2])
-//     }
-//     io.emit('arduinoMessage', arduinoMessage);
-//     console.log(arduinoMessage);
-// });
+    let arduinoMessage = {
+        actionA: dataArray[0],
+        actionB: dataArray[1],
+        signal: parseInt(dataArray[2])
+    }
+    io.emit('arduinoMessage', arduinoMessage);
+    console.log(arduinoMessage);
+});
 
 //Socket messages
 
@@ -85,10 +85,10 @@ io.on('connection', (socket) => {
     });
 
     //Order for arduino (music)
-    // socket.on('orderForArduino', (orderForArduino) => {
-    //     port.write(orderForArduino);
-    //     console.log('orderForArduino: ' + orderForArduino);
-    // });
+    socket.on('orderForArduino', (orderForArduino) => {
+        port.write(orderForArduino);
+        console.log('orderForArduino: ' + orderForArduino);
+    });
 });
 
 //User info from form
@@ -127,5 +127,22 @@ expressApp.post('/Points-Array', (request, response) => {
     response.json({ received: request.body });
 });
 
+// Tiempo de interacción
+
+// Endpoint para el tiempo
+expressApp.get('/Time', (request, response) => {
+    response.send(InteractionTime);
+});
+
+let InteractionTime = [];
+
+// Recibir información del tiempo
+expressApp.post('/Time', (request, response) => {
+    const interactionTime = request.body;
+    InteractionTime.push(interactionTime);
+    console.log("duration of last interaction:", request.body);
+    console.log("InteractionTime:", InteractionTime);
+    response.json({ received: request.body });
+});
 
 export { io };

@@ -1,6 +1,9 @@
 const URL = `${window.location.hostname}:${window.location.port}`;
 const socket = io(URL, { path: '/real-time' });
 let leads = document.getElementById('leads-table');
+let average = document.getElementById('Min-Average');
+let interactionsToday = document.getElementById('Interactions_Today');
+let leadsToday = document.getElementById('Leads_Today');
 
 //Graphics
 function controller(view) {
@@ -40,6 +43,10 @@ function controller(view) {
         const {convertions, hourTraffic, dayCounts, LeadsVSNo, lastLeads} = dashboardLocalData;
 
         leads.innerHTML = ` `;
+        average.innerHTML = ` `;
+        interactionsToday.innerHTML = ` `;
+        leadsToday.innerHTML = ` `;
+
         view.updateMinAverage(convertions);
         view.updateInteractionsToday(convertions);
         view.updateLeadsToday(convertions);

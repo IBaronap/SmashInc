@@ -9,7 +9,7 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
-//Arduino msn
+//Arduino msn (Para los movimientos de joystick y botón)
 
 socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
     console.log(arduinoMessage);
@@ -21,19 +21,126 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
     moveX([actionB, signal]); //Mov. Joystick
 })
 
+//Contador para volver al inicio si no se detectan interacciones
+
+    let timecounter = 0;
+    let interactionTime = 0;
+
+    let intervalId = null;
+    let intervalId2 = null;
+
+    function startTimer() {
+        intervalId = setInterval(() => {
+        timecounter++;
+            if (timecounter >= 60) {
+                clearInterval(intervalId);
+                timecounter = 0;
+                interactionData()
+                screen = 1;
+                switchScreen();
+            }
+        }, 1000); // 1000 ms = 1 segundo
+    }
+
+    function resetTimer() {
+        clearInterval(intervalId);
+        timecounter = 0;
+        startTimer();
+    }
+
+    //Guardar interacción
+
+    let interaction = {
+        date: "",
+        timeStamp: ""
+    };
+    
+    //Al undir el boton se registran los datos
+    function interactionData() {
+        //Interaction
+            let now = new Date();
+        
+            //Get day
+            let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+            let dateWithoutCommas = now.toLocaleDateString('es-ES', options).replace(/,/g, '');
+            interaction.date = dateWithoutCommas;
+    
+            //Get time
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            interaction.timeStamp = `${hours}:${minutes}`;
+    
+        console.log(interaction);
+        sendInteraction(interaction);
+    };
+    
+    async function sendInteraction(data) {//se envia a index
+        const dataF = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        };
+        await fetch(`/user`, dataF);
+    }
+
+    //Tiempo de interacción
+    window.addEventListener("load", function (event) {
+        console.log("Page loaded");
+        interactionTimer();
+    });
+
+    function interactionTimer() {
+        intervalId2 = setInterval(() => {
+        interactionTime++;
+        console.log(interactionTime);
+            if (screen == 3) {
+                sendTime(interactionTime).then(() => {
+                    console.log("Interaction time sent");
+                  })
+                  .catch((error) => {
+                    console.error("Failed to send interaction time", error);
+                  });
+                clearInterval(intervalId2);
+                interactionTime = 0;
+            }
+        }, 1000); // 1000 ms = 1 segundo
+    }
+
+    //Enviar tiempo de interacción
+    async function sendTime(interactionTime) {//Envia puntos por HTTP
+        try {
+            const response = await fetch("/Time", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ interactionTime }),});
+        
+            if (!response.ok) {
+              throw new Error("Failed to send interaction time");
+            }
+        
+            return response.json();
+          } catch (error) {
+            throw new Error("Failed to send interaction time:", error);
+          }
+    }
+
+//Cambios de pantallas (por arduino)
+
 function ArduinoBTNClicked(actionB){
     if (actionB == 'A') {
         if(screen == 1){ //From Home to Instructions 1
             screen = 2;
+            resetTimer();
             switchScreen();
         }
         else if(screen == 2){ //From Instructions 1 to Instructions 2
             screen = 3;
+            resetTimer();
             switchScreen();
         }
         
         else if(screen == 3){ //From Instructions 2 to Game
             screen = 4;
+            resetTimer();
             switchScreen();
         }
     
@@ -41,6 +148,7 @@ function ArduinoBTNClicked(actionB){
         
         else if(screen == 5){//From Gameover to QR
             screen = 6;
+            resetTimer();
             switchScreen();
         }
     
@@ -50,25 +158,34 @@ function ArduinoBTNClicked(actionB){
     }
 }
 
-//Switch Screens
+//Cambios de pantalla (click (para pruebas) y desde celular)
 
     let screen = 1;
-    let switchMSN;
 
-    //Para cambiar pantalla haciendo click al qR (ahora cambie es con el celular)
+    //Para cambiar pantalla haciendo click al qR (solo para pruebas)
     document.getElementById('QR').addEventListener('click', () => { /*Cambiar id del QR para que cambie de screen */
         screen = 7;
+        resetTimer();
         switchScreen();
     });
 
+    //Desde celular
     socket.on('switch', (msn) => { //Recibe mensaje de cambiar pantalla desde el celular
         screen = msn;
+        
+        resetTimer();
         switchScreen();
     });
 
+//Switch
     function switchScreen() {
+        
+        clearInterval(intervalId);
+
             switch(screen) {
                 case 1: //Home
+                    interactionTime = 0;
+                    interactionTimer();
                     document.getElementById('Home').style.display = 'block';
                     document.getElementById('Connected').style.display = 'none';
                     document.getElementById('Instructions').style.display = 'none';
@@ -87,6 +204,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
+                    startTimer();
                     break;
                 case 3: //Instructions 2
                     document.getElementById('Home').style.display = 'none';
@@ -97,6 +215,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
+                    startTimer();
                     break;
                 case 4: //Game
                     document.getElementById('Home').style.display = 'none';
@@ -119,6 +238,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
+                    startTimer();
                     socket.emit('orderForArduino','O'); //Para musica de final del juego
                     break;
                 case 6: //QR
@@ -130,8 +250,10 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'block';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
+                    startTimer();
                     break;
                 case 7: //Waiting for formulario
+                    sendInteractionTime(interactionTime);
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
                     document.getElementById('Instructions').style.display = 'none';
@@ -140,6 +262,7 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'block';
                     document.getElementById('Disconnect').style.display = 'none';
+                    startTimer();
                     break;
                 case 8: //End
                     document.getElementById('Home').style.display = 'none';
@@ -150,12 +273,12 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'block';
+                    startTimer();
                     break;
                 default:
                     console.log('Screen does not exist');
               }        
         };
-
 
  //Game
 
@@ -598,7 +721,7 @@ function ArduinoBTNClicked(actionB){
                         if (d < imgObj.width/2 + 35 && !immunityCooldown) { 
 
                             lives -= 1; 
-                            Points -= 10;
+                            Points -= 4;
 
                             immunityCooldown = true;
 
@@ -649,7 +772,7 @@ function ArduinoBTNClicked(actionB){
                         if (d < imgObj.width/2 + 25 && !immunityCooldown) { 
 
                             lives -= 1;     
-                            Points -= 10;
+                            Points -= 4;
 
                             immunityCooldown = true;
                             
@@ -700,7 +823,7 @@ function ArduinoBTNClicked(actionB){
                         if (d < imgObj.width/2 + 25 && !immunityCooldown) { 
 
                             lives -= 1;          
-                            Points -= 10;
+                            Points -= 4;
 
                             immunityCooldown = true;
                             
@@ -807,7 +930,7 @@ function ArduinoBTNClicked(actionB){
         fallingSpikes.length = 0;
         CanonsRight.length = 0;
         CanonsLeft.length = 0;
-        lives = 2;
+        lives = 3;
     }
 
     //Disconnect

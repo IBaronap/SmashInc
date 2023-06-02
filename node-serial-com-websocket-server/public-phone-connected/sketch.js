@@ -16,6 +16,7 @@ let switchMSN;
 
 window.addEventListener("load", function (event) {
     console.log("Page loaded");
+    interactionTimer();
     switchMSN = 7;
     socket.emit('switchPage', switchMSN);
 });
@@ -82,10 +83,40 @@ let user = {
     interactionTime: "",
     notify: "",
     lead: true,
-
     date: "",
     timeStamp: ""
 };
+
+//Tiempo de interacción (tiempo de mupi + tiempo de forms)
+    //Tiempo de mupi
+    let loadedInteractionTime;
+
+    async function getTimeData() {
+        const response = await fetch('/Time'); //Fetch al array que guarda los puntos
+        data = await response.json();
+        const lastElement = data[data.length - 1]; 
+
+        if (typeof lastElement === 'object' && 'interactionTime' in lastElement) {//Busca el ultimo elemento del array
+            const lastValue = lastElement.interactionTime;
+            console.log("El último valor del array es:", lastValue);
+            loadedInteractionTime = lastValue;
+        } else {
+            console.log("No se pudo encontrar la propiedad 'interactionTime' en el último elemento.");
+        }
+    }
+
+    getTimeData();
+
+    //Tiempo en forms
+    let interactionTime = 0;
+    let intervalId = null;
+
+    function interactionTimer() {
+        intervalId = setInterval(() => {
+        interactionTime++;
+        console.log(interactionTime);
+        }, 1000); // 1000 ms = 1 segundo
+    }
 
 //Al undir el boton se registran los datos
 button.addEventListener("click", function () {
@@ -96,6 +127,7 @@ button.addEventListener("click", function () {
         user.phone = document.getElementById("numberBox").value;
         user.privacyAgreement = Disable.checked;
         user.nintendoUser = document.getElementById("Check3").checked;
+        user.interactionTime = loadedInteractionTime + interactionTime;
         user.notify = document.getElementById("Check2").checked;
 
     //Interaction
@@ -152,7 +184,6 @@ async function getData() {
     } else {
         console.log("No se pudo encontrar la propiedad 'TotalPoints' en el último elemento.");
     }
-
 }
 
 getData();

@@ -10,28 +10,33 @@ export const postUserData = (req, res) => {
     const jsonUserData = JSON.parse(UserData);
     const jsonInteractionsData = JSON.parse(InteractionsData);
 
-    // create new user object from request body
-    const newUser = {
-      id: jsonUserData.users.length + 1,   // generate new user ID
-      name: req.body.name,
-      email: req.body.email,
-      phone:req.body.phone,
-      privacyAgreement: req.body.privacyAgreement,
-      nintendoUser: req.body.nintendoUser,
-      interactionTime: req.body.interactionTime,
-      lead: req.body.lead,
-      date: req.body.date,
-      timeStamp: req.body.timeStamp
-    };
-
+    //create new interaction
     const newInteraction = {
       id: jsonInteractionsData.interactions.length + 1,   // generate new user ID
       date: req.body.date,
       timeStamp: req.body.timeStamp
     };
 
+    // create new user (only if it has user info)
+    if (req.body.name) {
+      const newUser = {
+        id: jsonUserData.users.length + 1,
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        privacyAgreement: req.body.privacyAgreement,
+        nintendoUser: req.body.nintendoUser,
+        interactionTime: req.body.interactionTime,
+        lead: req.body.lead,
+        date: req.body.date,
+        timeStamp: req.body.timeStamp
+      };
+
+      jsonUserData.users.push(newUser);
+    }
+
+
     // add new user to existing data
-    jsonUserData.users.push(newUser);
     jsonInteractionsData.interactions.push(newInteraction);
 
     // write updated data back to users.json file
