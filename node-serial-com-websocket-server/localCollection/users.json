@@ -155,42 +155,6 @@
       "lead": true,
       "date": "lun 29 may 2023",
       "timeStamp": "09:21"
-    },
-    {
-      "id": 14,
-      "name": "Isa",
-      "email": "isabe@gmail.com",
-      "phone": "1111111",
-      "privacyAgreement": true,
-      "nintendoUser": false,
-      "interactionTime": 340,
-      "lead": true,
-      "date": "lun 29 may 2023",
-      "timeStamp": "10:11"
-    },
-    {
-      "id": 15,
-      "name": "Andres",
-      "email": "andres@email.com",
-      "phone": "77777",
-      "privacyAgreement": true,
-      "nintendoUser": true,
-      "interactionTime": 378,
-      "lead": true,
-      "date": "jue 1 jun 2023",
-      "timeStamp": "10:21"
-    },
-    {
-      "id": 16,
-      "name": "Karol",
-      "email": "karol@email.com",
-      "phone": "333333",
-      "privacyAgreement": true,
-      "nintendoUser": false,
-      "interactionTime": 315,
-      "lead": true,
-      "date": "vie 2 jun 2023",
-      "timeStamp": "10:25"
     }
   ]
 }

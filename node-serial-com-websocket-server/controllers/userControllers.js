@@ -1,21 +1,16 @@
 import { fs } from "../dependencies.js";
 import { io } from '../index.js';
+import fireStoreDB from '../firebase-config.js';
 
 export const postUserData = (req, res) => {
   try {
     // read existing data from users.json file
     const UserData = fs.readFileSync('./localCollection/users.json');
-    const InteractionsData = fs.readFileSync('./localCollection/interactions.json');
-
     const jsonUserData = JSON.parse(UserData);
-    const jsonInteractionsData = JSON.parse(InteractionsData);
 
-    //create new interaction
-    const newInteraction = {
-      id: jsonInteractionsData.interactions.length + 1,   // generate new user ID
-      date: req.body.date,
-      timeStamp: req.body.timeStamp
-    };
+    // read existing data from interactions.json file
+    const InteractionsData = fs.readFileSync('./localCollection/interactions.json');
+    const jsonInteractionsData = JSON.parse(InteractionsData);
 
     // create new user (only if it has user info)
     if (req.body.name) {
@@ -32,17 +27,27 @@ export const postUserData = (req, res) => {
         timeStamp: req.body.timeStamp
       };
 
+      // add new user to existing data (json)
       jsonUserData.users.push(newUser);
+      fs.writeFileSync('./localCollection/users.json', JSON.stringify(jsonUserData, null, 2));
+      // add new user to existing data (firebase)
+      fireStoreDB.addNewDocumentTo(jsonUser, 'Leads');
     }
 
+    //create new interaction
+    const newInteraction = {
+      id: jsonInteractionsData.interactions.length + 1,
+      date: req.body.date,
+      timeStamp: req.body.timeStamp
+    };
 
-    // add new user to existing data
+    // add new interaction to existing data (json)
     jsonInteractionsData.interactions.push(newInteraction);
-
-    // write updated data back to users.json file
-    fs.writeFileSync('./localCollection/users.json', JSON.stringify(jsonUserData, null, 2));
     fs.writeFileSync('./localCollection/interactions.json', JSON.stringify(jsonInteractionsData, null, 2));
+    // add new interaction to existing data (firebase)
+    fireStoreDB.addNewDocumentTo(jsonUser, 'Interactions');
 
+    //Message to update
     io.emit('data-update', { state: true });
 
     // send response indicating successful creation of new user

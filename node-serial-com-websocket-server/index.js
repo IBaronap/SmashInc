@@ -2,6 +2,7 @@
 import { express, SocketIOServer, cors, SerialPort, ReadlineParser, dotenv, fs } from './dependencies.js';
 import userRoutes from './routes/userRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import fireStoreDB from './firebase-config.js';
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -41,25 +42,25 @@ expressApp.use(cors({origin: '*'}));
 
 //Arduino communication
 
-const protocolConfiguration = { // Defining Serial configurations
-    path: 'COM8', //COM#
-    baudRate: 9600
-};
-const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
-const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
+// const protocolConfiguration = { // Defining Serial configurations
+//     path: 'COM8', //COM#
+//     baudRate: 9600
+// };
+// const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
+// const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
 
-parser.on('data', (arduinoData) => {
-    let dataArray = arduinoData.split(' ');
-    console.log(dataArray);
+// parser.on('data', (arduinoData) => {
+//     let dataArray = arduinoData.split(' ');
+//     console.log(dataArray);
 
-    let arduinoMessage = {
-        actionA: dataArray[0],
-        actionB: dataArray[1],
-        signal: parseInt(dataArray[2])
-    }
-    io.emit('arduinoMessage', arduinoMessage);
-    console.log(arduinoMessage);
-});
+//     let arduinoMessage = {
+//         actionA: dataArray[0],
+//         actionB: dataArray[1],
+//         signal: parseInt(dataArray[2])
+//     }
+//     io.emit('arduinoMessage', arduinoMessage);
+//     console.log(arduinoMessage);
+// });
 
 //Socket messages
 
@@ -85,11 +86,15 @@ io.on('connection', (socket) => {
     });
 
     //Order for arduino (music)
-    socket.on('orderForArduino', (orderForArduino) => {
-        port.write(orderForArduino);
-        console.log('orderForArduino: ' + orderForArduino);
-    });
+    // socket.on('orderForArduino', (orderForArduino) => {
+    //     port.write(orderForArduino);
+    //     console.log('orderForArduino: ' + orderForArduino);
+    // });
 });
+
+fireStoreDB.updateRealTime('Leads', () => {
+    io.emit('real-time-update', { state: 'Using onSnapshot' })
+  });
 
 //User info from form
 
