@@ -87,7 +87,7 @@ button:active:after {
 /* Screens */
 
 #Home{
-    display: block;
+    display: none;
 }
 
 #Connected{
@@ -115,16 +115,16 @@ button:active:after {
 }
 
 #Disconnect{
-    display: none;
+    display: block;
 }
 
 /* Home */
 
     #SMUpLogo{
         position: absolute;
-        width: 13vw;
-        left: 4.5vw;
-        top: 4.6vh;
+        width: 248px;
+        left: 28.43px;
+        top: 50.23px;
     }
 
     #NubesFront{
@@ -147,27 +147,27 @@ button:active:after {
 
     #NintendoLogo{
         position: absolute;
-        width: 10.4vw;
+        width: 200px;
         height: auto;
-        left: 42vw;
-        top: 4.6vh;
+        left: 634px;
+        top: 34px;
     }
 
     #titleHome{
         color: #E1F3FE;
         font-family: 'MARIO_Font_v3_Solid';
-        font-size: 35px;
+        font-size: 50px;
         font-weight: 700;
         position: absolute;
-        width: 398px;
+        width: 399.91px;
         height: 48px;
-        left: 0;
-        top: 115vh;
+        left: 9px;
+        top: 803.82px;
         letter-spacing: 0.2rem;
         text-align: center;
         transform: rotate(-5.43deg);
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        line-height: 4.6vh;
+        line-height: 50px;
     }
 
     
@@ -181,25 +181,34 @@ button:active:after {
     
     #GoombaFalling{
         position: absolute;
-        width: 13vw;
+        width: 196px;
         height: auto;
-        left: 20vw;
-        top: 958px;
+        left: 362px;
+        top: 955px;
         z-index: 3;
     }
     
     #MarioFlag{
         position: absolute;
-        width: 38vw;
+        width: 565px;
         height: auto;
-        right: 1.5vw;
-        bottom: 0;
+        left: 288px;
+        top: 200px;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     }
     
     #LineasFondo{
         width: 859px;
         height: 1253px;
+    }
+
+    #continueHome{
+        position: absolute;
+        width: 203.92px;
+        height: auto;
+        left: 107.26px;
+        top: 915.17px;
+        transform: rotate(-5.28deg);
     }
 
 /* Mupi connected / Bienvenida */
@@ -211,20 +220,21 @@ button:active:after {
 
             #titleBienvenida{
                 position: absolute;
-                width: 700px;
-                height: 90px;
-                left: 70px;
-                top: 87px;
+                width: 696px;
+                height: 159px;
+                left: 87px;
+                top: 111px;
+
                 font-family: 'MARIO_Font_v3_Solid';
                 font-weight: 700;
-                font-size: 5.4vw;
-                line-height: 80px;
+                font-size: 100px;
+                line-height: 74px;
                 text-align: center;
-                background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
+                background: linear-gradient(180deg, #FBE883 9.12%, #F2C700 60.84%, #EEC300 95.91%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                -webkit-text-stroke: 5.3px black;
-                letter-spacing: -0.18rem;
+                -webkit-text-stroke: 6px black;
+                letter-spacing: -0.025em;
                 
             }
 
@@ -232,18 +242,18 @@ button:active:after {
                 position: absolute;
                 width: 707px;
                 height: 548.54px;
-                right: 5vw;
+                left: 76px;
                 top: 294px; 
             }
 
                 #descriptionConnected{
                     position: absolute;
-                    width: 504px;
-                    height: 22px;
+                    width: 500px;
+                    height: 78px;
                     left: 146px;
-                    top: 47vh;
+                    top: 339px;
                     font-style: normal;
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 35px;
                     line-height: 39px;
                     text-align: left;
@@ -259,17 +269,17 @@ button:active:after {
                     left: 146px;
                     top: 464px;
                     font-weight: 500;
-                    font-size: 27px;
+                    font-size: 30px;
                     line-height: 40px;
                     text-align: left;
                 }
 
                 #control{
                     position: absolute;
-                    width: 180px;
+                    width: 200px;
                     height: auto;
-                    right: 7vw;
-                    top: 87vh;
+                    left: 570px;
+                    top: 630px;
                     filter: drop-shadow(3.12329px 3.12329px 4.68493px rgba(0, 0, 0, 0.3));
                     transform: rotate(-25deg);
                 }
@@ -278,8 +288,8 @@ button:active:after {
                 position: absolute;
                 width: 291.13px;
                 height: 380.03px;
-                right: 2vw;
-                bottom: 4vh;
+                left: 560px;
+                top: 813px;
                 z-index: 2;
             }
 
@@ -346,12 +356,12 @@ span { font-weight: 700; color: #FF5C00}
         text-align: center;
         width: 700px;
         height: 254px;
-        left: 0;
-        top: -35vh;
+        left: 0px;
+        top: -255px;
         font-family: 'MARIO_Font_v3_Solid';
         font-weight: 700;
-        font-size: 5.4vw;
-        line-height: 80px;
+        font-size: 100px;
+        line-height: 88px;
         text-align: center;
         color: #970202;
         text-shadow: 
@@ -359,7 +369,7 @@ span { font-weight: 700; color: #FF5C00}
             7px -7px 0 #fff,
             -7px 7px 0 #fff,
             7px 7px 0 #fff;
-        letter-spacing: -0.18rem;
+        letter-spacing: 0.05em;
     }
 
     #ModalOver {
@@ -463,7 +473,7 @@ span { font-weight: 700; color: #FF5C00}
     width: 580px;
     height: 150px;
     left: 139px;
-    top: 105vh;
+    top: 800px;
 }
 
 /* Formulario */
@@ -499,19 +509,19 @@ span { font-weight: 700; color: #FF5C00}
     #titleDisconnect{
             position: absolute;
             width: 700px;
-            height: 90px;
+            height: 100px;
             left: 0px;
             top: -220px;
             font-family: 'MARIO_Font_v3_Solid';
             font-weight: 700;
-            font-size: 5.4vw;
-            line-height: 80px;
+            font-size: 100px;
+            line-height: 74px;
             text-align: center;
             background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 5.3px black;
-            letter-spacing: -0.18rem;
+            -webkit-text-stroke: 6px black;
+            letter-spacing: -0.025em;
     }
 
     #ModalDisconnect {
@@ -520,6 +530,7 @@ span { font-weight: 700; color: #FF5C00}
         height: 617px;
         left: 78px;
         top: 328px;
+        text-align: center;
         background: #F7F9F8;
         border: 4px solid #FFA800;
         border-radius: 24px;
@@ -552,7 +563,7 @@ span { font-weight: 700; color: #FF5C00}
         width: 380px;
         height: fit-content;
         left: 152px;
-        top: 375px;
+        top: 365px;
         font-weight: 800;
         font-size: 26px;
         line-height: 32px;
@@ -565,12 +576,32 @@ span { font-weight: 700; color: #FF5C00}
         width: 550px;
         height: 96px;
         left: 75px;
-        top: 465px;
+        top: 455px;
         font-weight: 400;
         font-size: 20px;
         line-height: 30px;
         text-align: center;
         color: #000000;
+    }
+
+    #desconectarDispositivo{
+        position: absolute;
+        width: 650px;
+        height: 92.35px;
+        left: 110px;
+        top: 865px;
+
+        font-family: 'MARIO_Font_v3_Solid';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 43px;
+        text-align: center;
+        background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 3px black;
+            letter-spacing: -0.025em;
     }
 
     #MarioStar{
