@@ -598,10 +598,10 @@ span { font-weight: 700; color: #FF5C00}
         line-height: 43px;
         text-align: center;
         background-image: -webkit-linear-gradient( #FBE883 20%, #F2C700 80%, #EEC300 80%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 3px black;
-            letter-spacing: -0.025em;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 3px black;
+        letter-spacing: -0.025em;
     }
 
     #MarioStar{

@@ -155,6 +155,42 @@
       "lead": true,
       "date": "lun 29 may 2023",
       "timeStamp": "09:21"
+    },
+    {
+      "id": 14,
+      "name": "Metro",
+      "email": "calling@gmail.com",
+      "phone": "3007062023",
+      "privacyAgreement": true,
+      "nintendoUser": false,
+      "interactionTime": null,
+      "lead": true,
+      "date": "mié 7 jun 2023",
+      "timeStamp": "18:18"
+    },
+    {
+      "id": 15,
+      "name": "prueba",
+      "email": "kjcnke",
+      "phone": "98423985",
+      "privacyAgreement": true,
+      "nintendoUser": false,
+      "interactionTime": null,
+      "lead": true,
+      "date": "mié 7 jun 2023",
+      "timeStamp": "20:50"
+    },
+    {
+      "id": 16,
+      "name": "prueba2",
+      "email": "email",
+      "phone": "3016262536",
+      "privacyAgreement": true,
+      "nintendoUser": true,
+      "interactionTime": null,
+      "lead": true,
+      "date": "mié 7 jun 2023",
+      "timeStamp": "21:26"
     }
   ]
 }
