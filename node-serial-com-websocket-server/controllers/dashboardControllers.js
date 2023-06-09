@@ -1,4 +1,5 @@
 import { fs } from "../dependencies.js";
+import fireStoreDB from "../firebase-config.js";
 import * as KPI from "./kpicalculations.js";
 
 export const getData = (req, res) => {
@@ -18,9 +19,15 @@ export const getData = (req, res) => {
         const LeadsVSNo = KPI.amountLeads(users, interactions);
         const lastLeads = KPI.getLastLeads(users);
 
-        let dashboarddata = {users, interactions, convertions, hourTraffic, dayCounts, nintendoUsersByDay, LeadsVSNo, lastLeads};
-
-        res.status(201).send(dashboarddata);
+        let dashboardData = {users, interactions, convertions, hourTraffic, dayCounts, nintendoUsersByDay, LeadsVSNo, lastLeads};
+        
+        fireStoreDB.getCollection('Leads').then((leads) => {
+            console.log(leads);
+            dashboardData.fireStore = leads;
+            // res.send(dashboardData);
+        })
+        
+        res.send(dashboardData);
     }  catch (error) {
         console.error(error);
         res.status(500).send('Error adding user');

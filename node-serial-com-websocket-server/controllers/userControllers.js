@@ -2,18 +2,13 @@ import { fs } from "../dependencies.js";
 import { io } from '../index.js';
 import fireStoreDB from '../firebase-config.js';
 
-export const postUserData = (req, res) => {
+export const postUserData = async (req, res) => {
   try {
-    // read existing data from users.json file
+    // Lee archivo Json
     const UserData = fs.readFileSync('./localCollection/users.json');
     const jsonUserData = JSON.parse(UserData);
 
-    // read existing data from interactions.json file
-    const InteractionsData = fs.readFileSync('./localCollection/interactions.json');
-    const jsonInteractionsData = JSON.parse(InteractionsData);
-
-    // create new user (only if it has user info)
-    if (req.body.name) {
+    // Crea nuevo usuario
       const newUser = {
         id: jsonUserData.users.length + 1,
         name: req.body.name,
@@ -27,33 +22,50 @@ export const postUserData = (req, res) => {
         timeStamp: req.body.timeStamp
       };
 
-      // add new user to existing data (json)
+      // Añade a firebase
+      fireStoreDB.addNewDocumentTo(newUser, 'Leads');
+      console.log('Added to firebase');
+      // Añade a Json
       jsonUserData.users.push(newUser);
       fs.writeFileSync('./localCollection/users.json', JSON.stringify(jsonUserData, null, 2));
-      // add new user to existing data (firebase)
-      fireStoreDB.addNewDocumentTo(jsonUser, 'Leads');
-    }
 
-    //create new interaction
+    //Mensaje para hacer update
+    io.emit('data-update', { state: true });
+
+        // Respuesta que indica creación de usuario
+    res.status(201).send({ msn: `User ${newUser.id} created` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error adding user');
+  }
+}
+
+export const postInteractionData = async (req, res) => {
+  try {
+
+    // Lee archivo Json
+    const InteractionsData = fs.readFileSync('./localCollection/interactions.json');
+    const jsonInteractionsData = JSON.parse(InteractionsData);
+
+    //Crea nueva interacción
     const newInteraction = {
       id: jsonInteractionsData.interactions.length + 1,
       date: req.body.date,
       timeStamp: req.body.timeStamp
     };
 
-    // add new interaction to existing data (json)
+    // Añade a firebase
+    fireStoreDB.addNewDocumentTo(newInteraction, 'Interactions');
+    // Añade a Json
     jsonInteractionsData.interactions.push(newInteraction);
     fs.writeFileSync('./localCollection/interactions.json', JSON.stringify(jsonInteractionsData, null, 2));
-    // add new interaction to existing data (firebase)
-    fireStoreDB.addNewDocumentTo(jsonUser, 'Interactions');
 
-    //Message to update
+    //Mensaje para hacer update
     io.emit('data-update', { state: true });
 
-    // send response indicating successful creation of new user
-    res.status(201).send({ msn: `User ${newUser.id} created` });
+    // Respuesta que indica creación de interacción
+    res.status(201).send({ msn: `Interaction ${newUser.id} created` });
   } catch (error) {
-    // handle any errors that occur
     console.error(error);
     res.status(500).send('Error adding user');
   }
