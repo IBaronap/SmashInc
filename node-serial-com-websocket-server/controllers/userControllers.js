@@ -6,7 +6,7 @@ export const postUserData = async (req, res) => {
   try {
     // Lee archivo Json
     const UserData = fs.readFileSync('./localCollection/users.json');
-    const jsonUserData = JSON.parse(UserData);
+    const jsonUserData = JSON.parse(UserData);//String a código
 
     // Crea nuevo usuario
       const newUser = {

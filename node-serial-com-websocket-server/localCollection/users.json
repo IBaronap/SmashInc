@@ -165,8 +165,8 @@
       "nintendoUser": true,
       "interactionTime": 364,
       "lead": true,
-      "date": "vie 9 jun 2023",
-      "timeStamp": "00:21"
+      "date": "jue 8 jun 2023",
+      "timeStamp": "08:21"
     },
     {
       "id": 15,
@@ -175,58 +175,58 @@
       "phone": "3005643964",
       "privacyAgreement": true,
       "nintendoUser": false,
-      "interactionTime": null,
+      "interactionTime": 347,
       "lead": true,
-      "date": "vie 9 jun 2023",
-      "timeStamp": "00:25"
+      "date": "jue 8 jun 2023",
+      "timeStamp": "08:45"
     },
     {
       "id": 16,
-      "name": "Isa",
+      "name": "Isabella",
       "email": "isabe@gmail.com",
-      "phone": "4444",
+      "phone": "3167766666",
       "privacyAgreement": true,
       "nintendoUser": false,
-      "interactionTime": null,
+      "interactionTime": 312,
       "lead": true,
-      "date": "vie 9 jun 2023",
-      "timeStamp": "00:28"
+      "date": "jue 8 jun 2023",
+      "timeStamp": "13:28"
     },
     {
       "id": 17,
-      "name": "Isa",
-      "email": "isabe@gmail.com",
-      "phone": "4444",
+      "name": "Laura Lozano",
+      "email": "LauCL@gmail.com",
+      "phone": "3145557722",
       "privacyAgreement": true,
-      "nintendoUser": false,
-      "interactionTime": null,
+      "nintendoUser": true,
+      "interactionTime": 345,
       "lead": true,
-      "date": "vie 9 jun 2023",
-      "timeStamp": "00:30"
+      "date": "jue 8 jun 2023",
+      "timeStamp": "14:30"
     },
     {
       "id": 18,
-      "name": "Isa",
-      "email": "isabe@gmail.com",
-      "phone": "55555",
+      "name": "Peach",
+      "email": "peachesp@gmail.com",
+      "phone": "3175138520",
       "privacyAgreement": true,
       "nintendoUser": true,
-      "interactionTime": 55,
+      "interactionTime": 355,
       "lead": true,
       "date": "vie 9 jun 2023",
-      "timeStamp": "00:33"
+      "timeStamp": "05:33"
     },
     {
       "id": 19,
-      "name": "Isa",
-      "email": "isabe@gmail.com",
-      "phone": "2222222",
+      "name": "Luigi",
+      "email": "greenL@gmail.com",
+      "phone": "3122097912",
       "privacyAgreement": true,
       "nintendoUser": true,
-      "interactionTime": 62,
+      "interactionTime": 362,
       "lead": true,
       "date": "vie 9 jun 2023",
-      "timeStamp": "00:35"
+      "timeStamp": "06:35"
     }
   ]
 }
