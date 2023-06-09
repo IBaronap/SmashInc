@@ -19,6 +19,7 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
     BTNSounds(actionA); //Cambia el sonido del boton si esta en instrucciones o en el juego
     moveJump([actionA, signal]); //Mov. salto
     moveX([actionB, signal]); //Mov. Joystick
+    controller([actionB, signal]); //Para cambio en instrucciones
 })
 
 //Contador para volver al inicio si no se detectan interacciones
@@ -48,24 +49,23 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
         startTimer();
     }
 
-    //Guardar interacción
+    //Guardar interacción (interacción sin completar que se manda al hacer reset de la experiencia)
 
     let interaction = {
         date: "",
         timeStamp: ""
     };
     
-    //Al undir el boton se registran los datos
     function interactionData() {
         //Interaction
             let now = new Date();
         
-            //Get day
+            //Obtener día
             let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
             let dateWithoutCommas = now.toLocaleDateString('es-ES', options).replace(/,/g, '');
             interaction.date = dateWithoutCommas;
     
-            //Get time
+            //Obtener hora
             let hours = now.getHours().toString().padStart(2, '0');
             let minutes = now.getMinutes().toString().padStart(2, '0');
             interaction.timeStamp = `${hours}:${minutes}`;
@@ -74,6 +74,7 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
         sendInteraction(interaction);
     };
     
+    //Enviar interacción
     async function sendInteraction(data) {//se envia a index
         const dataF = {
             method: "POST",
@@ -82,10 +83,10 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
             },
             body: JSON.stringify(data),
         };
-        await fetch(`/user`, dataF);
+        await fetch(`/user/interaction`, dataF);
     }
 
-    //Tiempo de interacción
+//Contador del tiempo de interacción
     window.addEventListener("load", function (event) {
         console.log("Page loaded");
         interactionTimer();
@@ -95,7 +96,7 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
         intervalId2 = setInterval(() => {
         interactionTime++;
         console.log(interactionTime);
-            if (screen == 7) {
+            if (screen == 5) {
                 sendTime(interactionTime).then(() => {
                     console.log("Interaction time sent");
                   })
@@ -127,34 +128,28 @@ socket.on('arduinoMessage', (arduinoMessage) => { //Recibe mensaje arduino
 
 function ArduinoBTNClicked(actionB){
     if (actionB == 'A') {
-        if(screen == 1){ //From Home to Instructions 1
+        if(screen == 1){ //De Home a Bienvenido
             screen = 2;
             resetTimer();
             switchScreen();
         }
-        else if(screen == 2){ //From Instructions 1 to Instructions 2
+        else if(screen == 2){ //De Bienvenido a Game
             screen = 3;
             resetTimer();
             switchScreen();
         }
+    
+        //De Game a Gameover cambia automatico al terminar el juego
         
-        else if(screen == 3){ //From Instructions 2 to Game
-            screen = 4;
+        else if(screen == 4){//De Gameover a QR
+            screen = 5;
             resetTimer();
             switchScreen();
         }
     
-        //From Game to Gameover is when the player finishes the game
-        
-        else if(screen == 5){//From Gameover to QR
-            screen = 6;
-            resetTimer();
-            switchScreen();
-        }
-    
-        //From QR to Waiting is when the QR is read on the phone
-        //From Waiting to End is when the form is sent on the phone
-        //From End to Home is when the phone is disconnected
+        //De QR a Waiting pasa cuando se lee el QR con el celular
+        //De Waiting a End pasa cuando se envía el forms desde el celular
+        //De End a Home pasa cuando se desconecta desde el celular
     }
 }
 
@@ -164,7 +159,7 @@ function ArduinoBTNClicked(actionB){
 
     //Para cambiar pantalla haciendo click al qR (solo para pruebas)
     document.getElementById('QR').addEventListener('click', () => { /*Cambiar id del QR para que cambie de screen */
-        screen = 7;
+        screen = 5;
         resetTimer();
         switchScreen();
     });
@@ -188,7 +183,6 @@ function ArduinoBTNClicked(actionB){
                     interactionTimer();
                     document.getElementById('Home').style.display = 'block';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'none';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'none';
@@ -198,29 +192,16 @@ function ArduinoBTNClicked(actionB){
                 case 2: //Instructions 1 
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'block';
-                    document.getElementById('Instructions').style.display = 'none';
-                    document.getElementById('Game').style.display = 'none';
+                    document.getElementById('Game').style.display = 'block';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'none';
                     document.getElementById('Formulario').style.display = 'none';
                     document.getElementById('Disconnect').style.display = 'none';
                     startTimer();
                     break;
-                case 3: //Instructions 2
+                case 3: //Game
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'block';
-                    document.getElementById('Game').style.display = 'none';
-                    document.getElementById('Gameover').style.display = 'none';
-                    document.getElementById('QRScreen').style.display = 'none';
-                    document.getElementById('Formulario').style.display = 'none';
-                    document.getElementById('Disconnect').style.display = 'none';
-                    startTimer();
-                    break;
-                case 4: //Game
-                    document.getElementById('Home').style.display = 'none';
-                    document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'block';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'none';
@@ -229,10 +210,9 @@ function ArduinoBTNClicked(actionB){
                     Restart();
                     socket.emit('orderForArduino','G'); //Para musica de inicio del juego
                     break;
-                case 5: //Gameover
+                case 4: //Gameover
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'none';
                     document.getElementById('Gameover').style.display = 'block';
                     document.getElementById('QRScreen').style.display = 'none';
@@ -241,10 +221,9 @@ function ArduinoBTNClicked(actionB){
                     startTimer();
                     socket.emit('orderForArduino','O'); //Para musica de final del juego
                     break;
-                case 6: //QR
+                case 5: //QR
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'none';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'block';
@@ -252,11 +231,9 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('Disconnect').style.display = 'none';
                     startTimer();
                     break;
-                case 7: //Waiting for formulario
-                    sendInteractionTime(interactionTime);
+                case 6: //Waiting for formulario
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'none';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'none';
@@ -264,10 +241,9 @@ function ArduinoBTNClicked(actionB){
                     document.getElementById('Disconnect').style.display = 'none';
                     startTimer();
                     break;
-                case 8: //End
+                case 7: //End
                     document.getElementById('Home').style.display = 'none';
                     document.getElementById('Connected').style.display = 'none';
-                    document.getElementById('Instructions').style.display = 'none';
                     document.getElementById('Game').style.display = 'none';
                     document.getElementById('Gameover').style.display = 'none';
                     document.getElementById('QRScreen').style.display = 'none';
@@ -297,77 +273,8 @@ function ArduinoBTNClicked(actionB){
     }
     
     function draw() {
-        if(screen === 4){
-
-            //Game
-            gravity ();
-            game ();
-            points();
-            PointsChange();
-    
-            //Counter
-            stroke(255);
-            strokeWeight(8);
-            fill(42, 75, 153, 90);
-            circle(width/2, 100, 100, 100);
-
-            stroke(0);
-            strokeWeight(8);
-            fill(255);
-            textSize(40);
-            textFont( 'MARIO_Font_v3_Solid')
-            if (Points < 10) {
-                text("0" + Points, width/2 - 30, 113);
-            } else {
-                text(Points, width/2 - 30, 113);
-            }
-
-            //Points
-            fill(255);
-            textSize(30);
-            textFont( 'MARIO_Font_v3_Solid')
-            text("Mario", 50, 83);
-
-            fill(255);
-            textSize(30);
-            textFont( 'MARIO_Font_v3_Solid')
-            if (Points < 1) {
-                text("000" + Points*50, 50, 123);
-            }else if (Points < 2) {
-                text("00" + Points*50, 50, 123);
-            }else if (Points < 20) {
-                text("0" + Points*50, 50, 123);
-            } else {
-                text(Points*50, 50, 123);
-            }
-            
-            //Lives
-            fill(255);
-            textSize(30);
-            textFont( 'MARIO_Font_v3_Solid')
-            text("x " + lives, 750, 83);
-
-            //Gain/Loses points
-            if(immunityCooldown){
-                fill(255);
-                textSize(30);
-                textFont( 'MARIO_Font_v3_Solid')
-                text("- 500", Playerx, Playery - 25);
-            }
-
-            if(IncreasePoints){
-                fill(255);
-                textSize(30);
-                textFont( 'MARIO_Font_v3_Solid')
-                text("+ 200", Playerx, Playery - 25);
-            }
-
-            if(DecreasePoints){
-                fill(255);
-                textSize(30);
-                textFont( 'MARIO_Font_v3_Solid')
-                text("- 200", Playerx, Playery - 25);
-            }
+        if(screen === 3){ //Para que pinte solo cuando debe hacerlo
+            game(); 
         }
     }
 
@@ -375,43 +282,143 @@ function ArduinoBTNClicked(actionB){
         resizeCanvas(850, 1253);
     }
    
-    //Juego SetUp
+    //Estado del juego y estado del control
 
-    function game (){
-        image (back, -5, 0, width+5, height);
-        image (stuff2, 0, minh - 100, 0, 0);
-        image (stuff, 20, minh, 0, 0);
-        image (liveMushroom, 690, 50, 45, 45);
+    let gameState = "instructions1";
+    let controlState = "Still";
 
-        let player;
-
-        if (Newdirection == 'right' && !jump) {
-            player = playerR;
-        } else if (Newdirection == 'left' && !jump) {
-            player = playerL;
-        }     
-            else if (Newdirection == 'right' && jump) {
-                player = playerJumpR;
-            } else if (Newdirection == 'left' && jump) {
-                player = playerJumpL;
+    function controller([actionB, signal]){ //Dice que se ha movido en el control
+        if (actionB == "X"){
+            if(signal == 0 || signal == 2){ //Cuando recibe señal de joystick                
+                controlState = "JoystickMoved"
             }
-            
-        Playerx += dx;
+        } 
+        
+        if (actionB == "A"){ //Cuando recibe señal del botón
+            controlState = "ButtonPressed"
+        }
+    }
 
-        image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
+    function game (){ //El juego como tal
 
-        End.drawEnd();
-        Enemy.Spike();
-        Enemy.CanonR();
-        Enemy.CanonL();
+        switch (gameState) {
+            case "instructions1": //Juego inactivo, primera parte de las instrucciones
+                image(gameview, minw, maxh, width, height);
+                image(instructions1, minw, maxh, width, height);
+    
+                if (controlState === "JoystickMoved") {
+                    gameState = "instructions2";
+                    controlState = "Still";
+                }
+                break;
+            case "instructions2": //Juego inactivo, segunda parte de las instrucciones
+                image(gameview, minw, maxh, width, height);
+                image(instructions2, minw, maxh, width, height);
+          
+                if (controlState === "ButtonPressed") {
+                    gameState = "playing";
+                    controlState = "Still";
+                }
+                break;
+            case "playing": //Juego activo
+                //Funciones juego
+                gravity ();
+                points(); 
 
-        Plat.paint();
-        Plat.collision();
+                //Fondo
+                image (back, -5, 0, width+5, height);
+                image (stuff2, 0, minh - 100, 0, 0);
+                image (stuff, 20, minh, 0, 0);
+                image (liveMushroom, 690, 50, 45, 45);
 
-        End.end();
+                //Mario
+                let player;
+
+                if (Newdirection == 'right' && !jump) {
+                    player = playerR;
+                } else if (Newdirection == 'left' && !jump) {
+                    player = playerL;
+                }     
+                    else if (Newdirection == 'right' && jump) {
+                        player = playerJumpR;
+                    } else if (Newdirection == 'left' && jump) {
+                        player = playerJumpL;
+                    }
+                    
+                Playerx += dx;
+
+                image (player, Playerx, Playery, PlayerWidth, PlayerHeight);
+
+                //Counter
+                stroke(255);
+                strokeWeight(8);
+                fill(42, 75, 153, 90);
+                circle(width/2, 100, 100, 100);
+
+                stroke(0);
+                strokeWeight(8);
+                fill(255);
+                textSize(40);
+                textFont( 'MARIO_Font_v3_Solid')
+                if (Points < 10) {
+                    text("0" + Points, width/2 - 30, 113);
+                } else {
+                    text(Points, width/2 - 30, 113);
+                }
+
+                //Puntos
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                text("Mario", 50, 83);
+
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                if (Points < 1) {
+                    text("000" + Points*50, 50, 123);
+                }else if (Points < 2) {
+                    text("00" + Points*50, 50, 123);
+                }else if (Points < 20) {
+                    text("0" + Points*50, 50, 123);
+                } else {
+                    text(Points*50, 50, 123);
+                }
+
+                //Vidas
+                fill(255);
+                textSize(30);
+                textFont( 'MARIO_Font_v3_Solid')
+                text("x " + lives, 750, 83);
+
+                //Cuando pierde/gana puntos
+                if(immunityCooldown){
+                    fill(255);
+                    textSize(30);
+                    textFont( 'MARIO_Font_v3_Solid')
+                    text("- 200", Playerx, Playery - 25);
+                }
+
+                //Enemigos
+                End.drawEnd();
+                Enemy.Spike();
+                Enemy.CanonR();
+                Enemy.CanonL();
+
+                //Plataformas
+                Plat.paint();
+                Plat.collision();
+
+                End.end();
+                break;
+            }     
     }
 
     //Image loads
+
+    let gameview;
+    let instructions1;
+    let instructions2;
 
     let playerR;
     let playerL;
@@ -429,6 +436,10 @@ function ArduinoBTNClicked(actionB){
     let liveMushroom;
     
     function preload (){
+        gameview = loadImage('./Images/Game.png');
+        instructions1 = loadImage('./Images/Overlay1.png');
+        instructions2 = loadImage('./Images/Overlay2.png');
+
         playerR = loadImage('./Images/MarioR.png');
         playerL = loadImage('./Images/MarioL.png');
         playerJumpR = loadImage('./Images/MarioJ.png');
@@ -449,16 +460,16 @@ function ArduinoBTNClicked(actionB){
 
     function BTNSounds(actionA){
         if (actionA == 'B') {
-            if (screen == 4){ //Sonido de salto si está en el juego
+            if (screen == 3){ //Sonido de salto si está en el juego
                 socket.emit('orderForArduino','J');
             }
-            else if (screen == 1 || screen == 2 || screen == 3 || screen == 5){ //Sonido de continuar 
+            else if (screen == 1 || screen == 2 || screen == 4){ //Sonido de continuar 
                 socket.emit('orderForArduino','A');
             }
         }
     }
 
-    //Max and Min coordinates
+    //Coordenadas maximas y minimas
 
     var minh = 1070;    var maxh = 0;
     var minw = 0;       var maxw = 780;
@@ -475,13 +486,12 @@ function ArduinoBTNClicked(actionB){
 
             //Movement
 
-            function moveX([direction, signal]) {
+            function moveX([direction, signal]) { //Movimiento del jugador
                 if(direction[0] == 'X'){
 
                     switch(signal){
                         case 0:
                             if (Playerx >= minw) {
-                                // Playerx -= 20;
                                 dx = -2;
                                 Newdirection = 'left';
                                 socket.emit('orderForArduino','W'); //Sonido de caminar
@@ -490,7 +500,6 @@ function ArduinoBTNClicked(actionB){
             
                         case 2:
                             if (Playerx <= maxw) {
-                                // Playerx += 20;
                                 dx = 2;
                                 Newdirection = 'right';
                                 socket.emit('orderForArduino','W'); //Sonido de caminar
@@ -499,30 +508,12 @@ function ArduinoBTNClicked(actionB){
             
                         case 1:
                             dx = 0;
-                            // Playerx = Playerx;
                             break;
                     }
-
-                    // let mapXValue = (signal * 770) / 1023;
-                    // Playerx = mapXValue;
-
-                    // let XPosition = signal;
-                    // let PreviousXPosition = XPosition;
-                    // const threshold = 10;
-
-                    // if (XPosition > PreviousXPosition + threshold) {
-                    //     player = playerR;
-                    //     image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-                    //     PreviousXPosition = XPosition;
-                    //   } else if (XPosition < PreviousXPosition - threshold) {
-                    //         player = playerL;
-                    //         image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-                    //         PreviousXPosition = XPosition;
-                    //     }
                 }
             }
 
-            function moveJump(direction, signal) {
+            function moveJump(direction, signal) { //Salto
                 if (direction[0] == 'B') {
                     if (!jump) {
                         jump = true;
@@ -532,38 +523,7 @@ function ArduinoBTNClicked(actionB){
                 }
             }
 
-            // socket.on('Move-Player', msn => {
-            //     console.log(msn);
-            //     let{} = msn;
-            //     switch(msn){
-            //         case 'LEFT':
-            //             if (Playerx >= minw) {
-
-            //                 Playerx -= 10;
-            //             };
-            //             break;
-
-            //         case 'RIGHT':
-            //             if (Playerx <= maxw) {
-            //                 player = playerR;
-            //                 image(player, Playerx, Playery, PlayerWidth, PlayerHeight);
-
-            //                 Playerx += 10;
-            //                 };
-            //             break;
-
-            //         case 'UP':
-            //             if (!jump) {
-            //                 jump = true;
-            //                 setTimeout(() => {
-            //                     jump = false;
-            //                 }, 500);
-            //             }
-            //             break;
-            //     }
-            // })
-
-        //Variables for jumping and gravity
+        //Variables de salto y gravedad
 
         var jump = false;
         var direction = 1;
@@ -572,7 +532,7 @@ function ArduinoBTNClicked(actionB){
         var falling = 10;
         var jumpcounter = 0;
 
-            //Gravity and Jump
+            //Gravedad y salto
 
             function gravity (){
             if (Playery >= minh && jump == false){
@@ -602,7 +562,7 @@ function ArduinoBTNClicked(actionB){
             }
             };
 
-        //Class Platforms & collision cases
+        //Plataformas y colisiones
 
         var Px1 = 500;  var Py1 = 1100;
         var Px2 = 325;  var Py2 = 1000;
@@ -658,34 +618,8 @@ function ArduinoBTNClicked(actionB){
                     }
                 }
         };
-
-        //Points based on height
-
-        let IncreasePoints;
-        let DecreasePoints;
-        let previousY = 1070;
-
-        function PointsChange(){
-            previousY = Points;
-            if (previousY - Playery >= 100){
-                Points += 2;
-                IncreasePoints = true;
-                setTimeout(() => {
-                    IncreasePoints = false;
-                }, 1000);
-            }
-            if (Playery - previousY <= -100){
-                Points -= 2;
-                DecreasePoints = true;
-                setTimeout(() => {
-                    DecreasePoints = false;
-                }, 1000);
-            }
-            previousY = Playery;
-        }
     
-        //Enemies
-
+        //Enemigos
         let lives = 3;
         let immunityCooldown = false;
         let redScreenOpacity = 0;
@@ -697,7 +631,7 @@ function ArduinoBTNClicked(actionB){
 
             class Item {
                 constructor() {}
-                Spike() {
+                Spike() {//Bolitas que caen del cielo
                     setTimeout(() => {
                         if (random(1) < 0.003) {
                             let imgObj = {
@@ -749,7 +683,7 @@ function ArduinoBTNClicked(actionB){
                     rect(0, 0, width, height);
                 
                 };
-                CanonR() {
+                CanonR() {//Cañones de la derecha
                     setTimeout(() => {
                         if (random(1) < 0.002) {
                             let imgObj = {
@@ -800,7 +734,7 @@ function ArduinoBTNClicked(actionB){
                     rect(0, 0, width, height);
                 
                 };
-                CanonL() {
+                CanonL() {//Cañones de la izquierda
                     setTimeout(() => {
                         if (random(1) < 0.002) {
                             let imgObj = {
@@ -852,7 +786,7 @@ function ArduinoBTNClicked(actionB){
                 };
             };
 
-        //Points
+        //Puntos
 
         let time = 0;
         let Points = 0;
@@ -867,7 +801,7 @@ function ArduinoBTNClicked(actionB){
                 }
             }
         
-        //Edge
+        //Bandera
 
         class Fin {
             constructor() {
@@ -910,13 +844,12 @@ function ArduinoBTNClicked(actionB){
 
         PrizeIMG();
 
-        screen = 5;
+        screen = 4;
         switchScreen();
         // Restart();
     }
 
-            //Send points to array
-                    
+            //Envia los puntos al array
             async function sendPoints(dataPoint) {//Envia puntos por HTTP
                 const dataP = {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(dataPoint)}
                 await fetch(`/Points-Array`, dataP)
@@ -933,7 +866,7 @@ function ArduinoBTNClicked(actionB){
         lives = 3;
     }
 
-    //Disconnect
+//Pantalla final
 
     let Sticker = './Images/Prize1.png';
     let Pin = './Images/Prize2.png';

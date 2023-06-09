@@ -10,7 +10,7 @@
       "interactionTime": 335,
       "lead": true,
       "timeStamp": "09:10",
-      "date": "mar May 16 2022"
+      "date": "mar may 16 2022"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "interactionTime": 250,
       "lead": true,
       "timeStamp": "10:16",
-      "date": "mar May 16 2022"
+      "date": "mar may 16 2022"
     },
     {
       "id": 3,
@@ -34,7 +34,7 @@
       "interactionTime": 235,
       "lead": true,
       "timeStamp": "21:19",
-      "date": "mie May 17 2022"
+      "date": "mié may 17 2022"
     },
     {
       "id": 4,
@@ -46,7 +46,7 @@
       "interactionTime": 263,
       "lead": true,
       "timeStamp": "10:14",
-      "date": "jue May 18 2022"
+      "date": "jue may 18 2022"
     },
     {
       "id": 5,
@@ -58,7 +58,7 @@
       "interactionTime": 276,
       "lead": true,
       "timeStamp": "11:11",
-      "date": "vie May 19 2022"
+      "date": "vie may 19 2022"
     },
     {
       "id": 6,
@@ -70,7 +70,7 @@
       "interactionTime": 238,
       "lead": true,
       "timeStamp": "09:19",
-      "date": "vie May 19 2022"
+      "date": "vie may 19 2022"
     },
     {
       "id": 7,
@@ -82,7 +82,7 @@
       "interactionTime": 315,
       "lead": true,
       "timeStamp": "10:10",
-      "date": "vie May 19 2022"
+      "date": "vie may 19 2022"
     },
     {
       "id": 8,
@@ -94,7 +94,7 @@
       "interactionTime": 335,
       "lead": true,
       "timeStamp": "12:17",
-      "date": "vie May 19 2022"
+      "date": "vie may 19 2022"
     },
     {
       "id": 9,
@@ -105,7 +105,7 @@
       "nintendoUser": false,
       "interactionTime": 289,
       "lead": true,
-      "date": "sab May 20 2023",
+      "date": "sáb may 20 2023",
       "timeStamp": "16:30"
     },
     {
@@ -117,7 +117,7 @@
       "nintendoUser": true,
       "interactionTime": 260,
       "lead": true,
-      "date": "dom May 14 2023",
+      "date": "dom may 14 2023",
       "timeStamp": "16:30"
     },
     {
@@ -158,39 +158,75 @@
     },
     {
       "id": 14,
-      "name": "Metro",
-      "email": "calling@gmail.com",
-      "phone": "3007062023",
+      "name": "Karol Fuentes ",
+      "email": "karolfuentescaro@gmail.com",
+      "phone": "3046060148",
       "privacyAgreement": true,
-      "nintendoUser": false,
-      "interactionTime": null,
+      "nintendoUser": true,
+      "interactionTime": 364,
       "lead": true,
-      "date": "mié 7 jun 2023",
-      "timeStamp": "18:18"
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:21"
     },
     {
       "id": 15,
-      "name": "prueba",
-      "email": "kjcnke",
-      "phone": "98423985",
+      "name": "Andres",
+      "email": "andres@gmail.com",
+      "phone": "3005643964",
       "privacyAgreement": true,
       "nintendoUser": false,
       "interactionTime": null,
       "lead": true,
-      "date": "mié 7 jun 2023",
-      "timeStamp": "20:50"
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:25"
     },
     {
       "id": 16,
-      "name": "prueba2",
-      "email": "email",
-      "phone": "3016262536",
+      "name": "Isa",
+      "email": "isabe@gmail.com",
+      "phone": "4444",
       "privacyAgreement": true,
-      "nintendoUser": true,
+      "nintendoUser": false,
       "interactionTime": null,
       "lead": true,
-      "date": "mié 7 jun 2023",
-      "timeStamp": "21:27"
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:28"
+    },
+    {
+      "id": 17,
+      "name": "Isa",
+      "email": "isabe@gmail.com",
+      "phone": "4444",
+      "privacyAgreement": true,
+      "nintendoUser": false,
+      "interactionTime": null,
+      "lead": true,
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:30"
+    },
+    {
+      "id": 18,
+      "name": "Isa",
+      "email": "isabe@gmail.com",
+      "phone": "55555",
+      "privacyAgreement": true,
+      "nintendoUser": true,
+      "interactionTime": 55,
+      "lead": true,
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:33"
+    },
+    {
+      "id": 19,
+      "name": "Isa",
+      "email": "isabe@gmail.com",
+      "phone": "2222222",
+      "privacyAgreement": true,
+      "nintendoUser": true,
+      "interactionTime": 62,
+      "lead": true,
+      "date": "vie 9 jun 2023",
+      "timeStamp": "00:35"
     }
   ]
 }

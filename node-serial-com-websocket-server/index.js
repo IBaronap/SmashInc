@@ -10,6 +10,16 @@ const SERVER_IP = ' 172.30.179.100'; //Change IP
 const expressApp = express();
 expressApp.use(cors());
 
+//Lee datos de firebase
+fireStoreDB.getCollection('Leads').then((leads) => {
+    console.log(leads);
+  })
+
+fireStoreDB.getCollection('Interactions').then((interactions) => {
+    console.log(interactions);
+})
+
+
     //Server
     const httpServer = expressApp.listen(PORT, () => { //Start the server
         console.log(`Server is running, host http://${SERVER_IP}:${PORT}/`);
@@ -17,7 +27,7 @@ expressApp.use(cors());
 
     const io = new SocketIOServer(httpServer, { path: '/real-time', cors:{origin: '*', methods: ['GET', 'POST']} }); //WebSocket Server initialization
 
-//To let communication between localhost and ngrok
+//Permite comunicación entre localhost y ngrok
 expressApp.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -40,27 +50,27 @@ expressApp.use(cors({origin: '*'}));
     expressApp.use('/user', userRoutes);
     expressApp.use('/dashboard', dashboardRoutes);
 
-//Arduino communication
+//Arduino 
 
-// const protocolConfiguration = { // Defining Serial configurations
-//     path: 'COM8', //COM#
-//     baudRate: 9600
-// };
-// const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
-// const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
+const protocolConfiguration = { 
+    path: 'COM8', //COM#
+    baudRate: 9600
+};
+const port = new SerialPort(protocolConfiguration); //Comunicación con el arduino
+const parser = port.pipe(new ReadlineParser); //Analiza la información recibida de arduino
 
-// parser.on('data', (arduinoData) => {
-//     let dataArray = arduinoData.split(' ');
-//     console.log(dataArray);
+parser.on('data', (arduinoData) => { //Recibe datos del arduino
+    let dataArray = arduinoData.split(' '); //Divide el mensaje de arduino
+    console.log(dataArray);
 
-//     let arduinoMessage = {
-//         actionA: dataArray[0],
-//         actionB: dataArray[1],
-//         signal: parseInt(dataArray[2])
-//     }
-//     io.emit('arduinoMessage', arduinoMessage);
-//     console.log(arduinoMessage);
-// });
+    let arduinoMessage = {
+        actionA: dataArray[0], //J para Joystick, B para botón
+        actionB: dataArray[1], //X para joystick, A para botón
+        signal: parseInt(dataArray[2]) //Señal solo cambia si es de joystick
+    }
+    io.emit('arduinoMessage', arduinoMessage); //Emite los mensajes de arduino
+    console.log(arduinoMessage);
+});
 
 //Socket messages
 
@@ -79,75 +89,75 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('Move-Player', message)
     });
 
-    //Page switch
+    //Cambio de pantalla entre celular y mupi
     socket.on('switchPage', (message) => {
         console.log('Switch to screen '+ message);
         socket.broadcast.emit('switch', message)
     });
 
-    //Order for arduino (music)
-    // socket.on('orderForArduino', (orderForArduino) => {
-    //     port.write(orderForArduino);
-    //     console.log('orderForArduino: ' + orderForArduino);
-    // });
+    //Orden para Arduino (musica)
+    socket.on('orderForArduino', (orderForArduino) => {
+        port.write(orderForArduino);
+        console.log('orderForArduino: ' + orderForArduino);
+    });
 });
 
+//Hace update de firebase
 fireStoreDB.updateRealTime('Leads', () => {
     io.emit('real-time-update', { state: 'Using onSnapshot' })
   });
 
-//User info from form
+//HTTP
 
-// Endpoint 
-expressApp.get('/Forms-Array', (request, response) => {
-    response.send(PlayerForm);
-});
+    //Info de usario
+        // Endpoint 
+        expressApp.get('/Forms-Array', (request, response) => {
+            response.send(PlayerForm);
+        });
 
-let PlayerForm = [];
+        let PlayerForm = [];
 
-// Recibir información del formulario de jugadores
-expressApp.post('/Forms-Array', (request, response) => {
-    console.log("Form data received:" + request.body);
-    const { name, email, phone, notify } = request.body;
-    PlayerForm.push({ name, email, phone, notify });
-    console.log("PlayerForm:", PlayerForm);
-    response.json({ received: request.body });
-});
+        // Recibir información del formulario de jugadores
+        expressApp.post('/Forms-Array', (request, response) => {
+            console.log("Form data received:" + request.body);
+            const { name, email, phone, notify } = request.body;
+            PlayerForm.push({ name, email, phone, notify });
+            console.log("PlayerForm:", PlayerForm);
+            response.json({ received: request.body });
+        });
 
-// Puntos de usuario
+    // Puntos de usuario
+        // Endpoint
+        expressApp.get('/Points-Array', (request, response) => {
+            response.send(Points_Array);
+        });
 
-// Endpoint para los puntos
-expressApp.get('/Points-Array', (request, response) => {
-    response.send(Points_Array);
-});
+        let Points_Array = [];
 
-let Points_Array = [];
+        // Recibir información de los puntos
+        expressApp.post('/Points-Array', (request, response) => {
+            const { TotalPoints } = request.body;
+            Points_Array.push({ TotalPoints });
+            console.log("Points data received:", request.body);
+            console.log("Points_Array:", Points_Array);
+            response.json({ received: request.body });
+        });
 
-// Recibir información de los puntos
-expressApp.post('/Points-Array', (request, response) => {
-    const { TotalPoints } = request.body;
-    Points_Array.push({ TotalPoints });
-    console.log("Points data received:", request.body);
-    console.log("Points_Array:", Points_Array);
-    response.json({ received: request.body });
-});
+    // Tiempo de interacción
+        // Endpoint para el tiempo
+        expressApp.get('/Time', (request, response) => {
+            response.send(InteractionTime);
+        });
 
-// Tiempo de interacción
+        let InteractionTime = [];
 
-// Endpoint para el tiempo
-expressApp.get('/Time', (request, response) => {
-    response.send(InteractionTime);
-});
-
-let InteractionTime = [];
-
-// Recibir información del tiempo
-expressApp.post('/Time', (request, response) => {
-    const interactionTime = request.body;
-    InteractionTime.push(interactionTime);
-    console.log("duration of last interaction:", request.body);
-    console.log("InteractionTime:", InteractionTime);
-    response.json({ received: request.body });
-});
+        // Recibir información del tiempo
+        expressApp.post('/Time', (request, response) => {
+            const interactionTime = request.body;
+            InteractionTime.push(interactionTime);
+            console.log("duration of last interaction:", request.body);
+            console.log("InteractionTime:", InteractionTime);
+            response.json({ received: request.body });
+        });
 
 export { io };

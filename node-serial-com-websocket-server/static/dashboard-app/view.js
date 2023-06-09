@@ -1,6 +1,6 @@
 class View {
     static lineItem = document.querySelector('#myLineChart');
-    static barItem = document.querySelector('#myBarChart'); // static hace que esta variable sera la misma para todos los hijos que creemos para esta clase, si se cambia. cambiará en todos los objetos 
+    static barItem = document.querySelector('#myBarChart');  
     static stackedItem = document.querySelector('#myStackedChart');
     static doughnutItem = document.querySelector('#myDoughnutChart');
     static leads = document.getElementById('leads-table');
@@ -36,7 +36,7 @@ class View {
     }
 
     getBarChart() {
-        const config = { //configuracion de la tabla 
+        const config = { 
             type: 'bar',
             data: {
                 labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
@@ -49,7 +49,7 @@ class View {
                     borderRadius: 10
                 }]
             },
-            options: { //Opciones de estilo
+            options: { 
                 scales: {
                     y: {
                         beginAtZero: true
@@ -57,11 +57,11 @@ class View {
                 }
             }
         }
-        this.BarChart = new Chart(View.barItem, config);// Para que la funcion sepa donde va a pintar la gráfica
+        this.BarChart = new Chart(View.barItem, config);
     }
 
     getStackedChart() {
-        const config = { //configuracion de la tabla 
+        const config = { 
             type: 'bar',
             data: {
                 labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
@@ -90,7 +90,7 @@ class View {
                 }
               }
         }
-        this.StackedChart = new Chart(View.stackedItem, config);// Para que la funcion sepa donde va a pintar la gráfica
+        this.StackedChart = new Chart(View.stackedItem, config);
     }
 
     getmyDoughnutChart() {
@@ -117,8 +117,7 @@ class View {
         this.doughnutChart = new Chart(View.doughnutItem, config);
     }
 
-    //Data
-    //Convertions
+    //Datos
     updateMinAverage(convertions){
         console.table(convertions);
 

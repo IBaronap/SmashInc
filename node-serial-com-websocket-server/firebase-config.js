@@ -1,4 +1,4 @@
-import { dotenv } from './dependencies.js';
+import { dotenv, express } from './dependencies.js';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, addDoc, onSnapshot } from "firebase/firestore";
 
@@ -35,18 +35,18 @@ class FireStoreDB {
     }
 
     getCollection = async (collectionName) => {
-        const snapshot = await getDocs(collectionName);
+        const snapshot = await getDocs(FireStoreDB.collections[collectionName]);
         const list = snapshot.docs.map(doc => doc.data());
         return list;
     }
 
     addNewDocumentTo = async (newDocument, collection) => {
         try {
-            const document = newDocument
+            const document = newDocument;
             const docRef = await addDoc(FireStoreDB.collections[collection], document);
             console.log(docRef.id);
         } catch (error) {
-            console.log(error);
+            console.log(`Error adding document to collection: ${error}`);
         }
     }
 

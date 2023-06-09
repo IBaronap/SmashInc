@@ -1,11 +1,14 @@
+//General
 const URL = `${window.location.hostname}:${window.location.port}`;
 const socket = io(URL, { path: '/real-time' });
+
+//Espacios donde se pinta información
 let leads = document.getElementById('leads-table');
 let average = document.getElementById('Min-Average');
 let interactionsToday = document.getElementById('Interactions_Today');
 let leadsToday = document.getElementById('Leads_Today');
 
-//Graphics
+//Gráficos
 function controller(view) {
 
     let dashboardLocalData;
@@ -17,46 +20,46 @@ function controller(view) {
 
         const {convertions, hourTraffic, dayCounts, nintendoUsersByDay, LeadsVSNo, lastLeads} = dashboardLocalData;
 
-        view.updateMinAverage(convertions);
+        view.updateMinAverage(convertions); //Datos que no están en gráficos
         view.updateInteractionsToday(convertions);
         view.updateLeadsToday(convertions);
 
-        view.updateLineChart(hourTraffic);
+        view.updateLineChart(hourTraffic);//Gráficos
         view.updateBarChart(dayCounts);
         view.updateStackedChart(nintendoUsersByDay);
         view.updateDoughnut(LeadsVSNo);
         
-        view.updateTable(lastLeads);
+        view.updateTable(lastLeads);//Tabla
 
-    }) (); // funcion autodeclarada , es más segura, a penas se termina de escribir se autodeclara
+    }) (); // funcion autodeclarada 
 
-    socket.on('data-update', (data) => {
+    socket.on('data-update', (data) => {//Recibe mensaje de update
         console.log(data);
         updateRealTime();
     });
 
-    const updateRealTime = async () => {
+    const updateRealTime = async () => {//Actualiza los datos
         const request = await fetch ('http://localhost:5050/dashboard');
         const data = await request.json();
         dashboardLocalData = data;
 
         const {convertions, hourTraffic, dayCounts, LeadsVSNo, lastLeads} = dashboardLocalData;
 
-        leads.innerHTML = ` `;
+        leads.innerHTML = ` `; //Borra los datos anteriores para pintar los nuevos (en los datos que no están en gráficos)
         average.innerHTML = ` `;
         interactionsToday.innerHTML = ` `;
         leadsToday.innerHTML = ` `;
 
-        view.updateMinAverage(convertions);
+        view.updateMinAverage(convertions); //Datos que no están en gráficos
         view.updateInteractionsToday(convertions);
         view.updateLeadsToday(convertions);
 
-        view.updateLineChart(hourTraffic);
+        view.updateLineChart(hourTraffic); //Gráficos
         view.updateBarChart(dayCounts);
         view.updateStackedChart( dayCounts);
         view.updateDoughnut(LeadsVSNo);
 
-        view.updateTable(lastLeads);
+        view.updateTable(lastLeads); //Tabla
 
         console.log('Data updated');
     }
@@ -67,7 +70,7 @@ function controller(view) {
 let view = new View();
 controller(view, socket);
 
-//Change screen
+//Cambios de sección
 let NavResumen = document.getElementById('NavResumen');
 let NavLeads = document.getElementById('NavLeads');
 

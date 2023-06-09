@@ -12,19 +12,19 @@ function windowResized() {
 let screen = 1;
 let switchMSN;
 
-//From QR to Waiting (Mupi)
+//De QR a Waiting (Mupi)
 
 window.addEventListener("load", function (event) {
     console.log("Page loaded");
-    interactionTimer();
-    switchMSN = 7;
+    switchMSN = 6;
     socket.emit('switchPage', switchMSN);
+    interactionTimer();
 });
 
-//From Form to Disconnect (both Mupi and Phone)
+//De Form a Disconnect (Mupi & Phone)
 document.getElementById('ButtonSendForm').addEventListener('click', () => {
     //Mupi
-    switchMSN = 8;
+    switchMSN = 7;
     socket.emit('switchPage', switchMSN);
 
     //Phone
@@ -32,11 +32,10 @@ document.getElementById('ButtonSendForm').addEventListener('click', () => {
     switchScreen();
 });
 
-//From Disconnect to Home (Mupi)
+//De Disconnect a Home (Mupi)
 document.getElementById('DisconnectBTN').addEventListener('click', () => {
     //Msn para que Mupi vuelva a Home
     switchMSN = 1;
-    switchScreen();
     socket.emit('switchPage', switchMSN);
 });
 
@@ -59,7 +58,7 @@ function switchScreen() {
 
 //Form
 
-//Lets the button be abled to use by checking if the "Terms and conditions" is cheked
+//Activa el botónsi los T&C están checked
 let button = document.getElementById('ButtonSendForm');
 
 let Disable = document.getElementById('CheckT&C');
@@ -72,7 +71,7 @@ Disable.addEventListener('change', function () {
     }
 });
 
-//The user data
+//User
 
 let user = {
     name: "",
@@ -83,6 +82,11 @@ let user = {
     interactionTime: "",
     notify: "",
     lead: true,
+    date: "",
+    timeStamp: ""
+};
+
+let interaction = {
     date: "",
     timeStamp: ""
 };
@@ -138,26 +142,42 @@ button.addEventListener("click", function () {
         let options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
         let dateWithoutCommas = now.toLocaleDateString('es-ES', options).replace(/,/g, '');
         user.date = dateWithoutCommas;
+        interaction.date = dateWithoutCommas;
 
         //Get time
 
         let hours = now.getHours().toString().padStart(2, '0');
         let minutes = now.getMinutes().toString().padStart(2, '0');
         user.timeStamp = `${hours}:${minutes}`;
+        interaction.timeStamp = `${hours}:${minutes}`;
 
     console.log(user);
     sendData(user);
+    sendInteraction(interaction);
 });
 
 async function sendData(data) {//se envia a index
-    const dataF = {
+    const dataU = {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data),
     };
-    await fetch(`/user`, dataF);
+    console.log("Added user");
+    await fetch(`/user`, dataU);
+}
+
+async function sendInteraction(data) {//se envia a index
+    const dataI = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+    };
+    console.log("Added interaction");
+    await fetch(`/user/interaction`, dataI);
 }
 
 //Disconnect

@@ -25,6 +25,14 @@
     margin: auto;
 }
 
+#MupiOverlay{
+    position: relative;
+    width: 859px;
+    height: 1253px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: auto;
+}
+
 #MupiOver{
     position: relative;
     width: 859px;
@@ -87,14 +95,10 @@ button:active:after {
 /* Screens */
 
 #Home{
-    display: none;
+    display: block;
 }
 
 #Connected{
-    display: none;
-}
-
-#Instructions{
     display: none;
 }
 
@@ -115,7 +119,7 @@ button:active:after {
 }
 
 #Disconnect{
-    display: block;
+    display: none;
 }
 
 /* Home */
@@ -211,7 +215,11 @@ button:active:after {
         transform: rotate(-5.28deg);
     }
 
-/* Mupi connected / Bienvenida */
+/* Mupi connected / Instrucciones 1 */
+
+        .Overlay{
+            background-color: #000000;
+        }
 
         .textScreen{
             display: flex;
@@ -299,6 +307,15 @@ button:active:after {
                 height: 475.28px;
                 left: 146px;
                 top: 690px;
+            }
+
+            #continueBienvenido{
+                position: absolute;
+                z-index: 3;
+                width: 203.92px;
+                height: auto;
+                right: 35px;
+                bottom: 80px;
             }
 
     #Nubes{
@@ -553,9 +570,9 @@ span { font-weight: 700; color: #FF5C00}
         #Prize{
             box-sizing: border-box;
             position: absolute;
-            width: 15vw;
-            left: 15vw;
-            top: 15vh;
+            width: 230px;
+            left: 240px;
+            top: 90px;
         }
 
     #InstructionDisconnect{
